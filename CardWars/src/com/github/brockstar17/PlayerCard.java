@@ -4,14 +4,14 @@ package com.github.brockstar17;
  * Defines the object of the player's card
  */
 
-public class Player
+public class PlayerCard
 {
 	private int x; // x pos of top left corner
 	private int y; // y pos of top left corner
 	private int w; // x pos of right edge of card
-	private int l;
+	private int l; // y pos of the bottom of card
 
-	public Player(int px, int py, int sx, int sy)
+	public PlayerCard(int px, int py, int sx, int sy)
 	{
 		this.x = px;
 		this.y = py;
@@ -30,5 +30,10 @@ public class Player
 	// returns the x pos of the right edge of card
 	public int getW() {
 		return w;
+	}
+
+	// returns the y pos of the bottom edge of card
+	public int getL() {
+		return l;
 	}
 }

@@ -17,7 +17,7 @@ public class ImageUtils
 		return scaledImage;
 	}
 
-	public static int frameWidth(double h, double nh, double w) {
+	public static int calcWidth(double h, double nh, double w) {
 
 		if(h < nh) // image being scaled up
 		{
@@ -36,5 +36,9 @@ public class ImageUtils
 			return (int) w;
 		}
 
+	}
+
+	public static int cardScale(double xScale) {
+		return (int) (xScale / .7111756168359942);
 	}
 }
