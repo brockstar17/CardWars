@@ -18,9 +18,16 @@ public class Paint extends JPanel
 		g.drawImage(CardWars.board, 0, 0, null);
 
 		drawCards(g);
+
+		highlight(g);
 	}
 
 	private void drawCards(Graphics g) {
 		g.drawImage(CardWars.yin, (int) (CardWars.screenX * .07), (int) (CardWars.screenY * .066), null);
+	}
+
+	private void highlight(Graphics g) {
+		g.drawImage(CardWars.hl, 0, 0, null);
+		// System.out.println("Debug");
 	}
 }

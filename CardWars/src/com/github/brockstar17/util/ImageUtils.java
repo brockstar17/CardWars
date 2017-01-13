@@ -38,7 +38,4 @@ public class ImageUtils
 
 	}
 
-	public static int cardScale(double xScale) {
-		return (int) (xScale / .7111756168359942);
-	}
 }
