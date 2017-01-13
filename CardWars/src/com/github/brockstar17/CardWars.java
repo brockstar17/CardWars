@@ -1,7 +1,7 @@
 package com.github.brockstar17;
 
+import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,12 +12,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import com.github.brockstar17.util.ImageUtils;
 
 @SuppressWarnings("serial")
-public class CardWars extends JPanel implements MouseMotionListener, MouseListener
+public class CardWars extends JFrame implements MouseMotionListener, MouseListener
 {
 
 	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -28,20 +27,26 @@ public class CardWars extends JPanel implements MouseMotionListener, MouseListen
 
 	public CardWars()
 	{
+
 		try
 		{
 			board = ImageIO.read(new File("src/resources/board.png"));
+
 			screenX = ImageUtils.frameWidth(board.getHeight(), screenY, board.getWidth());
+
 			board = ImageUtils.scale(board, screenX, screenY);
 		} catch (IOException e)
 		{
 
 		}
+
+		Container c = getContentPane();
+		c.add(new Paint());
 	}
 
 	public static void main(String[] args) {
 
-		JFrame frame = new JFrame();
+		JFrame frame = new CardWars();
 
 		frame.setSize(screenX, screenY);
 		frame.setLocationRelativeTo(null);
@@ -49,12 +54,6 @@ public class CardWars extends JPanel implements MouseMotionListener, MouseListen
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setResizable(false);
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-
-		super.paintComponent(g);
 	}
 
 	// -------------------------------------------------------------------------------------\\

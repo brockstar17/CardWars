@@ -21,13 +21,15 @@ public class ImageUtils
 
 		if(h < nh) // image being scaled up
 		{
+
 			double per = (nh - h) / h;
-			return (int) (w * per);
+			return (int) (w * per + w);
 		}
 		else if(h > nh) // image being scale down
 		{
 			double per = (h - nh) / h;
-			return (int) (w * per);
+
+			return (int) (w * per + w);
 		}
 		else
 		{
