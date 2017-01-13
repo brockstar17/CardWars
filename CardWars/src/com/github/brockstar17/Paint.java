@@ -27,7 +27,7 @@ public class Paint extends JPanel
 	}
 
 	private void highlight(Graphics g) {
-		g.drawImage(CardWars.hl, 0, 0, null);
+		g.drawImage(CardWars.hl, (int) (CardWars.screenX * .223), (int) (CardWars.screenY * .05), null);
 		// System.out.println("Debug");
 	}
 }

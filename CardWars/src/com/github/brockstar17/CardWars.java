@@ -41,10 +41,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			yin = ImageIO.read(new File("src/resources/yin.png"));
 			yin = ImageUtils.scale(yin, ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()), (int) (screenY * .2));
 
-			hl = ImageIO.read(new File("src/resources/hl.png"));
-
-			hl = ImageUtils.scale(hl, ImageUtils.calcWidth(hl.getHeight(), screenY * .9, hl.getWidth()), (int) (screenY * .9));
-
+			hl = ImageIO.read(new File("src/resources/highlight.png"));
+			hl = ImageUtils.scale(hl, ImageUtils.calcWidth(hl.getHeight(), screenY * .23, hl.getWidth()), (int) (screenY * .231));
+			System.out.println("Debug");
 		} catch (IOException e)
 		{
 			System.out.println("Something went wrong");
