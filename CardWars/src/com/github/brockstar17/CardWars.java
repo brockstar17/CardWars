@@ -40,7 +40,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			board = ImageUtils.scale(board, screenX, screenY);
 
 			yin = ImageIO.read(new File("src/resources/yin.png"));
-			yin = ImageUtils.scale(yin, (int) (screenX * .13), ImageUtils.cardScale(screenX * .13));
+			yin = ImageUtils.scale(yin, ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()), (int) (screenY * .2));
 		} catch (IOException e)
 		{
 

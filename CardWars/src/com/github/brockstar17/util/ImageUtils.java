@@ -28,7 +28,7 @@ public class ImageUtils
 		else if(h > nh) // image being scale down
 		{
 			double per = (h - nh) / h;
-
+			per *= -1;
 			return (int) (w * per + w);
 		}
 		else
