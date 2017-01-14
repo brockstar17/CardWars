@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -47,6 +48,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private boolean cardMoved;
 	private boolean cardSpawned;
 	private int totCards;
+	
+	public static ArrayList<PlayingCard> playerDeck;
+	public static ArrayList<PlayingCard> otherDeck;
 
 	public CardWars() {
 
@@ -228,7 +232,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		if(Paint.pCards[i] == null)
 		{
 			//System.out.println("Placed");
-			Paint.pCards[i] = (new PlayerCard(x, y, cellW, cellH, "spades", 1));
+			Paint.pCards[i] = (new PlayingCard(x, y, cellW, cellH, "spades", 1));
 			deckClicked = !deckClicked;
 			if(totCards < 5)
 			{

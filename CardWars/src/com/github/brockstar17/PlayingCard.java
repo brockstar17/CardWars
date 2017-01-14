@@ -4,7 +4,7 @@ package com.github.brockstar17;
  * Defines the object of the player's card
  */
 
-public class PlayerCard
+public class PlayingCard
 {
 	private int x; // x pos of top left corner
 	private int y; // y pos of top left corner
@@ -13,7 +13,7 @@ public class PlayerCard
 	private String suit; //the suit of the card
 	private int value; //the value of the card
 
-	public PlayerCard(int px, int py, int sx, int sy, String suit, int value)
+	public PlayingCard(int px, int py, int sx, int sy, String suit, int value)
 	{
 		this.x = px;
 		this.y = py;

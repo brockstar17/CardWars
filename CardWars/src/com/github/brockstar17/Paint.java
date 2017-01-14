@@ -11,7 +11,7 @@ import com.github.brockstar17.util.GameUtils;
 @SuppressWarnings("serial")
 public class Paint extends JPanel
 {
-	public static PlayerCard[] pCards = new PlayerCard[20];
+	public static PlayingCard[] pCards = new PlayingCard[20];
 	public static int cardSpaceX = (int)(CardWars.screenX *.034), cardSpaceY = (int)(CardWars.screenY*.0165);
 	public static int clicked;
 	
@@ -40,7 +40,7 @@ public class Paint extends JPanel
 		
 		
 		
-		if(CardWars.highlight)
+		if(CardWars.highlight && CardWars.player1)
 		{
 			highlight(g);
 		}
