@@ -2,6 +2,7 @@ package com.github.brockstar17.util;
 
 import com.github.brockstar17.CardWars;
 import com.github.brockstar17.Paint;
+import com.github.brockstar17.PlayerCard;
 
 public class BoardSpaces {
 
@@ -48,7 +49,17 @@ public class BoardSpaces {
 			if(x > cornX[i] && x < cornX[i] + CardWars.cellW
 					&& y > cornY[i] && y < cornY[i] + CardWars.cellH)
 			{
-				return i;
+				PlayerCard card = Paint.pCards[i];
+				if(card != null)
+				{
+					setCellHighCard(true);
+					return i;
+				}
+				else
+				{
+					setCellHighCard(false);
+					return i;
+				}
 			}
 		}
 		return -1;
@@ -60,5 +71,9 @@ public class BoardSpaces {
 			return false;
 		}
 		return true;
+	}
+	
+	private static void setCellHighCard(boolean hasCard){
+		Paint.cellHighCard = hasCard;
 	}
 }

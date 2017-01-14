@@ -34,6 +34,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage[] spades = new BufferedImage[13];
 	public static BufferedImage[] clubs = new BufferedImage[13];
 	public static BufferedImage[] diamonds = new BufferedImage[13];
+	public static BufferedImage cardSel = null;
 
 	public static int cellW, cellH;
 	public static int mx, my;
@@ -95,7 +96,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			turn = ImageIO.read(new File("src/resources/turn.png"));
 			turn = ImageUtils.scale(turn, ImageUtils.calcWidth(turn.getHeight(), screenY * .233, turn.getWidth()), (int) (screenY * .232));
 			
-			
+			cardSel = ImageIO.read(new File("src/resources/cardHighlight.png"));
+			cardSel = ImageUtils.scale(cardSel, yin.getWidth(), yin.getHeight());
 			
 			cellW = hl.getWidth();
 			cellH = hl.getHeight();
@@ -169,7 +171,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
 				cardSpawned = true;
 				countTurn();
-				System.out.println(totCards);
+				//System.out.println(totCards);
 			}
 			else if(cell == 15 && !cardSpawned && totCards < 5)
 			{

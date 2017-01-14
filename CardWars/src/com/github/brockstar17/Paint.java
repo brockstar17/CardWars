@@ -13,6 +13,8 @@ public class Paint extends JPanel
 	public static PlayerCard[] pCards = new PlayerCard[20];
 	public static int cardSpaceX = (int)(CardWars.screenX *.034), cardSpaceY = (int)(CardWars.screenY*.0165);
 	public static int clicked;
+	
+	public static boolean cellHighCard;
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -20,22 +22,28 @@ public class Paint extends JPanel
 		super.paintComponent(g);
 
 		g.drawImage(CardWars.board, 0, 0, null);
-		
+
 		if(CardWars.player1)
 		{
+			
 			g.drawImage(CardWars.turn, BoardSpaces.getCellX(15), BoardSpaces.getCellY(15), null);
-			if(CardWars.highlight)
-				highlight(g);
 		}
 		else
 		{
 			g.drawImage(CardWars.turn, BoardSpaces.getCellX(4), BoardSpaces.getCellY(4), null);
 		}
-
-
+		
 		drawDeck(g);
 		
 		drawCards(g);
+		
+		
+		
+		if(CardWars.highlight)
+		{
+			highlight(g);
+		}
+		
 		
 		if(CardWars.deckClicked && CardWars.player1)
 		{
@@ -47,7 +55,7 @@ public class Paint extends JPanel
 			movHighlight(g, GameUtils.adjMoves(clicked));
 		}
 		
-		g.drawImage(CardWars.hearts[11], BoardSpaces.getCellX(0) + cardSpaceX, BoardSpaces.getCellY(0) + cardSpaceY, null);
+		//g.drawImage(CardWars.hearts[11], BoardSpaces.getCellX(0) + cardSpaceX, BoardSpaces.getCellY(0) + cardSpaceY, null);
 		
 	}
 
@@ -63,12 +71,16 @@ public class Paint extends JPanel
 
 	private void highlight(Graphics g) {
 		
+		int cell = BoardSpaces.getCell(CardWars.mx, CardWars.my);
 		
-		if(BoardSpaces.getCell(CardWars.mx, CardWars.my) != -1 &&
-				BoardSpaces.getCell(CardWars.mx, CardWars.my) != 4 &&
-				BoardSpaces.getCell(CardWars.mx, CardWars.my) != 15)
+		if(cellHighCard)
 		{
-			g.drawImage(CardWars.sel, BoardSpaces.getCellX(BoardSpaces.getCell(CardWars.mx, CardWars.my)), BoardSpaces.getCellY(BoardSpaces.getCell(CardWars.mx, CardWars.my)), null);
+			g.drawImage(CardWars.cardSel, BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
+			
+		}
+		else if(cell!= -1 && cell != 4 && cell != 15)
+		{
+			g.drawImage(CardWars.sel, BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), null);
 			
 		}
 		
