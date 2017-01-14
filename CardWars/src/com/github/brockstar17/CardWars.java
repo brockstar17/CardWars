@@ -59,6 +59,29 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			board = ImageUtils.scale(board, screenX, screenY);
 
 			yin = ImageIO.read(new File("src/resources/yin.png"));
+			
+			for(int i = 0; i < hearts.length; i++)
+			{
+				hearts[i] = ImageIO.read(new File("src/resources/hearts/" + (i+1) + ".png"));
+				
+				spades[i] = ImageIO.read(new File("src/resources/spades/" + (i+1) + ".png"));
+				
+				clubs[i] = ImageIO.read(new File("src/resources/clubs/" + (i+1) + ".png"));
+				
+				diamonds[i] = ImageIO.read(new File("src/resources/diamonds/" + (i+1) + ".png"));
+				
+				spades[i] = ImageUtils.scale(spades[i], ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()),
+					(int) (screenY * .2));
+				clubs[i] = ImageUtils.scale(clubs[i], ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()),
+					(int) (screenY * .2));
+				diamonds[i] = ImageUtils.scale(diamonds[i], ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()),
+					(int) (screenY * .2));
+				hearts[i] = ImageUtils.scale(hearts[i], ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()),
+					(int) (screenY * .2));
+			}
+			
+			
+			
 			yin = ImageUtils.scale(yin, ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()),
 					(int) (screenY * .2));
 
@@ -72,13 +95,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			turn = ImageIO.read(new File("src/resources/turn.png"));
 			turn = ImageUtils.scale(turn, ImageUtils.calcWidth(turn.getHeight(), screenY * .233, turn.getWidth()), (int) (screenY * .232));
 			
-			for(int i = 0; i < hearts.length; i++)
-			{
-				hearts[i] = ImageIO.read(new File("src/resources/hearts/" + (i + 1) + ".png"));
-				spades[i] = ImageIO.read(new File("src/resources/spades/" + (i + 1) + ".png"));
-				clubs[i] = ImageIO.read(new File("src/resources/clubs/" + (i + 1) + ".png"));
-				diamonds[i] = ImageIO.read(new File("src/resources/diamonds/" + (i + 1) + ".png"));
-			}
+			
 			
 			cellW = hl.getWidth();
 			cellH = hl.getHeight();

@@ -47,6 +47,8 @@ public class Paint extends JPanel
 			movHighlight(g, GameUtils.adjMoves(clicked));
 		}
 		
+		g.drawImage(CardWars.hearts[11], BoardSpaces.getCellX(0) + cardSpaceX, BoardSpaces.getCellY(0) + cardSpaceY, null);
+		
 	}
 
 	private void drawCards(Graphics g) {
