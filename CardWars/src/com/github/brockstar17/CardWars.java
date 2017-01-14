@@ -30,6 +30,10 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage hl = null;
 	public static BufferedImage sel = null;
 	public static BufferedImage turn = null;
+	public static BufferedImage[] hearts = new BufferedImage[13];
+	public static BufferedImage[] spades = new BufferedImage[13];
+	public static BufferedImage[] clubs = new BufferedImage[13];
+	public static BufferedImage[] diamonds = new BufferedImage[13];
 
 	public static int cellW, cellH;
 	public static int mx, my;
@@ -67,6 +71,14 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			
 			turn = ImageIO.read(new File("src/resources/turn.png"));
 			turn = ImageUtils.scale(turn, ImageUtils.calcWidth(turn.getHeight(), screenY * .233, turn.getWidth()), (int) (screenY * .232));
+			
+			for(int i = 0; i < hearts.length; i++)
+			{
+				hearts[i] = ImageIO.read(new File("src/resources/hearts/" + (i + 1) + ".png"));
+				spades[i] = ImageIO.read(new File("src/resources/spades/" + (i + 1) + ".png"));
+				clubs[i] = ImageIO.read(new File("src/resources/clubs/" + (i + 1) + ".png"));
+				diamonds[i] = ImageIO.read(new File("src/resources/diamonds/" + (i + 1) + ".png"));
+			}
 			
 			cellW = hl.getWidth();
 			cellH = hl.getHeight();
