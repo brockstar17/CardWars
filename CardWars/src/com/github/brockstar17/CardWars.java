@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.github.brockstar17.util.BoardSpaces;
+import com.github.brockstar17.util.GameUtils;
 import com.github.brockstar17.util.ImageUtils;
 
 @SuppressWarnings("serial")
@@ -49,13 +50,13 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private boolean cardSpawned;
 	private int totCards;
 	
-	public static ArrayList<PlayingCard> playerDeck;
-	public static ArrayList<PlayingCard> otherDeck;
+	public static ArrayList<PlayingCard> playerDeck = new ArrayList<PlayingCard>();
+	public static ArrayList<PlayingCard> otherDeck = new ArrayList<PlayingCard>();
 
 	public CardWars() {
 
 		super("Card Wars");
-		
+	
 		try {
 			board = ImageIO.read(new File("src/resources/board.png"));
 
@@ -105,11 +106,14 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			
 			cellW = hl.getWidth();
 			cellH = hl.getHeight();
+			
+			
 		} catch (IOException e) {
 			System.out.println("Something went wrong");
 		}
 
 		BoardSpaces.initCorners();
+		GameUtils.initShuffle();
 
 		Container c = getContentPane();
 		c.add(new Paint());
@@ -232,7 +236,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		if(Paint.pCards[i] == null)
 		{
 			//System.out.println("Placed");
-			Paint.pCards[i] = (new PlayingCard(x, y, cellW, cellH, "spades", 1));
+			Paint.pCards[i] = (new PlayingCard(x, y, cellW, cellH, playerDeck.get(totCards).getSuit(), playerDeck.get(totCards).getValue()));
 			deckClicked = !deckClicked;
 			if(totCards < 5)
 			{
