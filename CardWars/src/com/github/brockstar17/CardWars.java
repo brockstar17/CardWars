@@ -116,5 +116,19 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	// this is the click function
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		int cell = BoardSpaces.getCell(mx, my);
+		if(cell != -1)
+		{
+			placeCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
+		}
+		repaint();
+	}
+	
+	public void placeCard(int x, int y, int i){
+		if(Paint.pCards[i] == null && i != 4 && i != 15)
+		{
+			System.out.println("Placed");
+			Paint.pCards[i] = (new PlayerCard(x, y, cellW, cellH));
+		}
 	}
 }

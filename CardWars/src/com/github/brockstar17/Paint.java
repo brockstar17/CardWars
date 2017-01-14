@@ -1,7 +1,6 @@
 package com.github.brockstar17;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -10,7 +9,8 @@ import com.github.brockstar17.util.BoardSpaces;
 @SuppressWarnings("serial")
 public class Paint extends JPanel
 {
-	public static ArrayList<PlayerCard> pCards = new ArrayList<PlayerCard>();
+	public static PlayerCard[] pCards = new PlayerCard[20];
+	private int cardSpaceX = (int)(CardWars.screenX *.034), cardSpaceY = (int)(CardWars.screenY*.0165);
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -24,10 +24,18 @@ public class Paint extends JPanel
 		highlight(g);
 		
 		drawDeck(g);
+		
+		drawCards(g);
 	}
 
 	private void drawCards(Graphics g) {
-		g.drawImage(CardWars.yin, (int) (CardWars.screenX * .07), (int) (CardWars.screenY * .066), null);
+		for(int i = 0; i < pCards.length - 2; i++)
+		{
+			if(pCards[i] != null && i != 4 && i != 15)
+			{
+				g.drawImage(CardWars.yin, BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i)+ cardSpaceY, null);
+			}
+		}
 	}
 
 	private void highlight(Graphics g) {
@@ -44,7 +52,7 @@ public class Paint extends JPanel
 	}
 	
 	private void drawDeck(Graphics g){
-		g.drawImage(CardWars.yin, BoardSpaces.getCellX(4) + (int)(CardWars.screenX *.034), BoardSpaces.getCellY(4) + (int)(CardWars.screenY*.017), null);
-		g.drawImage(CardWars.yin, BoardSpaces.getCellX(15)+ (int)(CardWars.screenX *.034), BoardSpaces.getCellY(15)+ (int)(CardWars.screenY*.016), null);
+		g.drawImage(CardWars.yin, BoardSpaces.getCellX(4) + cardSpaceX, BoardSpaces.getCellY(4) + cardSpaceY, null);
+		g.drawImage(CardWars.yin, BoardSpaces.getCellX(15)+ cardSpaceX, BoardSpaces.getCellY(15)+ cardSpaceY, null);
 	}
 }

@@ -15,6 +15,8 @@ public class PlayerCard
 	{
 		this.x = px;
 		this.y = py;
+		this.w = sx;
+		this.l = sy;
 	}
 
 	// returns the x pos of this card
