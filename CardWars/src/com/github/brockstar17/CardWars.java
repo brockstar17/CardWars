@@ -174,6 +174,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		{
 			//System.out.println("Placed");
 			Paint.pCards[i] = (new PlayerCard(x, y, cellW, cellH));
+			deckClicked = !deckClicked;
 		}
 	}
 
