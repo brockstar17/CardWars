@@ -10,13 +10,17 @@ public class PlayerCard
 	private int y; // y pos of top left corner
 	private int w; // x pos of right edge of card
 	private int l; // y pos of the bottom of card
+	private String suit; //the suit of the card
+	private int value; //the value of the card
 
-	public PlayerCard(int px, int py, int sx, int sy)
+	public PlayerCard(int px, int py, int sx, int sy, String suit, int value)
 	{
 		this.x = px;
 		this.y = py;
 		this.w = sx;
 		this.l = sy;
+		this.suit = suit.toLowerCase();
+		this.value = value;
 	}
 
 	// returns the x pos of this card
@@ -45,5 +49,13 @@ public class PlayerCard
 	
 	public void setY(int y){
 		this.y = y;
+	}
+	
+	public String getSuit(){
+		return this.suit;
+	}
+	
+	public int getValue(){
+		return this.value;
 	}
 }

@@ -1,6 +1,7 @@
 package com.github.brockstar17;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -75,8 +76,17 @@ public class Paint extends JPanel
 		
 		if(cellHighCard)
 		{
-			g.drawImage(CardWars.cardSel, BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
+			BufferedImage[] suit = getSuitArray(pCards[cell].getSuit());
 			
+			if(suit != null)
+			{
+				g.drawImage(suit[pCards[cell].getValue()-1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
+
+			}
+			else
+			{
+				g.drawImage(CardWars.cardSel, BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
+			}
 		}
 		else if(cell!= -1 && cell != 4 && cell != 15)
 		{
@@ -114,6 +124,22 @@ public class Paint extends JPanel
 	
 	public static void setClicked(int cell){
 		clicked = cell;
+	}
+	
+	private BufferedImage[] getSuitArray(String suit){
+		switch(suit)
+		{
+		case "hearts":
+			return CardWars.hearts;
+		case "clubs":
+			return CardWars.clubs;
+		case "spades":
+			return CardWars.spades;
+		case "diamonds":
+			return CardWars.diamonds;
+		default:
+				return null;
+		}
 	}
 	
 	
