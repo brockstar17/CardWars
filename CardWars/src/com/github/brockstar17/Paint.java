@@ -22,6 +22,8 @@ public class Paint extends JPanel
 		//drawCards(g);
 
 		highlight(g);
+		
+		drawDeck(g);
 	}
 
 	private void drawCards(Graphics g) {
@@ -44,5 +46,10 @@ public class Paint extends JPanel
 			
 		}
 		
+	}
+	
+	private void drawDeck(Graphics g){
+		g.drawImage(CardWars.yin, BoardSpaces.getCellX(4) + (int)(CardWars.screenX *.034), BoardSpaces.getCellY(4) + (int)(CardWars.screenY*.017), null);
+		g.drawImage(CardWars.yin, BoardSpaces.getCellX(15)+ (int)(CardWars.screenX *.034), BoardSpaces.getCellY(15)+ (int)(CardWars.screenY*.016), null);
 	}
 }
