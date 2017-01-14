@@ -1,6 +1,7 @@
 package com.github.brockstar17.util;
 
 import com.github.brockstar17.CardWars;
+import com.github.brockstar17.Paint;
 
 public class BoardSpaces {
 
@@ -51,5 +52,13 @@ public class BoardSpaces {
 			}
 		}
 		return -1;
+	}
+	
+	public static boolean hasCard(int cell){
+		if(Paint.pCards[cell] == null)
+		{
+			return false;
+		}
+		return true;
 	}
 }

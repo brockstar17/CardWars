@@ -30,6 +30,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 	public static int cellW, cellH;
 	public static int mx, my;
+	
+	public static boolean deckClicked; //true if deck spaces are clicked
+	private boolean player1; //true when it is player 1's turn
 
 	public CardWars() {
 
@@ -117,17 +120,23 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		int cell = BoardSpaces.getCell(mx, my);
-		if(cell != -1)
+		if((cell == 10 || cell == 5 || cell == 16 || cell == 17 || cell == 18) && deckClicked)
 		{
-			placeCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
+			spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
 		}
+		else if(cell == 15)
+		{
+			//System.out.println("Deck Clicked");
+			deckClicked = !deckClicked;
+		}
+			
 		repaint();
 	}
 	
-	public void placeCard(int x, int y, int i){
-		if(Paint.pCards[i] == null && i != 4 && i != 15)
+	public void spawnCard(int x, int y, int i){
+		if(Paint.pCards[i] == null)
 		{
-			System.out.println("Placed");
+			//System.out.println("Placed");
 			Paint.pCards[i] = (new PlayerCard(x, y, cellW, cellH));
 		}
 	}
