@@ -36,7 +36,9 @@ public class Paint extends JPanel
 			g.drawImage(CardWars.hl, BoardSpaces.getCellX(i), BoardSpaces.getCellY(i), null);
 		}*/
 		
-		if(BoardSpaces.getCell(CardWars.mx, CardWars.my) != -1)
+		if(BoardSpaces.getCell(CardWars.mx, CardWars.my) != -1 &&
+				BoardSpaces.getCell(CardWars.mx, CardWars.my) != 4 &&
+				BoardSpaces.getCell(CardWars.mx, CardWars.my) != 15)
 		{
 			g.drawImage(CardWars.hl, BoardSpaces.getCellX(BoardSpaces.getCell(CardWars.mx, CardWars.my)), BoardSpaces.getCellY(BoardSpaces.getCell(CardWars.mx, CardWars.my)), null);
 			

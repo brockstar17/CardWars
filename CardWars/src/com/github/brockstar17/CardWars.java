@@ -32,6 +32,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 	public CardWars() {
 
+		super("Card Wars");
+		
 		try {
 			board = ImageIO.read(new File("src/resources/board.png"));
 
