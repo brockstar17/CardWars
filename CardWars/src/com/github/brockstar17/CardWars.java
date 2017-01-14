@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.github.brockstar17.util.BoardSpaces;
+import com.github.brockstar17.util.CardFrame;
 import com.github.brockstar17.util.GameUtils;
 import com.github.brockstar17.util.ImageUtils;
 
@@ -26,6 +27,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static int screenX;
 	public static int screenY = (int) screenSize.getHeight() - 40;
+
 
 	public static BufferedImage board = null;
 	public static BufferedImage yin = null;
@@ -186,6 +188,12 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				//System.out.println("Deck Clicked");
 				
 				deckClicked = !deckClicked;
+				if(deckClicked)
+				{
+					this.setEnabled(false);
+					new CardFrame(this);
+				}
+				
 				
 			}
 			else if(cell != 4)
@@ -293,4 +301,6 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			player1 = !player1;
 		}
 	}
+	
+	
 }
