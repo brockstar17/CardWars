@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import com.github.brockstar17.util.BoardSpaces;
+
 @SuppressWarnings("serial")
 public class Paint extends JPanel
 {
@@ -17,7 +19,7 @@ public class Paint extends JPanel
 
 		g.drawImage(CardWars.board, 0, 0, null);
 
-		drawCards(g);
+		//drawCards(g);
 
 		highlight(g);
 	}
@@ -27,7 +29,18 @@ public class Paint extends JPanel
 	}
 
 	private void highlight(Graphics g) {
-		g.drawImage(CardWars.hl, (int) (CardWars.screenX * .223), (int) (CardWars.screenY * .05), null);
+		//g.drawImage(CardWars.hl, (int) (CardWars.screenX * .222), (int) (CardWars.screenY * .049), null);
 		// System.out.println("Debug");
+		/*for(int i = 0; i <=19; i++)
+		{
+			g.drawImage(CardWars.hl, BoardSpaces.getCellX(i), BoardSpaces.getCellY(i), null);
+		}*/
+		
+		if(BoardSpaces.getCell(CardWars.mx, CardWars.my) != -1)
+		{
+			g.drawImage(CardWars.hl, BoardSpaces.getCellX(BoardSpaces.getCell(CardWars.mx, CardWars.my)), BoardSpaces.getCellY(BoardSpaces.getCell(CardWars.mx, CardWars.my)), null);
+			
+		}
+		
 	}
 }

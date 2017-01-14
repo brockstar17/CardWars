@@ -13,11 +13,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import com.github.brockstar17.util.BoardSpaces;
 import com.github.brockstar17.util.ImageUtils;
 
 @SuppressWarnings("serial")
-public class CardWars extends JFrame implements MouseMotionListener, MouseListener
-{
+public class CardWars extends JFrame implements MouseMotionListener, MouseListener {
 
 	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static int screenX;
@@ -27,11 +27,12 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage yin = null;
 	public static BufferedImage hl = null;
 
-	public CardWars()
-	{
+	public static int cellW, cellH;
+	public static int mx, my;
 
-		try
-		{
+	public CardWars() {
+
+		try {
 			board = ImageIO.read(new File("src/resources/board.png"));
 
 			screenX = ImageUtils.calcWidth(board.getHeight(), screenY, board.getWidth());
@@ -39,18 +40,25 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			board = ImageUtils.scale(board, screenX, screenY);
 
 			yin = ImageIO.read(new File("src/resources/yin.png"));
-			yin = ImageUtils.scale(yin, ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()), (int) (screenY * .2));
+			yin = ImageUtils.scale(yin, ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()),
+					(int) (screenY * .2));
 
 			hl = ImageIO.read(new File("src/resources/highlight.png"));
-			hl = ImageUtils.scale(hl, ImageUtils.calcWidth(hl.getHeight(), screenY * .23, hl.getWidth()), (int) (screenY * .231));
-			System.out.println("Debug");
-		} catch (IOException e)
-		{
+			hl = ImageUtils.scale(hl, ImageUtils.calcWidth(hl.getHeight(), screenY * .233, hl.getWidth()),
+					(int) (screenY * .232));
+
+			cellW = hl.getWidth();
+			cellH = hl.getHeight();
+		} catch (IOException e) {
 			System.out.println("Something went wrong");
 		}
 
+		BoardSpaces.initCorners();
+
 		Container c = getContentPane();
 		c.add(new Paint());
+		c.addMouseMotionListener(this);
+		c.addMouseListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -68,12 +76,15 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	// -------------------------------------------------------------------------------------\\
 
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
+	public void mouseDragged(MouseEvent e) {
 	}
 
 	// this function will be for hovering
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
+	public void mouseMoved(MouseEvent e) {
+		mx = e.getX();
+		my = e.getY();
+		repaint();
 	}
 
 	// -------------------------------------------------------------------------------------\\
@@ -93,6 +104,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	// this is the other click function
 	@Override
 	public void mousePressed(MouseEvent e) {
+		
 	}
 
 	// this is the click function
