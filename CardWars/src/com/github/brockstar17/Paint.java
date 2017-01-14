@@ -5,12 +5,14 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import com.github.brockstar17.util.BoardSpaces;
+import com.github.brockstar17.util.GameUtils;
 
 @SuppressWarnings("serial")
 public class Paint extends JPanel
 {
 	public static PlayerCard[] pCards = new PlayerCard[20];
-	private int cardSpaceX = (int)(CardWars.screenX *.034), cardSpaceY = (int)(CardWars.screenY*.0165);
+	public static int cardSpaceX = (int)(CardWars.screenX *.034), cardSpaceY = (int)(CardWars.screenY*.0165);
+	public static int clicked;
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -18,19 +20,33 @@ public class Paint extends JPanel
 		super.paintComponent(g);
 
 		g.drawImage(CardWars.board, 0, 0, null);
-
-		//drawCards(g);
-
-		highlight(g);
 		
+		if(CardWars.player1)
+		{
+			g.drawImage(CardWars.turn, BoardSpaces.getCellX(15), BoardSpaces.getCellY(15), null);
+			if(CardWars.highlight)
+				highlight(g);
+		}
+		else
+		{
+			g.drawImage(CardWars.turn, BoardSpaces.getCellX(4), BoardSpaces.getCellY(4), null);
+		}
+
+
 		drawDeck(g);
 		
 		drawCards(g);
 		
-		if(CardWars.deckClicked)
+		if(CardWars.deckClicked && CardWars.player1)
 		{
 			drawSpawn(g);
 		}
+		
+		if(CardWars.select)
+		{
+			movHighlight(g, GameUtils.adjMoves(clicked));
+		}
+		
 	}
 
 	private void drawCards(Graphics g) {
@@ -55,6 +71,14 @@ public class Paint extends JPanel
 		}
 		
 	}
+
+	private void movHighlight(Graphics g, int[] cells){
+		for(int i = 0; i < cells.length; i++)
+		{
+			g.drawImage(CardWars.sel, BoardSpaces.getCellX(cells[i]), BoardSpaces.getCellY(cells[i]), null);
+			
+		}
+	}
 	
 	private void drawDeck(Graphics g){
 		g.drawImage(CardWars.yin, BoardSpaces.getCellX(4) + cardSpaceX, BoardSpaces.getCellY(4) + cardSpaceY, null);
@@ -73,4 +97,10 @@ public class Paint extends JPanel
 		if(!BoardSpaces.hasCard(18))
 			g.drawImage(CardWars.hl, BoardSpaces.getCellX(18), BoardSpaces.getCellY(18), null);
 	}
+	
+	public static void setClicked(int cell){
+		clicked = cell;
+	}
+	
+	
 }

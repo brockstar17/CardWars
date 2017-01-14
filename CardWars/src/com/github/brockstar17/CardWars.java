@@ -3,6 +3,8 @@ package com.github.brockstar17;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -17,7 +19,7 @@ import com.github.brockstar17.util.BoardSpaces;
 import com.github.brockstar17.util.ImageUtils;
 
 @SuppressWarnings("serial")
-public class CardWars extends JFrame implements MouseMotionListener, MouseListener {
+public class CardWars extends JFrame implements MouseMotionListener, MouseListener, KeyListener {
 
 	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static int screenX;
@@ -27,12 +29,15 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage yin = null;
 	public static BufferedImage hl = null;
 	public static BufferedImage sel = null;
+	public static BufferedImage turn = null;
 
 	public static int cellW, cellH;
 	public static int mx, my;
 	
 	public static boolean deckClicked; //true if deck spaces are clicked
-	private boolean player1; //true when it is player 1's turn
+	public static boolean player1 = true; //true when it is player 1's turn
+	public static boolean select = false;
+	public static boolean highlight = true;
 
 	public CardWars() {
 
@@ -56,6 +61,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			sel = ImageIO.read(new File("src/resources/selector.png"));
 			sel = ImageUtils.scale(sel, ImageUtils.calcWidth(sel.getHeight(), screenY * .233, sel.getWidth()), (int) (screenY * .232));
 			
+			turn = ImageIO.read(new File("src/resources/turn.png"));
+			turn = ImageUtils.scale(turn, ImageUtils.calcWidth(turn.getHeight(), screenY * .233, turn.getWidth()), (int) (screenY * .232));
+			
 			cellW = hl.getWidth();
 			cellH = hl.getHeight();
 		} catch (IOException e) {
@@ -68,6 +76,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		c.add(new Paint());
 		c.addMouseMotionListener(this);
 		c.addMouseListener(this);
+		addKeyListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -119,15 +128,42 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	// this is the click function
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		int cell = BoardSpaces.getCell(mx, my);
-		if((cell == 10 || cell == 5 || cell == 16 || cell == 17 || cell == 18) && deckClicked)
+		if(player1)
 		{
-			spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
-		}
-		else if(cell == 15)
-		{
-			//System.out.println("Deck Clicked");
-			deckClicked = !deckClicked;
+			int cell = BoardSpaces.getCell(mx, my);
+			if((cell == 10 || cell == 5 || cell == 16 || cell == 17 || cell == 18) && deckClicked)
+			{
+				spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
+			}
+			else if(cell == 15)
+			{
+				//System.out.println("Deck Clicked");
+				deckClicked = !deckClicked;
+			}
+			else if(cell != 4)
+			{
+				if(Paint.pCards[cell] != null && !select)
+				{
+					select = true;
+					highlight = false;
+					Paint.setClicked(cell);
+				}
+				else if(Paint.pCards[cell] == null && select)
+				{
+					select = false;
+					highlight = true;
+					Paint.pCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
+					Paint.pCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
+					Paint.pCards[cell] = Paint.pCards[Paint.clicked];
+					Paint.pCards[Paint.clicked] = null;
+				}
+				else if(Paint.pCards[cell] != null && select)
+				{
+					select = false;
+					highlight = true;
+				}
+				
+			}
 		}
 			
 		repaint();
@@ -139,5 +175,38 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			//System.out.println("Placed");
 			Paint.pCards[i] = (new PlayerCard(x, y, cellW, cellH));
 		}
+	}
+
+	// -------------------------------------------------------------------------------------\\
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
+		
+		switch(key)
+		{
+		case KeyEvent.VK_ENTER:
+			player1 = !player1;
+			break;
+			
+		case KeyEvent.VK_ESCAPE:
+			select = false;
+			highlight = true;
+			break;
+		}
+		
+		repaint();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+		
 	}
 }
