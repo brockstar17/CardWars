@@ -26,6 +26,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage board = null;
 	public static BufferedImage yin = null;
 	public static BufferedImage hl = null;
+	public static BufferedImage sel = null;
 
 	public static int cellW, cellH;
 	public static int mx, my;
@@ -48,7 +49,10 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			hl = ImageIO.read(new File("src/resources/highlight.png"));
 			hl = ImageUtils.scale(hl, ImageUtils.calcWidth(hl.getHeight(), screenY * .233, hl.getWidth()),
 					(int) (screenY * .232));
-
+			
+			sel = ImageIO.read(new File("src/resources/selector.png"));
+			sel = ImageUtils.scale(sel, ImageUtils.calcWidth(sel.getHeight(), screenY * .233, sel.getWidth()), (int) (screenY * .232));
+			
 			cellW = hl.getWidth();
 			cellH = hl.getHeight();
 		} catch (IOException e) {
