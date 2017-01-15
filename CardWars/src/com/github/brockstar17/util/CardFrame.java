@@ -16,13 +16,15 @@ import com.github.brockstar17.CardWars;
 public class CardFrame extends JFrame implements MouseListener, KeyListener, WindowListener{
 
 	private CardWars cardWars;
+	private SelectionPanel selPan;
 	
-	private int x;
+	//private int x;
 	private int y;
 	private int w;
 	private int l;
 	
-	
+	//(int)(w * .03 + (w * .19 * i));
+	private int cardH = (int)(y * .1);
 	
 	public CardFrame(CardWars cw)
 	{
@@ -30,15 +32,20 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		
 		this.cardWars = cw;
 		
+		
 		this.w = (int)(cw.getWidth()*.75);
-		this.l = (int)(cw.getHeight()*.5);
+		this.l = ImageUtils.calcWidth(300, this.w, 180);
+		
+		this.selPan = new SelectionPanel(this);
 		
 		Container c = getContentPane();
-		c.add(new SelectionPanel());
+		c.add(this.selPan);
 
-		addMouseListener(this);
+		c.addMouseListener(this);
 		addKeyListener(this);
 		addWindowListener(this);
+		
+		
 		
 		setSize(w, l);
 		setLocationRelativeTo(null);
@@ -49,7 +56,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		
 		
 		
-		this.x = getX();
+		//this.x = getX();
 		this.y = getY();
 	}
 	
@@ -82,9 +89,14 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 	public void mouseClicked(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
-		if(mx > this.x && mx < this.x + this.w && my > this.y && my < this.y + this.l)
+		
+		if(getCardClicked(mx, my) != -1)
 		{
-			System.out.println("You have clicked a CardFrame");
+			int cell = getCardClicked(mx, my);
+			cardWars.setSelectedCard(CardWars.playerDeck.get(cell));
+			cardWars.setCardSelected(true);
+			this.dispose();
+			
 		}
 		
 	}
@@ -121,8 +133,9 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		this.cardWars.setEnabled(true);
+		
 		this.cardWars.setVisible(true);
+		this.cardWars.setEnabled(true);
 	}
 
 	@Override
@@ -151,10 +164,34 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
+		cardWars.setEnabled(false);
 		
 	}
 
+	public int getW(){
+		return this.w;
+	}
+	
+	public int getH(){
+		return this.l;
+	}
 	
 	
+	private int getCardClicked(int x, int y)
+	{
+		int cardX = 0;
+		
+		for(int i = 0; i < 5; i++)
+		{
+			cardX = (int)(w * .03 + (w * .19 * i));
+			if(x > cardX && x < cardX + selPan.getCardX() && y > cardH && y < cardH + selPan.getCardY())
+			{
+				//System.out.println("i " + i);
+				return i;
+			}
+			
+		}
+		//System.out.println("Fell Through");
+		return -1;
+	}
 }
