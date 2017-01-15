@@ -41,7 +41,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		Container c = getContentPane();
 		c.add(this.selPan);
 
-		c.addMouseListener(this);
+		addMouseListener(this);
 		addKeyListener(this);
 		addWindowListener(this);
 		
