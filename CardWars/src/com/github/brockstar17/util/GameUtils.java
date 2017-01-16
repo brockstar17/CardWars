@@ -76,32 +76,48 @@ public class GameUtils {
 		int odx = BoardSpaces.getCellX(4);
 		int ody = BoardSpaces.getCellY(4);
 		
-		int cards = 0;
-		int cards2 = 0;
+		PlayingCard[] cards = new PlayingCard[52];
+		
+		int count = 0;
 		
 		for(int i = 0; i < 13; i++)
 		{
 			for(int s = 0; s < 4; s++)
 			{
-				if(rn.nextInt(4) < 2 && cards < 26)
-				{
-					CardWars.playerDeck.add(new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, getSuit(s), i+1));
-					cards++;
-				}
-				else if(cards2 < 26)
-				{
-					CardWars.otherDeck.add(new PlayingCard(odx, ody, CardWars.cellW, CardWars.cellH, getSuit(s), i+1));
-					cards2++;
-				}
-				else
-				{
-					CardWars.playerDeck.add(new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, getSuit(s), i+1));
-					cards++;
-				}
+				cards[count] = new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, getSuit(s), i+1);
+				count++;
 			}
+		
 		}
 		
 		
+		
+		for(int i = 0; i  < 4; i++)
+		{
+			iShuffle(cards);
+			
+		}
+		
+		for(int i = 0; i < cards.length; i++)
+		{
+			if(i%2 == 0)
+			{
+				CardWars.playerDeck.add(cards[i]);
+			}
+			else
+			{
+				cards[i].setX(odx);
+				cards[i].setY(ody);
+				CardWars.otherDeck.add(cards[i]);
+			}
+		}
+		
+		/*
+		//debug
+		for(int i = 0; i < CardWars.playerDeck.size(); i++)
+		{
+			System.out.println(CardWars.playerDeck.get(i).getName() + " " + i);
+		}*/
 		
 		
 	}
@@ -122,21 +138,39 @@ public class GameUtils {
 		}
 	}
 	
+	private static void iShuffle(PlayingCard[] list){
+		for(int i = 0; i < list.length; i++)
+		{
+			int to = rn.nextInt(list.length);
+			int from = rn.nextInt(list.length);
+			PlayingCard temp = list[from];
+			list[from] = list[to];
+			list[to] = temp;
+		}
+		
+	}
+	
+
+	
 	public static void shuffle(ArrayList<PlayingCard> list){
-		int rand;
-		PlayingCard card, repCard;
+		
 		
 		for(int i = 0; i < list.size(); i++)
 		{
-			rand = rn.nextInt(list.size());
-			card = list.get(rand);
-			repCard = list.get(i);
-			list.set(i, card);
-			list.set(rand, repCard);
+			int to = rn.nextInt(list.size());
+			int from = rn.nextInt(list.size());
+			PlayingCard temp = list.get(from);
+			list.set(from, list.get(to));
+			list.set(to, temp);
 		}
 	}
 	
 	
-	
+	/*
+	 * CardWars.otherDeck.add(new PlayingCard(odx, ody, CardWars.cellW, CardWars.cellH, getSuit(s), i+1));
+					cards2++;
+					CardWars.playerDeck.add(new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, getSuit(s), i+1));
+					cards++;
+	 */
 	
 }

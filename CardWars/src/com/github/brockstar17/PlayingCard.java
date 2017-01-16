@@ -58,4 +58,52 @@ public class PlayingCard
 	public int getValue(){
 		return this.value;
 	}
+	
+	public String getName(){
+		String name;
+		switch(this.value)
+		{
+		case 1:
+			name = "ace of ";
+			break;
+		case 2:
+			name = "two of ";
+			break;
+		case 3:
+			name = "three of ";
+			break;
+		case 4:
+			name = "four of ";
+			break;
+		case 5:
+			name = "five of ";
+			break;
+		case 6:
+			name = "six of ";
+			break;
+		case 7:
+			name = "seven of ";
+			break;
+		case 8:
+			name = "eight of ";
+			break;
+		case 9:
+			name = "nine of ";
+			break;
+		case 10:
+			name = "ten of ";
+			break;
+		case 11:
+			name = "jack of ";
+			break;
+		case 12:
+			name = "queen of ";
+			break;
+		default:
+			name = "king of ";
+			break;
+		}
+		
+		return name + suit;
+	}
 }
