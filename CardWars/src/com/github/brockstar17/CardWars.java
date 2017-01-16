@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import com.github.brockstar17.attack.AttackFrame;
 import com.github.brockstar17.util.BoardSpaces;
 import com.github.brockstar17.util.CardFrame;
 import com.github.brockstar17.util.GameUtils;
@@ -219,18 +220,27 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				}
 				else if(Paint.pCards[cell] == null)
 				{
-					if(!cardMoved && Paint.pCards[Paint.clicked] != null)
+					if(!cardMoved)
 					{
-						select = false;
-						highlight = true;
-						
-						Paint.pCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
-						Paint.pCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
-						Paint.pCards[cell] = Paint.pCards[Paint.clicked];
-						Paint.pCards[Paint.clicked] = null;
-						
-						cardMoved = true;
-						countTurn();
+						if(Paint.pCards[Paint.clicked] != null && Paint.oCards[cell] == null)
+						{
+							select = false;
+							highlight = true;
+							
+							Paint.pCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
+							Paint.pCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
+							Paint.pCards[cell] = Paint.pCards[Paint.clicked];
+							Paint.pCards[Paint.clicked] = null;
+							
+							cardMoved = true;
+							countTurn();
+						}
+						else //attacking
+						{
+							this.setEnabled(false);
+							new AttackFrame(this);
+							
+						}
 						
 					}
 				}
@@ -279,18 +289,27 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				}
 				else if(Paint.oCards[cell] == null)
 				{
-					if(!cardMoved && Paint.oCards[Paint.clicked] != null)
+					if(!cardMoved)
 					{
-						select = false;
-						highlight = true;
-						
-						Paint.oCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
-						Paint.oCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
-						Paint.oCards[cell] = Paint.oCards[Paint.clicked];
-						Paint.oCards[Paint.clicked] = null;
-						
-						cardMoved = true;
-						countTurn();
+						if(Paint.oCards[Paint.clicked] != null && Paint.pCards[cell] == null)
+						{
+							select = false;
+							highlight = true;
+							
+							Paint.oCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
+							Paint.oCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
+							Paint.oCards[cell] = Paint.oCards[Paint.clicked];
+							Paint.oCards[Paint.clicked] = null;
+							
+							cardMoved = true;
+							countTurn();
+						}
+						else //attacking
+						{
+							this.setEnabled(false);
+							new AttackFrame(this);
+							
+						}
 						
 					}
 				}

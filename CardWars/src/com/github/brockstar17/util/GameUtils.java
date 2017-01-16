@@ -54,7 +54,7 @@ public class GameUtils {
 		
 		for(int i = 0; i < mov.length; i++)
 		{
-			if(Paint.pCards[mov[i]] == null && mov[i] != 4 && mov[i] != 15)
+			if((Paint.pCards[mov[i]] == null || Paint.oCards[mov[i]] != null) && mov[i] != 4 && mov[i] != 15)
 			{
 				ar.add(mov[i]);
 			}
