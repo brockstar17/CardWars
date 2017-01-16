@@ -19,12 +19,12 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 	private SelectionPanel selPan;
 	
 	//private int x;
-	private int y;
+	
 	private int w;
 	private int l;
 	
 	//(int)(w * .03 + (w * .19 * i));
-	private int cardH = (int)(y * .1);
+	private int cardH;
 	
 	public CardFrame(CardWars cw)
 	{
@@ -41,8 +41,8 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		Container c = getContentPane();
 		c.add(this.selPan);
 
-		addMouseListener(this);
-		addKeyListener(this);
+		c.addMouseListener(this);
+		c.addKeyListener(this);
 		addWindowListener(this);
 		
 		
@@ -54,10 +54,9 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		setVisible(true);
 		setResizable(false);
 		
+		cardH = (int)(l * .1);
 		
 		
-		//this.x = getX();
-		this.y = getY();
 	}
 	
 	@Override

@@ -51,7 +51,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private static int turnCount;
 	private boolean cardMoved;
 	private boolean cardSpawned;
-	private int totCards;
+	private int playCards;
+	private int oppCards;
 	private boolean cardSelected;
 	private PlayingCard selectedCard;
 	
@@ -188,9 +189,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
 				cardSpawned = true;
 				countTurn();
-				//System.out.println(totCards);
+				//System.out.println(playCards);
 			}
-			else if(cell == 15 && !cardSpawned && totCards < 5)
+			else if(cell == 15 && !cardSpawned && playCards < 5)
 			{
 				//System.out.println("Deck Clicked");
 				
@@ -205,7 +206,11 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				
 				
 			}
-			else if(cell != 4)
+			else if(cell == 4&& !cardSpawned && playCards < 5)
+			{
+				
+			}
+			else
 			{
 				if(Paint.pCards[cell] != null && !select && !cardMoved)
 				{
@@ -259,9 +264,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			//System.out.println("Placed");
 			Paint.pCards[i] = (selectedCard);
 			deckClicked = !deckClicked;
-			if(totCards < 5)
+			if(playCards < 5)
 			{
-				totCards++;
+				playCards++;
 			}
 			
 		}
@@ -304,7 +309,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	}
 	
 	private void countTurn(){
-		if(turnCount < 1 && totCards < 5)
+		if(turnCount < 1 && ((playCards < 5 && player1) || (oppCards < 5 && !player1)))
 		{
 			turnCount++;
 		}
@@ -313,6 +318,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			turnCount=0;
 			player1 = !player1;
 		}
+		
 	}
 	
 	public void setCardSelected(boolean selected){
