@@ -94,6 +94,8 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		{
 			int cell = getCardClicked(mx, my);
 			cardWars.setSelectedCard(CardWars.playerDeck.get(cell));
+			CardWars.playerDiscard.add(CardWars.playerDeck.get(cell));
+			CardWars.playerDeck.remove(cell);
 			cardWars.setCardSelected(true);
 			this.dispose();
 			

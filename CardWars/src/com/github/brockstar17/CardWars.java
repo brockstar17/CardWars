@@ -57,6 +57,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	
 	public static ArrayList<PlayingCard> playerDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> otherDeck = new ArrayList<PlayingCard>();
+	public static ArrayList<PlayingCard> playerDiscard = new ArrayList<PlayingCard>();
+	public static ArrayList<PlayingCard> otherDiscard = new ArrayList<PlayingCard>();
 
 	public CardWars() {
 
