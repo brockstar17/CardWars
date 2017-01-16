@@ -44,21 +44,45 @@ public class BoardSpaces {
 	}
 	
 	public static int getCell(int x, int y){
-		for(int i = 0; i < cornX.length; i++)
+		if(CardWars.player1)
 		{
-			if(x > cornX[i] && x < cornX[i] + CardWars.cellW
-					&& y > cornY[i] && y < cornY[i] + CardWars.cellH)
+			for(int i = 0; i < cornX.length; i++)
 			{
-				PlayingCard card = Paint.pCards[i];
-				if(card != null)
+				if(x > cornX[i] && x < cornX[i] + CardWars.cellW
+						&& y > cornY[i] && y < cornY[i] + CardWars.cellH)
 				{
-					setCellHighCard(true);
-					return i;
+					PlayingCard card = Paint.pCards[i];
+					if(card != null)
+					{
+						setCellHighCard(true);
+						return i;
+					}
+					else
+					{
+						setCellHighCard(false);
+						return i;
+					}
 				}
-				else
+			}
+		}
+		else
+		{
+			for(int i = 0; i < cornX.length; i++)
+			{
+				if(x > cornX[i] && x < cornX[i] + CardWars.cellW
+						&& y > cornY[i] && y < cornY[i] + CardWars.cellH)
 				{
-					setCellHighCard(false);
-					return i;
+					PlayingCard card = Paint.oCards[i];
+					if(card != null)
+					{
+						setCellHighCard(true);
+						return i;
+					}
+					else
+					{
+						setCellHighCard(false);
+						return i;
+					}
 				}
 			}
 		}
@@ -66,7 +90,7 @@ public class BoardSpaces {
 	}
 	
 	public static boolean hasCard(int cell){
-		if(Paint.pCards[cell] == null)
+		if(Paint.pCards[cell] == null || Paint.oCards[cell] == null)
 		{
 			return false;
 		}

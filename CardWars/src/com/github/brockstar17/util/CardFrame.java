@@ -42,7 +42,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		c.add(this.selPan);
 
 		c.addMouseListener(this);
-		c.addKeyListener(this);
+		addKeyListener(this);
 		addWindowListener(this);
 		
 		
@@ -65,8 +65,8 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		
 		switch(key)
 		{
-		case KeyEvent.VK_ENTER:
-			System.out.println("I am CardFrame");
+		case KeyEvent.VK_ESCAPE:
+			this.dispose();
 			break;
 		}
 		
@@ -89,17 +89,42 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		int mx = e.getX();
 		int my = e.getY();
 		
-		if(getCardClicked(mx, my) != -1)
+		int mb = e.getButton();
+		
+		if(mb == 1)
 		{
-			int cell = getCardClicked(mx, my);
-			cardWars.setSelectedCard(CardWars.playerDeck.get(cell));
-			CardWars.playerDiscard.add(CardWars.playerDeck.get(cell));
-			CardWars.playerDeck.remove(cell);
-			cardWars.setCardSelected(true);
-			this.dispose();
+			if(CardWars.player1)
+			{
+				if(getCardClicked(mx, my) != -1)
+				{
+					int cell = getCardClicked(mx, my);
+					cardWars.setSelectedCard(CardWars.playerDeck.get(cell));
+					CardWars.playerDiscard.add(CardWars.playerDeck.get(cell));
+					CardWars.playerDeck.remove(cell);
+					cardWars.setCardSelected(true);
+					this.dispose();
+					
+				}
+			}
+			else
+			{
+				if(getCardClicked(mx, my) != -1)
+				{
+					int cell = getCardClicked(mx, my);
+					cardWars.setSelectedCard(CardWars.otherDeck.get(cell));
+					CardWars.otherDiscard.add(CardWars.otherDeck.get(cell));
+					CardWars.otherDeck.remove(cell);
+					cardWars.setCardSelected(true);
+					this.dispose();
+					
+				}
+			}
 			
 		}
-		
+		else
+		{
+			this.dispose();
+		}
 	}
 
 	@Override
@@ -135,6 +160,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 	@Override
 	public void windowClosed(WindowEvent e) {
 		
+		CardWars.deckClicked = !CardWars.deckClicked;
 		this.cardWars.setVisible(true);
 		this.cardWars.setEnabled(true);
 	}

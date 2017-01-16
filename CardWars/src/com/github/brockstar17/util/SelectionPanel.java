@@ -27,12 +27,25 @@ public class SelectionPanel extends JPanel{
 		
 		g.drawImage(ImageUtils.scale(CardWars.cardSelBack, x, y), 0, 0, null);
 		
-		for(int i = 0; i < 5; i++)
+		if(CardWars.player1)
 		{
-			int val = CardWars.playerDeck.get(i).getValue();
-			String s = CardWars.playerDeck.get(i).getSuit();
-			g.drawImage(getSuit(s)[val - 1], (int)(x * .03 + (x * .19 * i)), (int)(y * .1), null);
-			
+			for(int i = 0; i < 5; i++)
+			{
+				int val = CardWars.playerDeck.get(i).getValue();
+				String s = CardWars.playerDeck.get(i).getSuit();
+				g.drawImage(getSuit(s)[val - 1], (int)(x * .03 + (x * .19 * i)), (int)(y * .1), null);
+				
+			}
+		}
+		else
+		{
+			for(int i = 0; i < 5; i++)
+			{
+				int val = CardWars.otherDeck.get(i).getValue();
+				String s = CardWars.otherDeck.get(i).getSuit();
+				g.drawImage(getSuit(s)[val - 1], (int)(x * .03 + (x * .19 * i)), (int)(y * .1), null);
+				
+			}
 		}
 	}
 	

@@ -181,9 +181,11 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	// this is the click function
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		int cell = BoardSpaces.getCell(mx, my);
+		
 		if(player1)
 		{
-			int cell = BoardSpaces.getCell(mx, my);
+			
 			if((cell == 10 || cell == 5 || cell == 16 || cell == 17 || cell == 18) && deckClicked && cardSelected)
 			{
 				spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
@@ -206,11 +208,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				
 				
 			}
-			else if(cell == 4&& !cardSpawned && playCards < 5)
-			{
-				
-			}
-			else
+			else if(cell != 4)
 			{
 				if(Paint.pCards[cell] != null && !select && !cardMoved)
 				{
@@ -244,31 +242,104 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				
 			}
 		}
-		
-		if(!player1)
+		else
 		{
-			cardMoved = false;
-			cardSpawned = false;
+			if((cell == 9 || cell == 14 || cell == 1 || cell == 2 || cell == 3) && deckClicked && cardSelected)
+			{
+				spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
+				cardSpawned = true;
+				cardSelected = false;
+				countTurn();
+				//System.out.println(playCards);
+			}
+			
+			else if(cell == 4 && !cardSpawned && playCards < 5)
+			{
+				//System.out.println("Deck Clicked");
+				
+				deckClicked = !deckClicked;
+				
+				
+				if(deckClicked)
+				{
+					this.setEnabled(false);
+					new CardFrame(this);
+				}
+				
+				
+			}
+			else if(cell != 15)
+			{
+				if(Paint.oCards[cell] != null && !select && !cardMoved)
+				{
+					select = true;
+					highlight = false;
+					
+					Paint.setClicked(cell);
+				}
+				else if(Paint.oCards[cell] == null)
+				{
+					if(!cardMoved && Paint.oCards[Paint.clicked] != null)
+					{
+						select = false;
+						highlight = true;
+						
+						Paint.oCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
+						Paint.oCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
+						Paint.oCards[cell] = Paint.oCards[Paint.clicked];
+						Paint.oCards[Paint.clicked] = null;
+						
+						cardMoved = true;
+						countTurn();
+						
+					}
+				}
+				else if(Paint.oCards[cell] != null && select)
+				{
+					select = false;
+					highlight = true;
+				}
+				
+			}
 		}
+		
+		
 		
 		
 			
 		repaint();
 		
-		cardSelected = false;
+		
 	}
 	
 	public void spawnCard(int x, int y, int i){
-		if(Paint.pCards[i] == null)
+		if(player1)
 		{
-			//System.out.println("Placed");
-			Paint.pCards[i] = (selectedCard);
-			deckClicked = !deckClicked;
-			if(playCards < 5)
+			if(Paint.pCards[i] == null)
 			{
-				playCards++;
+				//System.out.println("Placed");
+				Paint.pCards[i] = (selectedCard);
+				deckClicked = !deckClicked;
+				if(playCards < 5)
+				{
+					playCards++;
+				}
+				
 			}
-			
+		}
+		else
+		{
+			if(Paint.oCards[i] == null)
+			{
+				//System.out.println("Placed");
+				Paint.oCards[i] = (selectedCard);
+				deckClicked = !deckClicked;
+				if(playCards < 5)
+				{
+					playCards++;
+				}
+				
+			}
 		}
 	}
 
@@ -317,6 +388,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		{
 			turnCount=0;
 			player1 = !player1;
+			cardMoved = false;
+			cardSpawned = false;
 		}
 		
 	}
