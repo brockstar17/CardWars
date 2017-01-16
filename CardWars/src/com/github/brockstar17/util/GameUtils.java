@@ -122,22 +122,19 @@ public class GameUtils {
 		}
 	}
 	
-/*
- * for(int i = 0; i < deck.size(); i++)
+	public static void shuffle(ArrayList<PlayingCard> list){
+		int rand;
+		PlayingCard card, repCard;
+		
+		for(int i = 0; i < list.size(); i++)
 		{
-			
-			if(i % 2 == 0)
-			{
-				CardWars.playerDeck.add(new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, suits.get(i), deck.get(i)));
-				System.out.println("card " + i/2 + " " + CardWars.playerDeck.get(i/2).getSuit() + " " + CardWars.playerDeck.get(i/2).getValue());
-			}
-			else
-			{
-				CardWars.otherDeck.add(new PlayingCard(odx, ody, CardWars.cellW, CardWars.cellH, suits.get(i), deck.get(i)));
-
-			}
+			rand = rn.nextInt(list.size());
+			card = list.get(rand);
+			repCard = list.get(i);
+			list.set(i, card);
+			list.set(rand, repCard);
 		}
- */
+	}
 	
 	
 	
