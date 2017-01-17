@@ -41,6 +41,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage[] diamonds = new BufferedImage[13];
 	public static BufferedImage cardSel = null;
 	public static BufferedImage cardSelBack = null;
+	public static BufferedImage oCardSel = null;
+	public static BufferedImage attackBack = null;
 
 	public static int cellW, cellH;
 	public static int mx, my;
@@ -56,6 +58,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private int oppCards;
 	private boolean cardSelected;
 	private PlayingCard selectedCard;
+	public static boolean canPlaceCard;
 	
 	public static ArrayList<PlayingCard> playerDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> otherDeck = new ArrayList<PlayingCard>();
@@ -113,7 +116,11 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			cardSel = ImageIO.read(new File("src/resources/cardHighlight.png"));
 			cardSel = ImageUtils.scale(cardSel, yin.getWidth(), yin.getHeight());
 			
+			oCardSel = ImageIO.read(new File("src/resources/otherCardHighlight.png"));
+			oCardSel = ImageUtils.scale(oCardSel, yin.getWidth(), yin.getHeight());
+			
 			cardSelBack = ImageIO.read(new File("src/resources/cardSelectBackground.png"));
+			attackBack = ImageIO.read(new File("src/resources/attackBackground.png"));
 			
 			cellW = hl.getWidth();
 			cellH = hl.getHeight();
@@ -222,25 +229,40 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				{
 					if(!cardMoved)
 					{
-						if(Paint.pCards[Paint.clicked] != null && Paint.oCards[cell] == null)
+						if(Paint.pCards[Paint.clicked] != null)
 						{
-							select = false;
-							highlight = true;
+							if(GameUtils.canMove(cell, Paint.clicked) && canPlaceCard)
+							{
+								
+								if(Paint.oCards[cell] == null )
+								{
+									
+									select = false;
+									
+									
+									Paint.pCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
+									Paint.pCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
+									Paint.pCards[cell] = Paint.pCards[Paint.clicked];
+									Paint.pCards[Paint.clicked] = null;
+									
+									cardMoved = true;
+									countTurn();
+									
+									
+								}
+								else if(Paint.oCards[cell] != null)//attacking
+								{
+									this.setEnabled(false);
+									new AttackFrame(this);
+								
+								}
+								
+								
+							}
 							
-							Paint.pCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
-							Paint.pCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
-							Paint.pCards[cell] = Paint.pCards[Paint.clicked];
-							Paint.pCards[Paint.clicked] = null;
 							
-							cardMoved = true;
-							countTurn();
 						}
-						else //attacking
-						{
-							this.setEnabled(false);
-							new AttackFrame(this);
-							
-						}
+						
 						
 					}
 				}
@@ -291,25 +313,33 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				{
 					if(!cardMoved)
 					{
-						if(Paint.oCards[Paint.clicked] != null && Paint.pCards[cell] == null)
+						if(Paint.oCards[Paint.clicked] != null)
 						{
-							select = false;
-							highlight = true;
+							if(GameUtils.canMove(cell, Paint.clicked) && canPlaceCard)
+							{
+								if(Paint.pCards[cell] == null )
+								{
+									select = false;
+									
+									
+									Paint.oCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
+									Paint.oCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
+									Paint.oCards[cell] = Paint.oCards[Paint.clicked];
+									Paint.oCards[Paint.clicked] = null;
+									
+									cardMoved = true;
+									countTurn();
+								}
+								else if(Paint.pCards[cell] != null)//attacking
+								{
+									this.setEnabled(false);
+									new AttackFrame(this);
+									
+								}
+							}
 							
-							Paint.oCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
-							Paint.oCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
-							Paint.oCards[cell] = Paint.oCards[Paint.clicked];
-							Paint.oCards[Paint.clicked] = null;
-							
-							cardMoved = true;
-							countTurn();
 						}
-						else //attacking
-						{
-							this.setEnabled(false);
-							new AttackFrame(this);
-							
-						}
+						
 						
 					}
 				}

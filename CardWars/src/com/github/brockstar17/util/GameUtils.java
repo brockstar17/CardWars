@@ -54,9 +54,19 @@ public class GameUtils {
 		
 		for(int i = 0; i < mov.length; i++)
 		{
-			if((Paint.pCards[mov[i]] == null || Paint.oCards[mov[i]] != null) && mov[i] != 4 && mov[i] != 15)
+			if(CardWars.player1)
 			{
-				ar.add(mov[i]);
+				if((Paint.pCards[mov[i]] == null || (Paint.pCards[mov[i]] == null && Paint.oCards[mov[i]] != null)) && mov[i] != 4 && mov[i] != 15)
+				{
+					ar.add(mov[i]);
+				}
+			}
+			else
+			{
+				if((Paint.oCards[mov[i]] == null || (Paint.oCards[mov[i]] == null && Paint.pCards[mov[i]] != null)) && mov[i] != 4 && mov[i] != 15)
+				{
+					ar.add(mov[i]);
+				}
 			}
 			
 		}
@@ -166,11 +176,16 @@ public class GameUtils {
 	}
 	
 	
-	/*
-	 * CardWars.otherDeck.add(new PlayingCard(odx, ody, CardWars.cellW, CardWars.cellH, getSuit(s), i+1));
-					cards2++;
-					CardWars.playerDeck.add(new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, getSuit(s), i+1));
-					cards++;
-	 */
+	public static boolean canMove(int cell, int clicked){
+		for(int i = 0; i < adjMoves(clicked).length; i++)
+		{
+			if(cell == adjMoves(clicked)[i])
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 }

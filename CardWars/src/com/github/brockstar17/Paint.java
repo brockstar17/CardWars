@@ -43,7 +43,12 @@ public class Paint extends JPanel
 		
 		if(CardWars.highlight)
 		{
+			CardWars.canPlaceCard = false;
 			highlight(g);
+		}
+		else
+		{
+			CardWars.canPlaceCard = true;
 		}
 		
 		
@@ -120,7 +125,7 @@ public class Paint extends JPanel
 				}
 				else
 				{
-					g.drawImage(CardWars.cardSel, BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
+					g.drawImage(CardWars.oCardSel, BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
 				}
 			}
 			else if(cell!= -1 && cell != 4 && cell != 15)
