@@ -101,10 +101,7 @@ public class Paint extends JPanel
 					g.drawImage(suit[pCards[cell].getValue()-1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
 
 				}
-				else
-				{
-					g.drawImage(CardWars.cardSel, BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
-				}
+				
 			}
 			else if(cell!= -1 && cell != 4 && cell != 15)
 			{
@@ -123,10 +120,7 @@ public class Paint extends JPanel
 					g.drawImage(suit[oCards[cell].getValue()-1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
 
 				}
-				else
-				{
-					g.drawImage(CardWars.oCardSel, BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
-				}
+				
 			}
 			else if(cell!= -1 && cell != 4 && cell != 15)
 			{
