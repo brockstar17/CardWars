@@ -288,7 +288,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				//System.out.println(playCards);
 			}
 			
-			else if(cell == 4 && !cardSpawned && playCards < 5)
+			else if(cell == 4 && !cardSpawned && oppCards < 5)
 			{
 				//System.out.println("Deck Clicked");
 				
@@ -383,9 +383,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				//System.out.println("Placed");
 				Paint.oCards[i] = (selectedCard);
 				deckClicked = !deckClicked;
-				if(playCards < 5)
+				if(oppCards < 5)
 				{
-					playCards++;
+					oppCards++;
 				}
 				
 			}

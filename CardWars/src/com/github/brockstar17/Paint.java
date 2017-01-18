@@ -92,7 +92,7 @@ public class Paint extends JPanel
 		
 		if(CardWars.player1)
 		{
-			if(cellHighCard)
+			if(cellHighCard && cell != -1)
 			{
 				BufferedImage[] suit = getSuitArray(pCards[cell].getSuit());
 				
