@@ -57,6 +57,7 @@ public class AttackFrame extends JFrame implements WindowListener{
 		
 		this.cw.setVisible(true);
 		this.cw.setEnabled(true);
+		
 	}
 
 	@Override

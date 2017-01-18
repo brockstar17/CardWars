@@ -355,11 +355,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				
 			}
 		}
-		
-		
-		
-		
-			
+	
 		repaint();
 		
 		

@@ -66,7 +66,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		switch(key)
 		{
 		case KeyEvent.VK_ESCAPE:
-			CardWars.deckClicked = !CardWars.deckClicked;
+			//CardWars.deckClicked = !CardWars.deckClicked;
 			this.dispose();
 			break;
 		}
@@ -103,6 +103,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 					CardWars.playerDiscard.add(CardWars.playerDeck.get(cell));
 					CardWars.playerDeck.remove(cell);
 					cardWars.setCardSelected(true);
+					CardWars.deckClicked = !CardWars.deckClicked;
 					this.dispose();
 					
 				}
@@ -116,6 +117,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 					CardWars.otherDiscard.add(CardWars.otherDeck.get(cell));
 					CardWars.otherDeck.remove(cell);
 					cardWars.setCardSelected(true);
+					CardWars.deckClicked = !CardWars.deckClicked;
 					this.dispose();
 					
 				}
@@ -124,7 +126,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		}
 		else
 		{
-			CardWars.deckClicked = !CardWars.deckClicked;
+			//CardWars.deckClicked = !CardWars.deckClicked;
 			this.dispose();
 		}
 	}
@@ -162,7 +164,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 	@Override
 	public void windowClosed(WindowEvent e) {
 		
-		
+		CardWars.deckClicked = !CardWars.deckClicked;
 		this.cardWars.setVisible(true);
 		this.cardWars.setEnabled(true);
 	}
