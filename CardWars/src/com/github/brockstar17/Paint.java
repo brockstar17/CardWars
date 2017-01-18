@@ -111,7 +111,7 @@ public class Paint extends JPanel
 		}
 		else
 		{
-			if(cellHighCard)
+			if(cellHighCard && cell != -1)
 			{
 				BufferedImage[] suit = getSuitArray(oCards[cell].getSuit());
 				
@@ -189,7 +189,7 @@ public class Paint extends JPanel
 		clicked = cell;
 	}
 	
-	private BufferedImage[] getSuitArray(String suit){
+	public static BufferedImage[] getSuitArray(String suit){
 		switch(suit)
 		{
 		case "hearts":

@@ -39,10 +39,11 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage[] spades = new BufferedImage[13];
 	public static BufferedImage[] clubs = new BufferedImage[13];
 	public static BufferedImage[] diamonds = new BufferedImage[13];
-
 	public static BufferedImage cardSelBack = null;
-
 	public static BufferedImage attackBack = null;
+	public static BufferedImage flame1 = null;
+	public static BufferedImage flame2 = null;
+	public static BufferedImage behFlame = null;
 
 	public static int cellW, cellH;
 	public static int mx, my;
@@ -113,6 +114,12 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			turn = ImageIO.read(new File("src/resources/turn.png"));
 			turn = ImageUtils.scale(turn, ImageUtils.calcWidth(turn.getHeight(), screenY * .233, turn.getWidth()), (int) (screenY * .232));
 			
+			flame1 = ImageIO.read(new File("src/resources/flames/flame5.png"));
+			flame2 = ImageIO.read(new File("src/resources/flames/flame6.png"));
+			flame1 = ImageUtils.scale(flame1, yin.getWidth(), ImageUtils.calcWidth(flame1.getWidth(), yin.getWidth(), flame1.getHeight()));
+			flame2 = ImageUtils.scale(flame2, flame1.getWidth(), flame1.getHeight());
+			behFlame = ImageIO.read(new File("src/resources/flames/behindFlame.png"));
+			behFlame = ImageUtils.scale(behFlame, yin.getWidth(), yin.getHeight());
 			
 			cardSelBack = ImageIO.read(new File("src/resources/cardSelectBackground.png"));
 			attackBack = ImageIO.read(new File("src/resources/attackBackground.png"));
@@ -233,7 +240,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								{
 									
 									select = false;
-									
+									highlight = true;
 									
 									Paint.pCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
 									Paint.pCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
@@ -248,7 +255,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								else if(Paint.oCards[cell] != null)//attacking
 								{
 									this.setEnabled(false);
-									new AttackFrame(this);
+									
+									new AttackFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell]);
 								
 								}
 								
@@ -295,7 +303,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				
 				
 			}
-			else if(cell != 15)
+			else if(cell != 15 && cell != -1)
 			{
 				if(Paint.oCards[cell] != null && !select && !cardMoved)
 				{
@@ -315,7 +323,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								if(Paint.pCards[cell] == null )
 								{
 									select = false;
-									
+									highlight = true;
 									
 									Paint.oCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
 									Paint.oCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
@@ -328,7 +336,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								else if(Paint.pCards[cell] != null)//attacking
 								{
 									this.setEnabled(false);
-									new AttackFrame(this);
+								
+									new AttackFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked]);
 									
 								}
 							}
