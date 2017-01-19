@@ -57,25 +57,29 @@ public class AttackPanel extends JPanel implements ActionListener
 		if(CardWars.player1 && burn)
 		{
 			this.winner = AttackUtil.compare(player.getValue(), opp.getValue());
+			af.winner = this.winner;
 			if(winner == "p1")
 			{
 				drawFire(g, cx2);
+				
 			}
 			else if(winner == "p2")
 			{
 				drawFire(g, cx1);
+				
 			}
 		}
 		else if(burn)
 		{
-			this.winner = AttackUtil.compare(opp.getValue(), player.getValue());
+			this.winner = AttackUtil.compare(player.getValue(), opp.getValue());
+			af.winner = this.winner;
 			if(winner == "p1")
 			{
-				drawFire(g, cx1);
+				drawFire(g, cx2);
 			}
 			else if(winner == "p2")
 			{
-				drawFire(g, cx2);
+				drawFire(g, cx1);
 			}
 		}
 

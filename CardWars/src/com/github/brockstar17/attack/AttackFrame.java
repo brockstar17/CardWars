@@ -18,6 +18,8 @@ public class AttackFrame extends JFrame implements WindowListener{
 	private int w;
 	private int l;
 	
+	protected String winner;
+	
 	private PlayingCard player, opp;
 	
 	public AttackFrame(CardWars cw, PlayingCard player, PlayingCard other)
@@ -55,6 +57,16 @@ public class AttackFrame extends JFrame implements WindowListener{
 	@Override
 	public void windowClosed(WindowEvent e) {
 		
+		if(winner == "p2")
+		{
+			System.out.println("Lost: P1");
+			CardWars.playerDiscard.add(player);
+		}
+		else if(winner == "p1")
+		{
+			System.out.println("Lost: P2");
+			CardWars.otherDiscard.add(opp);
+		}
 		this.cw.setVisible(true);
 		this.cw.setEnabled(true);
 		
