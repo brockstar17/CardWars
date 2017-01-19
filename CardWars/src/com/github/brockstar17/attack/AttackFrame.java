@@ -30,7 +30,6 @@ public class AttackFrame extends JFrame implements WindowListener
 		this.cw = cw;
 		this.player = player;
 		this.opp = other;
-
 		this.w = (int) (cw.getWidth() * .75);
 		this.l = ImageUtils.calcWidth(400, this.w, 200);
 
@@ -57,16 +56,9 @@ public class AttackFrame extends JFrame implements WindowListener
 	@Override
 	public void windowClosed(WindowEvent e) {
 
-		if(winner == "p2")
-		{
-			// System.out.println("Lost: P1");
-			CardWars.playerDiscard.add(player);
-		}
-		else if(winner == "p1")
-		{
-			// System.out.println("Lost: P2");
-			CardWars.otherDiscard.add(opp);
-		}
+		CardWars.select = false;
+		cw.countTurn();
+		cw.winner = this.winner;
 		this.cw.setVisible(true);
 		this.cw.setEnabled(true);
 
