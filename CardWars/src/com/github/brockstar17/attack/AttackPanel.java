@@ -87,6 +87,7 @@ public class AttackPanel extends JPanel implements ActionListener
 
 	private int count = 0;
 	private int moved = 0;
+	private double exp = 1.022;
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -94,12 +95,12 @@ public class AttackPanel extends JPanel implements ActionListener
 		{
 			burn = true;
 
-			if((int) (cy * 1.021) < (int) (af.getHeight() * .25) + CardWars.yin.getHeight())
+			if((int) (cy * exp) < (int) (af.getHeight() * .25) + CardWars.yin.getHeight())
 			{
 
-				cy = (int) (cy * 1.021);
+				cy = (int) (cy * exp);
 				repaint();
-				moved += (int) (cy * 1.021) - cy;
+				moved += (int) (cy * exp) - cy;
 			}
 			else
 			{
