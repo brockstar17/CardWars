@@ -248,8 +248,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								{
 									this.setEnabled(false);
 
-									new AttackFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell]);
-									attackDiscard(cell, Paint.pCards[Paint.clicked], Paint.oCards[cell]);
+									new AttackFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell], cell);
+
 								}
 
 							}
@@ -324,8 +324,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								{
 									this.setEnabled(false);
 
-									new AttackFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked]);
-									attackDiscard(cell, Paint.pCards[cell], Paint.oCards[Paint.clicked]);
+									new AttackFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked], cell);
+
 								}
 							}
 
@@ -443,59 +443,6 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 	public void setSelectedCard(PlayingCard card) {
 		this.selectedCard = card;
-	}
-
-	private void attackDiscard(int cell, PlayingCard player, PlayingCard opp) {
-		if(cell != -1 && CardWars.player1)
-		{
-			if(winner == "p2")
-			{
-				System.out.println("Lost: P1");
-				player = Paint.pCards[Paint.clicked];
-				Paint.pCards[Paint.clicked] = null;
-
-				System.out.println("Adding to other: " + player.getName());
-				CardWars.otherDiscard.add(player);
-
-			}
-			else if(winner == "p1")
-			{
-				System.out.println("Lost: P2");
-				opp = Paint.oCards[cell];
-				Paint.oCards[cell] = null;
-				player = Paint.pCards[Paint.clicked];
-				Paint.pCards[Paint.clicked] = null;
-				Paint.pCards[cell] = player;
-				System.out.println("Adding to player: " + opp.getName());
-				CardWars.playerDiscard.add(opp);
-
-			}
-
-		}
-		else if(cell != -1)
-		{
-			if(winner == "p2")
-			{
-				System.out.println("Lost: P1");
-				player = Paint.pCards[cell];
-				Paint.pCards[cell] = null;
-				opp = Paint.oCards[Paint.clicked];
-				Paint.oCards[Paint.clicked] = null;
-				Paint.oCards[cell] = opp;
-				System.out.println("Adding to other: " + player.getName());
-				CardWars.otherDiscard.add(player);
-			}
-			else if(winner == "p1")
-			{
-				System.out.println("Lost: P2");
-				opp = Paint.oCards[Paint.clicked];
-				Paint.oCards[Paint.clicked] = null;
-				System.out.println("Adding to player: " + opp.getName());
-				CardWars.playerDiscard.add(opp);
-
-			}
-
-		}
 	}
 
 }
