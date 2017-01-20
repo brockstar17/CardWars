@@ -13,9 +13,10 @@ public class Paint extends JPanel
 {
 	public static PlayingCard[] pCards = new PlayingCard[20];
 	public static PlayingCard[] oCards = new PlayingCard[20];
-	public static int cardSpaceX = (int)(CardWars.screenX *.034), cardSpaceY = (int)(CardWars.screenY*.0165);
+	public static int cardSpaceX = (int) (CardWars.screenX * .034),
+			cardSpaceY = (int) (CardWars.screenY * .0165);
 	public static int clicked;
-	
+
 	public static boolean cellHighCard;
 
 	@Override
@@ -27,20 +28,18 @@ public class Paint extends JPanel
 
 		if(CardWars.player1)
 		{
-			
+
 			g.drawImage(CardWars.turn, BoardSpaces.getCellX(15), BoardSpaces.getCellY(15), null);
 		}
 		else
 		{
 			g.drawImage(CardWars.turn, BoardSpaces.getCellX(4), BoardSpaces.getCellY(4), null);
 		}
-		
+
 		drawDeck(g);
-		
+
 		drawCards(g);
-		
-		
-		
+
 		if(CardWars.highlight)
 		{
 			CardWars.canPlaceCard = false;
@@ -50,63 +49,62 @@ public class Paint extends JPanel
 		{
 			CardWars.canPlaceCard = true;
 		}
-		
-		
+
 		if(CardWars.deckClicked)
 		{
 			drawSpawn(g);
 		}
-		
+
 		if(CardWars.select)
 		{
 			movHighlight(g, GameUtils.adjMoves(clicked));
 		}
-		
-		//g.drawImage(CardWars.hearts[11], BoardSpaces.getCellX(0) + cardSpaceX, BoardSpaces.getCellY(0) + cardSpaceY, null);
-		
+
+		// g.drawImage(CardWars.hearts[11], BoardSpaces.getCellX(0) + cardSpaceX, BoardSpaces.getCellY(0) + cardSpaceY, null);
+
 	}
 
 	private void drawCards(Graphics g) {
-		
+
 		for(int i = 0; i < pCards.length; i++)
 		{
 			if(pCards[i] != null && i != 4 && i != 15)
 			{
-				g.drawImage(CardWars.yin, BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i)+ cardSpaceY, null);
+				g.drawImage(CardWars.yin, BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i) + cardSpaceY, null);
 			}
 		}
-	
+
 		for(int i = 0; i < oCards.length; i++)
 		{
 			if(oCards[i] != null && i != 4 && i != 15)
 			{
-				g.drawImage(CardWars.yin, BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i)+ cardSpaceY, null);
+				g.drawImage(CardWars.paris, BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i) + cardSpaceY, null);
 			}
 		}
-		
+
 	}
 
 	private void highlight(Graphics g) {
-		
+
 		int cell = BoardSpaces.getCell(CardWars.mx, CardWars.my);
-		
+
 		if(CardWars.player1)
 		{
 			if(cellHighCard && cell != -1)
 			{
 				BufferedImage[] suit = getSuitArray(pCards[cell].getSuit());
-				
+
 				if(suit != null)
 				{
-					g.drawImage(suit[pCards[cell].getValue()-1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
+					g.drawImage(suit[pCards[cell].getValue() - 1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
 
 				}
-				
+
 			}
-			else if(cell!= -1 && cell != 4 && cell != 15)
+			else if(cell != -1 && cell != 4 && cell != 15)
 			{
 				g.drawImage(CardWars.sel, BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), null);
-				
+
 			}
 		}
 		else
@@ -114,31 +112,31 @@ public class Paint extends JPanel
 			if(cellHighCard && cell != -1)
 			{
 				BufferedImage[] suit = getSuitArray(oCards[cell].getSuit());
-				
+
 				if(suit != null)
 				{
-					g.drawImage(suit[oCards[cell].getValue()-1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
+					g.drawImage(suit[oCards[cell].getValue() - 1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
 
 				}
-				
+
 			}
-			else if(cell!= -1 && cell != 4 && cell != 15)
+			else if(cell != -1 && cell != 4 && cell != 15)
 			{
 				g.drawImage(CardWars.hl, BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), null);
-				
+
 			}
 		}
-		
+
 	}
 
-	private void movHighlight(Graphics g, int[] cells){
-		
+	private void movHighlight(Graphics g, int[] cells) {
+
 		if(CardWars.player1)
 		{
 			for(int i = 0; i < cells.length; i++)
 			{
 				g.drawImage(CardWars.sel, BoardSpaces.getCellX(cells[i]), BoardSpaces.getCellY(cells[i]), null);
-				
+
 			}
 		}
 		else
@@ -146,17 +144,17 @@ public class Paint extends JPanel
 			for(int i = 0; i < cells.length; i++)
 			{
 				g.drawImage(CardWars.hl, BoardSpaces.getCellX(cells[i]), BoardSpaces.getCellY(cells[i]), null);
-				
+
 			}
 		}
 	}
-	
-	private void drawDeck(Graphics g){
-		g.drawImage(CardWars.yin, BoardSpaces.getCellX(4) + cardSpaceX, BoardSpaces.getCellY(4) + cardSpaceY, null);
-		g.drawImage(CardWars.yin, BoardSpaces.getCellX(15)+ cardSpaceX, BoardSpaces.getCellY(15)+ cardSpaceY, null);
+
+	private void drawDeck(Graphics g) {
+		g.drawImage(CardWars.paris, BoardSpaces.getCellX(4) + cardSpaceX, BoardSpaces.getCellY(4) + cardSpaceY, null);
+		g.drawImage(CardWars.yin, BoardSpaces.getCellX(15) + cardSpaceX, BoardSpaces.getCellY(15) + cardSpaceY, null);
 	}
-	
-	private void drawSpawn(Graphics g){
+
+	private void drawSpawn(Graphics g) {
 		if(CardWars.player1)
 		{
 			if(!BoardSpaces.hasCard(5))
@@ -184,12 +182,12 @@ public class Paint extends JPanel
 				g.drawImage(CardWars.sel, BoardSpaces.getCellX(3), BoardSpaces.getCellY(3), null);
 		}
 	}
-	
-	public static void setClicked(int cell){
+
+	public static void setClicked(int cell) {
 		clicked = cell;
 	}
-	
-	public static BufferedImage[] getSuitArray(String suit){
+
+	public static BufferedImage[] getSuitArray(String suit) {
 		switch(suit)
 		{
 		case "hearts":
@@ -201,9 +199,8 @@ public class Paint extends JPanel
 		case "diamonds":
 			return CardWars.diamonds;
 		default:
-				return null;
+			return null;
 		}
 	}
-	
-	
+
 }
