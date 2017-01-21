@@ -16,6 +16,8 @@ public class Paint extends JPanel
 	public static int cardSpaceX = (int) (CardWars.screenX * .034),
 			cardSpaceY = (int) (CardWars.screenY * .0165);
 	public static int clicked;
+	
+	
 
 	public static boolean cellHighCard;
 
@@ -70,7 +72,7 @@ public class Paint extends JPanel
 		{
 			if(pCards[i] != null && i != 4 && i != 15)
 			{
-				g.drawImage(CardWars.yin, BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i) + cardSpaceY, null);
+				g.drawImage(getDeckBack(CardWars.userDeck, 0), BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i) + cardSpaceY, null);
 			}
 		}
 
@@ -78,7 +80,7 @@ public class Paint extends JPanel
 		{
 			if(oCards[i] != null && i != 4 && i != 15)
 			{
-				g.drawImage(CardWars.paris, BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i) + cardSpaceY, null);
+				g.drawImage(getDeckBack(CardWars.backDeck, CardWars.userDeck), BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i) + cardSpaceY, null);
 			}
 		}
 
@@ -150,8 +152,8 @@ public class Paint extends JPanel
 	}
 
 	private void drawDeck(Graphics g) {
-		g.drawImage(CardWars.paris, BoardSpaces.getCellX(4) + cardSpaceX, BoardSpaces.getCellY(4) + cardSpaceY, null);
-		g.drawImage(CardWars.yin, BoardSpaces.getCellX(15) + cardSpaceX, BoardSpaces.getCellY(15) + cardSpaceY, null);
+		g.drawImage(getDeckBack(CardWars.backDeck, CardWars.userDeck), BoardSpaces.getCellX(4) + cardSpaceX, BoardSpaces.getCellY(4) + cardSpaceY, null);
+		g.drawImage(getDeckBack(CardWars.userDeck, 0), BoardSpaces.getCellX(15) + cardSpaceX, BoardSpaces.getCellY(15) + cardSpaceY, null);
 	}
 
 	private void drawSpawn(Graphics g) {
@@ -200,6 +202,49 @@ public class Paint extends JPanel
 			return CardWars.diamonds;
 		default:
 			return null;
+		}
+	}
+	
+	private BufferedImage getDeckBack(int user, int opp){
+		switch(user)
+		{
+		case 1:
+			if(opp != user)
+			{
+				return CardWars.yin;
+			}
+			return CardWars.paris;
+			
+		case 2:
+			if(opp != user)
+			{
+				return CardWars.paris;
+			}
+			return CardWars.negParis;
+		case 3:
+			if(opp != user)
+			{
+				return CardWars.negParis;
+			}
+			return CardWars.geo;
+		case 4:
+			if(opp != user)
+			{
+				return CardWars.geo;
+			}
+			return CardWars.pretzel;
+		case 5:
+			if(opp != user)
+			{
+				return CardWars.pretzel;
+			}
+			return CardWars.yang;
+		default:
+			if(opp != user)
+			{
+				return CardWars.yang;
+			}
+			return CardWars.yin;
 		}
 	}
 

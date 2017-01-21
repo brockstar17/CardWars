@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -33,6 +34,10 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage board = null;
 	public static BufferedImage yin = null;
 	public static BufferedImage paris = null;
+	public static BufferedImage negParis = null;
+	public static BufferedImage geo = null;
+	public static BufferedImage yang = null;
+	public static BufferedImage pretzel = null;
 	public static BufferedImage hl = null;
 	public static BufferedImage sel = null;
 	public static BufferedImage turn = null;
@@ -62,7 +67,10 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private PlayingCard selectedCard;
 	public static boolean canPlaceCard;
 	public String winner;
-
+	private Random rn = new Random();
+	public static int backDeck;
+	public static int userDeck;
+	
 	public static ArrayList<PlayingCard> playerDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> otherDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> playerDiscard = new ArrayList<PlayingCard>();
@@ -73,6 +81,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 		super("Card Wars");
 
+		backDeck = rn.nextInt(6) + 1;
+		userDeck = 1;
+		
 		try
 		{
 			board = ImageIO.read(new File("src/resources/board.png"));
@@ -81,7 +92,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 			board = ImageUtils.scale(board, screenX, screenY);
 
-			yin = ImageIO.read(new File("src/resources/yin.png"));
+			yin = ImageIO.read(new File("src/resources/cards/yin.png"));
 
 			for(int i = 0; i < hearts.length; i++)
 			{
@@ -101,8 +112,17 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 			yin = ImageUtils.scale(yin, ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()), (int) (screenY * .2));
 
-			paris = ImageIO.read(new File("src/resources/paris.png"));
+			paris = ImageIO.read(new File("src/resources/cards/paris.png"));
 			paris = ImageUtils.scale(paris, yin.getWidth(), yin.getHeight());
+			
+			negParis = ImageIO.read(new File("src/resources/cards/parisNight.png"));
+			negParis = ImageUtils.scale(negParis, yin.getWidth(), yin.getHeight());
+			geo = ImageIO.read(new File("src/resources/cards/geometric.png"));
+			geo = ImageUtils.scale(geo, yin.getWidth(), yin.getHeight());
+			pretzel = ImageIO.read(new File("src/resources/cards/pretzel.png"));
+			pretzel = ImageUtils.scale(pretzel, yin.getWidth(), yin.getHeight());
+			yang = ImageIO.read(new File("src/resources/cards/yang.png"));
+			yang = ImageUtils.scale(yang, yin.getWidth(), yin.getHeight());
 
 			hl = ImageIO.read(new File("src/resources/highlight.png"));
 			hl = ImageUtils.scale(hl, ImageUtils.calcWidth(hl.getHeight(), screenY * .233, hl.getWidth()), (int) (screenY * .232));
