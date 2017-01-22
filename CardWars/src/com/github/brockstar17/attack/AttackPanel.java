@@ -34,7 +34,7 @@ public class AttackPanel extends JPanel implements ActionListener
 		this.cx2 = (int) (frame.getW() * .65);
 		this.cy = (int) (frame.getL() * .25);
 		this.pl = Paint.getSuitArray(player.getSuit())[player.getValue() - 1];
-		this.op = Paint.getSuitArray(opp.getSuit())[opp.getValue() - 1];
+		this.op = Paint.getDeckBack(CardWars.backDeck, CardWars.userDeck);
 		this.winner = AttackUtil.compare(player.getValue(), opp.getValue());
 		af.winner = this.winner;
 		Timer timer = new Timer(30, this);

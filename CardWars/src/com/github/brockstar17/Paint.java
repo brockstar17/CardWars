@@ -205,7 +205,7 @@ public class Paint extends JPanel
 		}
 	}
 	
-	private BufferedImage getDeckBack(int user, int opp){
+	public static BufferedImage getDeckBack(int user, int opp){
 		switch(user)
 		{
 		case 1:
@@ -218,31 +218,31 @@ public class Paint extends JPanel
 		case 2:
 			if(opp != user)
 			{
-				return CardWars.paris;
+				return CardWars.yang;
 			}
-			return CardWars.negParis;
+			return CardWars.geo;
 		case 3:
 			if(opp != user)
 			{
-				return CardWars.negParis;
+				return CardWars.geo;
 			}
-			return CardWars.geo;
+			return CardWars.negParis;
 		case 4:
 			if(opp != user)
 			{
-				return CardWars.geo;
+				return CardWars.negParis;
 			}
 			return CardWars.pretzel;
 		case 5:
 			if(opp != user)
 			{
-				return CardWars.pretzel;
+				return CardWars.paris;
 			}
 			return CardWars.yang;
 		default:
 			if(opp != user)
 			{
-				return CardWars.yang;
+				return CardWars.pretzel;
 			}
 			return CardWars.yin;
 		}

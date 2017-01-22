@@ -12,12 +12,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.github.brockstar17.attack.AttackFrame;
+import com.github.brockstar17.deck.DeckFrame;
 import com.github.brockstar17.util.BoardSpaces;
 import com.github.brockstar17.util.CardFrame;
 import com.github.brockstar17.util.GameUtils;
@@ -67,8 +67,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private PlayingCard selectedCard;
 	public static boolean canPlaceCard;
 	public String winner;
-	private Random rn = new Random();
-	public static int backDeck;
+
+	public static int backDeck = 5;
 	public static int userDeck;
 	
 	public static ArrayList<PlayingCard> playerDeck = new ArrayList<PlayingCard>();
@@ -80,9 +80,6 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	{
 
 		super("Card Wars");
-
-		backDeck = rn.nextInt(6) + 1;
-		userDeck = 1;
 		
 		try
 		{
@@ -159,6 +156,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		c.addMouseMotionListener(this);
 		c.addMouseListener(this);
 		addKeyListener(this);
+		
+		
 	}
 
 	public static void main(String[] args) {
@@ -167,10 +166,12 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 		frame.setSize(screenX, screenY);
 		frame.setLocationRelativeTo(null);
-
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setResizable(false);
+		
+		
 	}
 
 	// -------------------------------------------------------------------------------------\\
@@ -425,7 +426,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			select = false;
 			highlight = true;
 			break;
-		case KeyEvent.VK_D:
+		case KeyEvent.VK_G:
 			for(int i = 0; i < otherDiscard.size(); i++)
 			{
 				System.out.println("Other Disc " + i + " " + otherDiscard.get(i).getName());
@@ -435,7 +436,12 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			{
 				System.out.println("Player Disc " + i + " " + playerDiscard.get(i).getName());
 			}
-
+			break;
+		case KeyEvent.VK_D:
+			this.setEnabled(false);
+			new DeckFrame(this);
+			break;
+			
 		}
 
 		repaint();
