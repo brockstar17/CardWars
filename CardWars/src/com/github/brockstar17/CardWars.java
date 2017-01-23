@@ -51,6 +51,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage flame2 = null;
 	public static BufferedImage behFlame = null;
 
+	public static File rules = null;
+
 	public static int cellW, cellH;
 	public static int mx, my;
 
@@ -70,7 +72,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 	public static int backDeck = 5;
 	public static int userDeck;
-	
+
 	public static ArrayList<PlayingCard> playerDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> otherDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> playerDiscard = new ArrayList<PlayingCard>();
@@ -80,7 +82,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	{
 
 		super("Card Wars");
-		
+
 		try
 		{
 			board = ImageIO.read(new File("src/resources/board.png"));
@@ -111,7 +113,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 			paris = ImageIO.read(new File("src/resources/cards/paris.png"));
 			paris = ImageUtils.scale(paris, yin.getWidth(), yin.getHeight());
-			
+
 			negParis = ImageIO.read(new File("src/resources/cards/parisNight.png"));
 			negParis = ImageUtils.scale(negParis, yin.getWidth(), yin.getHeight());
 			geo = ImageIO.read(new File("src/resources/cards/geometric.png"));
@@ -156,8 +158,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		c.addMouseMotionListener(this);
 		c.addMouseListener(this);
 		addKeyListener(this);
-		
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -166,12 +167,11 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 		frame.setSize(screenX, screenY);
 		frame.setLocationRelativeTo(null);
-		
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setResizable(false);
-		
-		
+
 	}
 
 	// -------------------------------------------------------------------------------------\\
@@ -441,7 +441,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			this.setEnabled(false);
 			new DeckFrame(this);
 			break;
-			
+
 		}
 
 		repaint();
