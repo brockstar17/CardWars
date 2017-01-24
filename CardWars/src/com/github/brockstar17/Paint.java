@@ -1,5 +1,6 @@
 package com.github.brockstar17;
 
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -16,8 +17,6 @@ public class Paint extends JPanel
 	public static int cardSpaceX = (int) (CardWars.screenX * .034),
 			cardSpaceY = (int) (CardWars.screenY * .0165);
 	public static int clicked;
-	
-	
 
 	public static boolean cellHighCard;
 
@@ -204,8 +203,8 @@ public class Paint extends JPanel
 			return null;
 		}
 	}
-	
-	public static BufferedImage getDeckBack(int user, int opp){
+
+	public static BufferedImage getDeckBack(int user, int opp) {
 		switch(user)
 		{
 		case 1:
@@ -214,7 +213,7 @@ public class Paint extends JPanel
 				return CardWars.yin;
 			}
 			return CardWars.paris;
-			
+
 		case 2:
 			if(opp != user)
 			{
@@ -252,6 +251,13 @@ public class Paint extends JPanel
 			}
 			return CardWars.yin;
 		}
+	}
+
+	public void drawCenteredString(String s, int w, int h, Graphics g) {
+		FontMetrics fm = g.getFontMetrics();
+		int x = (w - fm.stringWidth(s)) / 2;
+		int y = (fm.getAscent() + (h - (fm.getAscent() + fm.getDescent())) / 2);
+		g.drawString(s, x, y);
 	}
 
 }
