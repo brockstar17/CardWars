@@ -126,7 +126,7 @@ public class DeckFrame extends JFrame implements MouseListener, WindowListener{
 	
 	private int getCell(int mx, int my){
 		
-		int y1 = (int)(h*.05), y2 = (int)(h*.35);
+		int y1 = (int)(h*.05), y2 = (int)(h*.35), y3 = (int)(h*.65);
 		
 		if(mx > (int)(w*.1) && mx < (int)(w*.1) + CardWars.yin.getWidth())
 		{
@@ -138,6 +138,10 @@ public class DeckFrame extends JFrame implements MouseListener, WindowListener{
 			if(my > y2 && my < y2 + CardWars.yin.getHeight())
 			{
 				return 4;
+			}
+			if(my > y3 && my < y3 + CardWars.yin.getHeight())
+			{
+				return 6;
 			}
 		}
 		else if(mx > (int)(w*.4) && mx < (int)(w*.4) + CardWars.yin.getWidth())
@@ -159,9 +163,10 @@ public class DeckFrame extends JFrame implements MouseListener, WindowListener{
 			}
 			if(my > y2 && my < y2 + CardWars.yin.getHeight())
 			{
-				return 6;
+				return 7;
 			}
 		}
+	
 		
 		return 0;
 	}

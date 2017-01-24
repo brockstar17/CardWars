@@ -34,10 +34,11 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage board = null;
 	public static BufferedImage yin = null;
 	public static BufferedImage paris = null;
-	public static BufferedImage negParis = null;
+	public static BufferedImage celtic = null;
 	public static BufferedImage geo = null;
-	public static BufferedImage yang = null;
+	public static BufferedImage tesselate = null;
 	public static BufferedImage pretzel = null;
+	public static BufferedImage brighty = null;
 	public static BufferedImage hl = null;
 	public static BufferedImage sel = null;
 	public static BufferedImage turn = null;
@@ -112,14 +113,17 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			paris = ImageIO.read(new File("src/resources/cards/paris.png"));
 			paris = ImageUtils.scale(paris, yin.getWidth(), yin.getHeight());
 			
-			negParis = ImageIO.read(new File("src/resources/cards/parisNight.png"));
-			negParis = ImageUtils.scale(negParis, yin.getWidth(), yin.getHeight());
+			celtic = ImageIO.read(new File("src/resources/cards/celtic.png"));
+			celtic = ImageUtils.scale(celtic, yin.getWidth(), yin.getHeight());
 			geo = ImageIO.read(new File("src/resources/cards/geometric.png"));
 			geo = ImageUtils.scale(geo, yin.getWidth(), yin.getHeight());
 			pretzel = ImageIO.read(new File("src/resources/cards/pretzel.png"));
 			pretzel = ImageUtils.scale(pretzel, yin.getWidth(), yin.getHeight());
-			yang = ImageIO.read(new File("src/resources/cards/yang.png"));
-			yang = ImageUtils.scale(yang, yin.getWidth(), yin.getHeight());
+			tesselate = ImageIO.read(new File("src/resources/cards/tesselate.png"));
+			tesselate = ImageUtils.scale(tesselate, yin.getWidth(), yin.getHeight());
+			brighty = ImageIO.read(new File("src/resources/cards/brighty.png"));
+			brighty = ImageUtils.scale(brighty, yin.getWidth(), yin.getHeight());
+			
 
 			hl = ImageIO.read(new File("src/resources/highlight.png"));
 			hl = ImageUtils.scale(hl, ImageUtils.calcWidth(hl.getHeight(), screenY * .233, hl.getWidth()), (int) (screenY * .232));

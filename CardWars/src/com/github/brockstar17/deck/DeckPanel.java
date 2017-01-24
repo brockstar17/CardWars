@@ -29,10 +29,11 @@ public class DeckPanel extends JPanel{
 		g.drawImage(ImageUtils.scale(CardWars.attackBack, d.getWidth(), d.getHeight()), 0, 0, null);
 		
 		g.drawImage(CardWars.yin, (int)(w*.1), (int)(h*.05), null);
-		g.drawImage(CardWars.yang, (int)(w*.4), (int)(h*.05), null);
+		g.drawImage(CardWars.tesselate, (int)(w*.4), (int)(h*.05), null);
 		g.drawImage(CardWars.geo, (int)(w*.7), (int)(h*.05), null);
-		g.drawImage(CardWars.negParis, (int)(w*.1), (int)(h*.35), null);
+		g.drawImage(CardWars.celtic, (int)(w*.1), (int)(h*.35), null);
 		g.drawImage(CardWars.paris, (int)(w*.4), (int)(h*.35), null);
 		g.drawImage(CardWars.pretzel, (int)(w*.7), (int)(h*.35), null);
+		g.drawImage(CardWars.brighty, (int)(w*.1), (int)(h*.65), null);
 	}
 }

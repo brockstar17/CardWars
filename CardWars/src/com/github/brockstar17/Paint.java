@@ -218,7 +218,7 @@ public class Paint extends JPanel
 		case 2:
 			if(opp != user)
 			{
-				return CardWars.yang;
+				return CardWars.tesselate;
 			}
 			return CardWars.geo;
 		case 3:
@@ -226,11 +226,11 @@ public class Paint extends JPanel
 			{
 				return CardWars.geo;
 			}
-			return CardWars.negParis;
+			return CardWars.celtic;
 		case 4:
 			if(opp != user)
 			{
-				return CardWars.negParis;
+				return CardWars.celtic;
 			}
 			return CardWars.pretzel;
 		case 5:
@@ -238,7 +238,13 @@ public class Paint extends JPanel
 			{
 				return CardWars.paris;
 			}
-			return CardWars.yang;
+			return CardWars.brighty;
+		case 6:
+			if(opp != user)
+			{
+				return CardWars.brighty;
+			}
+			return CardWars.tesselate;
 		default:
 			if(opp != user)
 			{
