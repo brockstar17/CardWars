@@ -1,6 +1,5 @@
 package com.github.brockstar17;
 
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -253,11 +252,6 @@ public class Paint extends JPanel
 		}
 	}
 
-	public void drawCenteredString(String s, int w, int h, Graphics g) {
-		FontMetrics fm = g.getFontMetrics();
-		int x = (w - fm.stringWidth(s)) / 2;
-		int y = (fm.getAscent() + (h - (fm.getAscent() + fm.getDescent())) / 2);
-		g.drawString(s, x, y);
-	}
+	
 
 }

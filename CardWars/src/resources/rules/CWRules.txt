@@ -1,0 +1,43 @@
+The rules of Card Wars shall be as follows
+Turns:
+On each turn, you may spawn 1 card and move 1 card.
+ You may only spawn a card in one of the five spawn spaces, provided that the desired space is empty.
+You may only move to a space if the space is adjacent to the card being moved and the space is not 
+occupied by another of your cards.
+ If you move your card into a space that is occupied by a card belonging to your opponent, 
+battle shall commence between the two cards.
+Battle:
+Upon commencing battle, the value of the two cards shall be compared. You will only see the value of your card. 
+ If the value of your card was higher than your opponent’s, the opponent’s card will be captured in a most 
+violent manner. However, if the value of your card was less than your opponent, the enemy will capture your 
+card with reciprocated violence.
+ If the value of the two card was the same, then a state of war between you and your opponent shall exist, 
+and both sides must then begin war preparations.
+War: 
+There are two methods of preparing for war.
+The first method: To prepare in this manner you must have three cards on the board not including the card 
+that initiated the war. If so, you shall select three cards from the board as spoils of war, and the top 
+card on your deck shall be the deciding factor of the war.
+ In the second method, you shall draw the top three cards from your deck as spoils of war, and then select 
+a card that you have placed on the board, other than the card that initiated the war, to be the deciding factor.
+Once both players have set aside the spoils and selected a card to decide the outcome of the war, the value 
+of the deciding cards shall be compared. The player with the highest value card shall receive all spoils 
+that were set aside.
+Discard:
+You will have two discard piles. The first is yours, this is where your cards will go after there move 
+count has expired, and where the war spoils you set aside shall go if you win a war. The second is for the
+ cards you capture from your enemy, any cards that you defeat in battle and the spoils of war you receive 
+from your opponent will go here.
+Move Count:
+Move count is the number of moves a card has left on the board. The count will only start decreasing after 
+the card has been used to attack another. The opponent attacking your card will not start your card’s move 
+count. Aces can only be used once; they expire after attacking. Face cards have a move count of 2. All other 
+cards have a move count of 3.
+Winning:
+Your ultimate goal is to capture all the cards belonging to your opponent. If you are successful in achieving 
+that goal you shall be declared the victor, free to bask in the glory of your opponent’s defeat. 
+However another way of rising above your opponent is by capturing their spawn spaces. 
+You shall be victorious if you succeed in placing your five cards in each of your opponent’s spawn spaces.
+
+Much luck against all opponents you shall face,
+The Card Wars Team.

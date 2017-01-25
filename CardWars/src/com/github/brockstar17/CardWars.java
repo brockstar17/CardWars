@@ -2,6 +2,9 @@ package com.github.brockstar17;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -85,8 +88,20 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 		super("Card Wars");
 
+		rules = new File("src/resources/rules/CWRules.txt");
+		
+		try {
+		     GraphicsEnvironment ge = 
+		         GraphicsEnvironment.getLocalGraphicsEnvironment();
+		     ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Quicksand-Bold.ttf")));
+		} catch (IOException|FontFormatException e) {
+		     System.out.println("Font not found");
+		}
+		
 		try
 		{
+			
+			
 			board = ImageIO.read(new File("src/resources/board.png"));
 
 			screenX = ImageUtils.calcWidth(board.getHeight(), screenY, board.getWidth());
