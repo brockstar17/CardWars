@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 
 import com.github.brockstar17.attack.AttackFrame;
 import com.github.brockstar17.deck.DeckFrame;
+import com.github.brockstar17.rules.RulesFrame;
 import com.github.brockstar17.util.BoardSpaces;
 import com.github.brockstar17.util.CardFrame;
 import com.github.brockstar17.util.GameUtils;
@@ -73,7 +74,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 	public static int backDeck = 5;
 	public static int userDeck;
-	
+
 	public static ArrayList<PlayingCard> playerDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> otherDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> playerDiscard = new ArrayList<PlayingCard>();
@@ -83,7 +84,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	{
 
 		super("Card Wars");
-		
+
 		try
 		{
 			board = ImageIO.read(new File("src/resources/board.png"));
@@ -114,7 +115,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 			paris = ImageIO.read(new File("src/resources/cards/paris.png"));
 			paris = ImageUtils.scale(paris, yin.getWidth(), yin.getHeight());
-			
+
 			celtic = ImageIO.read(new File("src/resources/cards/celtic.png"));
 			celtic = ImageUtils.scale(celtic, yin.getWidth(), yin.getHeight());
 			geo = ImageIO.read(new File("src/resources/cards/geometric.png"));
@@ -125,7 +126,6 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			tesselate = ImageUtils.scale(tesselate, yin.getWidth(), yin.getHeight());
 			brighty = ImageIO.read(new File("src/resources/cards/brighty.png"));
 			brighty = ImageUtils.scale(brighty, yin.getWidth(), yin.getHeight());
-			
 
 			hl = ImageIO.read(new File("src/resources/highlight.png"));
 			hl = ImageUtils.scale(hl, ImageUtils.calcWidth(hl.getHeight(), screenY * .233, hl.getWidth()), (int) (screenY * .232));
@@ -162,8 +162,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		c.addMouseMotionListener(this);
 		c.addMouseListener(this);
 		addKeyListener(this);
-		
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -172,12 +171,11 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 		frame.setSize(screenX, screenY);
 		frame.setLocationRelativeTo(null);
-		
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setResizable(false);
-		
-		
+
 	}
 
 	// -------------------------------------------------------------------------------------\\
@@ -429,8 +427,17 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			break;
 
 		case KeyEvent.VK_ESCAPE:
-			select = false;
-			highlight = true;
+			if(select)
+			{
+				select = false;
+				highlight = true;
+			}
+			else
+			{
+				// bring up rules
+				this.setEnabled(false);
+				new RulesFrame(this);
+			}
 			break;
 		case KeyEvent.VK_G:
 			for(int i = 0; i < otherDiscard.size(); i++)
@@ -447,7 +454,12 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			this.setEnabled(false);
 			new DeckFrame(this);
 			break;
-			
+		case KeyEvent.VK_F1:
+			// rules
+			this.setEnabled(false);
+			new RulesFrame(this);
+			break;
+
 		}
 
 		repaint();
