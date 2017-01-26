@@ -20,15 +20,14 @@ public class RulesFrame extends JFrame implements WindowListener, KeyListener
 
 	private CardWars cw;
 	private JTextArea text;
-	
-	//private Font norm = new Font("Quicksand-Bold", Font.PLAIN, 20);
+
+	// private Font norm = new Font("Quicksand-Bold", Font.PLAIN, 20);
 
 	public RulesFrame(CardWars cw)
 	{
 		super("Rules and Gameplay of CardWars");
 
 		this.cw = cw;
-		addKeyListener(this);
 		addWindowListener(this);
 
 		text = new JTextArea();
@@ -36,19 +35,17 @@ public class RulesFrame extends JFrame implements WindowListener, KeyListener
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
 		text.setFont(CardWars.QSB);
-		
 
 		displayRules();
 		JScrollPane sp = new JScrollPane(text);
 		getContentPane().add(sp);
-		
+
 		setSize(this.cw.getWidth(), this.cw.getHeight());
 		setLocationRelativeTo(null);
-		
+
 		Container c = getContentPane();
 		c.add(new RulesPanel());
 		c.add(sp);
-
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -61,6 +58,7 @@ public class RulesFrame extends JFrame implements WindowListener, KeyListener
 
 	@Override
 	public void windowClosed(WindowEvent e) {
+		// System.out.println("Closing");
 		cw.setEnabled(true);
 		cw.setVisible(true);
 	}
@@ -102,24 +100,23 @@ public class RulesFrame extends JFrame implements WindowListener, KeyListener
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
-	
-	private static Scanner s;
-	
-	private void displayRules(){
 
-		
-		try {
+	private static Scanner s;
+
+	private void displayRules() {
+
+		try
+		{
 			s = new Scanner(CardWars.rules);
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e)
+		{
 			System.out.println("File not found: CWRules.txt");
 		}
-		
+
 		String d;
-		
-		//int h = (int)(this.getHeight()*.1);
-		
-		
-		
+
+		// int h = (int)(this.getHeight()*.1);
+
 		while(s.hasNextLine())
 		{
 			d = s.nextLine();
@@ -135,14 +132,11 @@ public class RulesFrame extends JFrame implements WindowListener, KeyListener
 				text.append(d);
 				text.append("\n");
 			}
-			
-			
+
 		}
-		
+
 		text.setCaretPosition(0);
-		
+
 	}
 
-	
-	
 }
