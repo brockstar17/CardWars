@@ -5,8 +5,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import com.github.brockstar17.CardWars;
 
@@ -15,20 +19,36 @@ public class RulesFrame extends JFrame implements WindowListener, KeyListener
 {
 
 	private CardWars cw;
+	private JTextArea text;
+	
+	//private Font norm = new Font("Quicksand-Bold", Font.PLAIN, 20);
 
 	public RulesFrame(CardWars cw)
 	{
-		super("Rules de la CardWars");
+		super("Rules and Gameplay of CardWars");
 
 		this.cw = cw;
 		addKeyListener(this);
 		addWindowListener(this);
 
-		Container c = getContentPane();
-		c.add(new RulesPanel());
+		text = new JTextArea();
+		text.setEditable(false);
+		text.setLineWrap(true);
+		text.setWrapStyleWord(true);
+		text.setFont(CardWars.QSB);
+		
 
+		displayRules();
+		JScrollPane sp = new JScrollPane(text);
+		getContentPane().add(sp);
+		
 		setSize(this.cw.getWidth(), this.cw.getHeight());
 		setLocationRelativeTo(null);
+		
+		Container c = getContentPane();
+		c.add(new RulesPanel());
+		c.add(sp);
+
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -82,4 +102,47 @@ public class RulesFrame extends JFrame implements WindowListener, KeyListener
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
+	
+	private static Scanner s;
+	
+	private void displayRules(){
+
+		
+		try {
+			s = new Scanner(CardWars.rules);
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found: CWRules.txt");
+		}
+		
+		String d;
+		
+		//int h = (int)(this.getHeight()*.1);
+		
+		
+		
+		while(s.hasNextLine())
+		{
+			d = s.nextLine();
+			if(d.contains(":") && !d.contains("The first method:"))
+			{
+				text.append(d);
+				text.append("\n");
+				text.append("\n");
+			}
+
+			else
+			{
+				text.append(d);
+				text.append("\n");
+			}
+			
+			
+		}
+		
+		text.setCaretPosition(0);
+		
+	}
+
+	
+	
 }

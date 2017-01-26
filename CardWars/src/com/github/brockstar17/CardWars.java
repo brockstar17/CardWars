@@ -4,7 +4,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -82,6 +81,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static ArrayList<PlayingCard> otherDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> playerDiscard = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> otherDiscard = new ArrayList<PlayingCard>();
+	
+	public static Font QSB;
 
 	public CardWars()
 	{
@@ -90,12 +91,19 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 		rules = new File("src/resources/rules/CWRules.txt");
 		
+		File is = new File("src/resources/rules/Quicksand-Bold.ttf");
 		try {
-		     GraphicsEnvironment ge = 
-		         GraphicsEnvironment.getLocalGraphicsEnvironment();
-		     ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Quicksand-Bold.ttf")));
-		} catch (IOException|FontFormatException e) {
-		     System.out.println("Font not found");
+			Font font = Font.createFont(Font.TRUETYPE_FONT, is);
+			font = font.deriveFont(20f);
+			
+			QSB = font;
+		} catch (FontFormatException e1) {
+			System.out.println("Font failed 1");
+			
+		} catch (IOException e1) {
+			
+			System.out.println("Font failed 2");
+			e1.printStackTrace();
 		}
 		
 		try
@@ -255,7 +263,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				}
 
 			}
-			else if(cell != 4)
+			else if(cell != 4 && cell != -1)
 			{
 				if(Paint.pCards[cell] != null && !select && !cardMoved)
 				{
