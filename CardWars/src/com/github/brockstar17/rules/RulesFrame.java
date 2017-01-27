@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import com.github.brockstar17.CardWars;
 
@@ -34,6 +35,8 @@ public class RulesFrame extends JFrame implements WindowListener, KeyListener
 		JScrollPane scroll = new JScrollPane(new JLabel(new ImageIcon(CardWars.rules)));
 		scroll.getVerticalScrollBar().setUnitIncrement(5);
 		scroll.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		add(scroll);
 
 		addKeyListener(this);
