@@ -3,7 +3,6 @@ package com.github.brockstar17;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -54,8 +53,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage flame1 = null;
 	public static BufferedImage flame2 = null;
 	public static BufferedImage behFlame = null;
-
-	public static File rules = null;
+	public static BufferedImage rules = null;
 
 	public static int cellW, cellH;
 	public static int mx, my;
@@ -81,7 +79,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static ArrayList<PlayingCard> otherDeck = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> playerDiscard = new ArrayList<PlayingCard>();
 	public static ArrayList<PlayingCard> otherDiscard = new ArrayList<PlayingCard>();
-	
+
 	public static Font QSB;
 
 	public CardWars()
@@ -89,27 +87,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 		super("Card Wars");
 
-		rules = new File("src/resources/rules/CWRules.txt");
-		
-		File is = new File("src/resources/rules/Quicksand-Bold.ttf");
-		try {
-			Font font = Font.createFont(Font.TRUETYPE_FONT, is);
-			font = font.deriveFont(20f);
-			
-			QSB = font;
-		} catch (FontFormatException e1) {
-			System.out.println("Font failed 1");
-			
-		} catch (IOException e1) {
-			
-			System.out.println("Font failed 2");
-			e1.printStackTrace();
-		}
-		
 		try
 		{
-			
-			
+
 			board = ImageIO.read(new File("src/resources/board.png"));
 
 			screenX = ImageUtils.calcWidth(board.getHeight(), screenY, board.getWidth());
@@ -168,6 +148,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 			cardSelBack = ImageIO.read(new File("src/resources/cardSelectBackground.png"));
 			attackBack = ImageIO.read(new File("src/resources/attackBackground.png"));
+
+			rules = ImageIO.read(new File("src/resources/RulesParch.png"));
+			rules = ImageUtils.scale(rules, screenX, ImageUtils.calcWidth(rules.getWidth(), screenX, rules.getHeight()));
 
 			cellW = hl.getWidth();
 			cellH = hl.getHeight();
