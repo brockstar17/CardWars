@@ -71,6 +71,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private PlayingCard selectedCard;
 	public static boolean canPlaceCard;
 	public String winner;
+	
 
 	public static int backDeck = 5;
 	public static int userDeck;
@@ -90,7 +91,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		try
 		{
 
-			board = ImageIO.read(new File("src/resources/board.png"));
+			board = ImageIO.read(new File("src/resources/parchBoard.png"));
 
 			screenX = ImageUtils.calcWidth(board.getHeight(), screenY, board.getWidth());
 
@@ -146,8 +147,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			behFlame = ImageIO.read(new File("src/resources/flames/behindFlame.png"));
 			behFlame = ImageUtils.scale(behFlame, yin.getWidth(), yin.getHeight());
 
-			cardSelBack = ImageIO.read(new File("src/resources/cardSelectBackground.png"));
-			attackBack = ImageIO.read(new File("src/resources/attackBackground.png"));
+			cardSelBack = ImageIO.read(new File("src/resources/cardSelectBackParch.png"));
+			attackBack = ImageIO.read(new File("src/resources/attackBackParch.png"));
 
 			rules = ImageIO.read(new File("src/resources/RulesParch.png"));
 			rules = ImageUtils.scale(rules, screenX, ImageUtils.calcWidth(rules.getWidth(), screenX, rules.getHeight()));
@@ -241,6 +242,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 				if(deckClicked)
 				{
+					
 					this.setEnabled(false);
 					new CardFrame(this);
 				}
@@ -320,6 +322,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 				if(deckClicked)
 				{
+					
 					this.setEnabled(false);
 					new CardFrame(this);
 				}
@@ -389,6 +392,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				// System.out.println("Placed");
 				Paint.pCards[i] = (selectedCard);
 				deckClicked = !deckClicked;
+				
 				if(playCards < 5)
 				{
 					playCards++;
@@ -403,6 +407,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				// System.out.println("Placed");
 				Paint.oCards[i] = (selectedCard);
 				deckClicked = !deckClicked;
+				
 				if(oppCards < 5)
 				{
 					oppCards++;
@@ -419,6 +424,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 	}
 
+	
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -440,9 +447,11 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			}
 			else
 			{
+				
 				// bring up rules
 				this.setEnabled(false);
 				new RulesFrame(this);
+				
 			}
 			break;
 		case KeyEvent.VK_G:

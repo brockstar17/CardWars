@@ -86,7 +86,8 @@ public class GameUtils {
 		int odx = BoardSpaces.getCellX(4);
 		int ody = BoardSpaces.getCellY(4);
 		
-		PlayingCard[] cards = new PlayingCard[52];
+		PlayingCard[] cards1 = new PlayingCard[52];
+		PlayingCard[] cards2 = new PlayingCard[52];
 		
 		int count = 0;
 		
@@ -94,7 +95,8 @@ public class GameUtils {
 		{
 			for(int s = 0; s < 4; s++)
 			{
-				cards[count] = new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, getSuit(s), i+1);
+				cards1[count] = new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, getSuit(s), i+1);
+				cards2[count] = new PlayingCard(odx, ody, CardWars.cellW, CardWars.cellH, getSuit(s), i+1);
 				count++;
 			}
 		
@@ -104,22 +106,20 @@ public class GameUtils {
 		
 		for(int i = 0; i  < 4; i++)
 		{
-			iShuffle(cards);
+			iShuffle(cards1);
+			iShuffle(cards2);
 			
 		}
 		
-		for(int i = 0; i < cards.length; i++)
+		for(int i = 0; i < cards1.length; i++)
 		{
-			if(i%2 == 0)
-			{
-				CardWars.playerDeck.add(cards[i]);
-			}
-			else
-			{
-				cards[i].setX(odx);
-				cards[i].setY(ody);
-				CardWars.otherDeck.add(cards[i]);
-			}
+			
+			CardWars.playerDeck.add(cards1[i]);
+		
+			cards2[i].setX(odx);
+			cards2[i].setY(ody);
+			CardWars.otherDeck.add(cards2[i]);
+			
 		}
 		
 		/*
