@@ -96,7 +96,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 			board = ImageUtils.scale(board, screenX, screenY);
 
-			yin = ImageIO.read(new File("src/resources/cards/yin.png"));
+			yin = ImageIO.read(new File("src/resources/cards/grace.png"));
 
 			for(int i = 0; i < hearts.length; i++)
 			{
@@ -116,7 +116,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 			yin = ImageUtils.scale(yin, ImageUtils.calcWidth(yin.getHeight(), screenY * .2, yin.getWidth()), (int) (screenY * .2));
 
-			paris = ImageIO.read(new File("src/resources/cards/paris.png"));
+			paris = ImageIO.read(new File("src/resources/cards/circuit.png"));
 			paris = ImageUtils.scale(paris, yin.getWidth(), yin.getHeight());
 
 			celtic = ImageIO.read(new File("src/resources/cards/celtic.png"));
