@@ -189,7 +189,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 	@Override
 	public void windowOpened(WindowEvent e) {
 		
-		this.cardWars.setFocusable(false);
+		
 		this.cardWars.setEnabled(false);
 
 	}

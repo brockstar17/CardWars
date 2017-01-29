@@ -122,12 +122,7 @@ public class GameUtils {
 			
 		}
 		
-		/*
-		//debug
-		for(int i = 0; i < CardWars.playerDeck.size(); i++)
-		{
-			System.out.println(CardWars.playerDeck.get(i).getName() + " " + i);
-		}*/
+		
 		
 		
 	}

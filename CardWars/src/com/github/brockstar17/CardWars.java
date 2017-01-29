@@ -507,5 +507,13 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public void setSelectedCard(PlayingCard card) {
 		this.selectedCard = card;
 	}
+	
+	public void decrPlayCard(){
+		this.playCards--;
+	}
+	
+	public void decrOppCards(){
+		this.oppCards--;
+	}
 
 }

@@ -118,8 +118,8 @@ public class AttackFrame extends JFrame implements WindowListener
 				System.out.println("Lost: P1");
 				player = Paint.pCards[Paint.clicked];
 				Paint.pCards[Paint.clicked] = null;
-
-				System.out.println("Adding to other: " + player.getName());
+				cw.decrPlayCard();
+				//System.out.println("Adding to other: " + player.getName());
 				CardWars.otherDiscard.add(player);
 
 			}
@@ -131,7 +131,8 @@ public class AttackFrame extends JFrame implements WindowListener
 				player = Paint.pCards[Paint.clicked];
 				Paint.pCards[Paint.clicked] = null;
 				Paint.pCards[cell] = player;
-				System.out.println("Adding to player: " + opp.getName());
+				cw.decrOppCards();
+				//System.out.println("Adding to player: " + opp.getName());
 				CardWars.playerDiscard.add(opp);
 
 			}
@@ -147,7 +148,8 @@ public class AttackFrame extends JFrame implements WindowListener
 				opp = Paint.oCards[Paint.clicked];
 				Paint.oCards[Paint.clicked] = null;
 				Paint.oCards[cell] = opp;
-				System.out.println("Adding to other: " + player.getName());
+				cw.decrPlayCard();
+				//System.out.println("Adding to other: " + player.getName());
 				CardWars.otherDiscard.add(player);
 			}
 			else if(winner == "p1")
@@ -155,7 +157,8 @@ public class AttackFrame extends JFrame implements WindowListener
 				System.out.println("Lost: P2");
 				opp = Paint.oCards[Paint.clicked];
 				Paint.oCards[Paint.clicked] = null;
-				System.out.println("Adding to player: " + opp.getName());
+				cw.decrOppCards();
+				//System.out.println("Adding to player: " + opp.getName());
 				CardWars.playerDiscard.add(opp);
 
 			}
