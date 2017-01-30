@@ -35,7 +35,7 @@ public class CardFrame extends JDialog implements MouseListener, KeyListener, Wi
 	{
 		setUndecorated(true);
 		JPanel p = (JPanel) getContentPane();
-		p.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+		p.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 
 		this.cardWars = cw;
 
