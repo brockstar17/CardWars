@@ -14,6 +14,7 @@ import com.github.brockstar17.CardWars;
 import com.github.brockstar17.Paint;
 import com.github.brockstar17.PlayingCard;
 import com.github.brockstar17.util.ImageUtils;
+import com.github.brockstar17.war.WarFrame;
 
 @SuppressWarnings("serial")
 public class AttackFrame extends JDialog implements WindowListener
@@ -142,6 +143,12 @@ public class AttackFrame extends JDialog implements WindowListener
 				CardWars.playerDiscard.add(opp);
 
 			}
+			else // war
+			{
+				this.dispose();
+				cw.setEnabled(false);
+				new WarFrame(cw);
+			}
 
 		}
 		else if(cell != -1)
@@ -167,6 +174,12 @@ public class AttackFrame extends JDialog implements WindowListener
 				// System.out.println("Adding to player: " + opp.getName());
 				CardWars.playerDiscard.add(opp);
 
+			}
+			else // war
+			{
+				this.dispose();
+				cw.setEnabled(false);
+				new WarFrame(cw);
 			}
 
 		}

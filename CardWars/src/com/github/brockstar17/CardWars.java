@@ -27,6 +27,7 @@ import com.github.brockstar17.util.BoardSpaces;
 import com.github.brockstar17.util.CardFrame;
 import com.github.brockstar17.util.GameUtils;
 import com.github.brockstar17.util.ImageUtils;
+import com.github.brockstar17.war.WarFrame;
 
 @SuppressWarnings("serial")
 public class CardWars extends JFrame implements MouseMotionListener, MouseListener, KeyListener
@@ -472,6 +473,10 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		case KeyEvent.VK_D:
 			this.setEnabled(false);
 			new DeckFrame(this);
+			break;
+		case KeyEvent.VK_W:
+			this.setEnabled(false);
+			new WarFrame(this);
 			break;
 		case KeyEvent.VK_F1:
 			// rules
