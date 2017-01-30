@@ -1,5 +1,6 @@
 package com.github.brockstar17;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,7 +16,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.github.brockstar17.attack.AttackFrame;
 import com.github.brockstar17.deck.DeckFrame;
@@ -71,7 +74,6 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private PlayingCard selectedCard;
 	public static boolean canPlaceCard;
 	public String winner;
-	
 
 	public static int backDeck = 5;
 	public static int userDeck;
@@ -87,6 +89,10 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	{
 
 		super("Card Wars");
+
+		// setUndecorated(true);
+		JPanel p = (JPanel) getContentPane();
+		p.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 
 		try
 		{
@@ -242,7 +248,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 				if(deckClicked)
 				{
-					
+
 					this.setEnabled(false);
 					new CardFrame(this);
 				}
@@ -322,7 +328,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 				if(deckClicked)
 				{
-					
+
 					this.setEnabled(false);
 					new CardFrame(this);
 				}
@@ -392,7 +398,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				// System.out.println("Placed");
 				Paint.pCards[i] = (selectedCard);
 				deckClicked = !deckClicked;
-				
+
 				if(playCards < 5)
 				{
 					playCards++;
@@ -407,7 +413,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 				// System.out.println("Placed");
 				Paint.oCards[i] = (selectedCard);
 				deckClicked = !deckClicked;
-				
+
 				if(oppCards < 5)
 				{
 					oppCards++;
@@ -424,8 +430,6 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 	}
 
-	
-	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -447,11 +451,11 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			}
 			else
 			{
-				
+
 				// bring up rules
 				this.setEnabled(false);
 				new RulesFrame(this);
-				
+
 			}
 			break;
 		case KeyEvent.VK_G:
@@ -507,12 +511,12 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public void setSelectedCard(PlayingCard card) {
 		this.selectedCard = card;
 	}
-	
-	public void decrPlayCard(){
+
+	public void decrPlayCard() {
 		this.playCards--;
 	}
-	
-	public void decrOppCards(){
+
+	public void decrOppCards() {
 		this.oppCards--;
 	}
 

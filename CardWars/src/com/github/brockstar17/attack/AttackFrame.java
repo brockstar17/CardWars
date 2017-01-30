@@ -1,10 +1,14 @@
 package com.github.brockstar17.attack;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.github.brockstar17.CardWars;
 import com.github.brockstar17.Paint;
@@ -12,7 +16,7 @@ import com.github.brockstar17.PlayingCard;
 import com.github.brockstar17.util.ImageUtils;
 
 @SuppressWarnings("serial")
-public class AttackFrame extends JFrame implements WindowListener
+public class AttackFrame extends JDialog implements WindowListener
 {
 
 	private CardWars cw;
@@ -26,7 +30,9 @@ public class AttackFrame extends JFrame implements WindowListener
 
 	public AttackFrame(CardWars cw, PlayingCard player, PlayingCard other, int cell)
 	{
-		super("Battle Commences");
+		setUndecorated(true);
+		JPanel p = (JPanel) getContentPane();
+		p.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 
 		this.cw = cw;
 		this.player = player;
@@ -119,7 +125,7 @@ public class AttackFrame extends JFrame implements WindowListener
 				player = Paint.pCards[Paint.clicked];
 				Paint.pCards[Paint.clicked] = null;
 				cw.decrPlayCard();
-				//System.out.println("Adding to other: " + player.getName());
+				// System.out.println("Adding to other: " + player.getName());
 				CardWars.otherDiscard.add(player);
 
 			}
@@ -132,7 +138,7 @@ public class AttackFrame extends JFrame implements WindowListener
 				Paint.pCards[Paint.clicked] = null;
 				Paint.pCards[cell] = player;
 				cw.decrOppCards();
-				//System.out.println("Adding to player: " + opp.getName());
+				// System.out.println("Adding to player: " + opp.getName());
 				CardWars.playerDiscard.add(opp);
 
 			}
@@ -149,7 +155,7 @@ public class AttackFrame extends JFrame implements WindowListener
 				Paint.oCards[Paint.clicked] = null;
 				Paint.oCards[cell] = opp;
 				cw.decrPlayCard();
-				//System.out.println("Adding to other: " + player.getName());
+				// System.out.println("Adding to other: " + player.getName());
 				CardWars.otherDiscard.add(player);
 			}
 			else if(winner == "p1")
@@ -158,7 +164,7 @@ public class AttackFrame extends JFrame implements WindowListener
 				opp = Paint.oCards[Paint.clicked];
 				Paint.oCards[Paint.clicked] = null;
 				cw.decrOppCards();
-				//System.out.println("Adding to player: " + opp.getName());
+				// System.out.println("Adding to player: " + opp.getName());
 				CardWars.playerDiscard.add(opp);
 
 			}

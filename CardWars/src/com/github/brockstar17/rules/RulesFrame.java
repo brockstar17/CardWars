@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -15,7 +16,7 @@ import javax.swing.ScrollPaneConstants;
 import com.github.brockstar17.CardWars;
 
 @SuppressWarnings("serial")
-public class RulesFrame extends JFrame implements WindowListener, KeyListener
+public class RulesFrame extends JDialog implements WindowListener, KeyListener
 {
 
 	private CardWars cw;
@@ -24,7 +25,7 @@ public class RulesFrame extends JFrame implements WindowListener, KeyListener
 
 	public RulesFrame(CardWars cw)
 	{
-		super("Rules and Gameplay of CardWars");
+		setUndecorated(true);
 
 		this.cw = cw;
 		addWindowListener(this);

@@ -1,5 +1,6 @@
 package com.github.brockstar17.util;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -8,12 +9,15 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.github.brockstar17.CardWars;
 
 @SuppressWarnings("serial")
-public class CardFrame extends JFrame implements MouseListener, KeyListener, WindowListener
+public class CardFrame extends JDialog implements MouseListener, KeyListener, WindowListener
 {
 
 	private CardWars cardWars;
@@ -29,7 +33,9 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 
 	public CardFrame(CardWars cw)
 	{
-		super("Select a Card");
+		setUndecorated(true);
+		JPanel p = (JPanel) getContentPane();
+		p.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
 
 		this.cardWars = cw;
 
@@ -58,7 +64,6 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
 
 	}
 
@@ -69,7 +74,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 		switch(key)
 		{
 		case KeyEvent.VK_ESCAPE:
-			
+
 			this.dispose();
 			break;
 		}
@@ -155,11 +160,10 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 	@Override
 	public void windowClosed(WindowEvent e) {
 
-		
 		this.cardWars.setVisible(true);
 		this.cardWars.setEnabled(true);
 		CardWars.deckClicked = !CardWars.deckClicked;
-	
+
 	}
 
 	@Override
@@ -188,8 +192,7 @@ public class CardFrame extends JFrame implements MouseListener, KeyListener, Win
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		
-		
+
 		this.cardWars.setEnabled(false);
 
 	}
