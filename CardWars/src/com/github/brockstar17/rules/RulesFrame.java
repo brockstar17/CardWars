@@ -34,7 +34,7 @@ public class RulesFrame extends JDialog implements WindowListener, KeyListener
 		setLocationRelativeTo(null);
 
 		JScrollPane scroll = new JScrollPane(new JLabel(new ImageIcon(CardWars.rules)));
-		scroll.getVerticalScrollBar().setUnitIncrement(5);
+		scroll.getVerticalScrollBar().setUnitIncrement(7);
 		scroll.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
