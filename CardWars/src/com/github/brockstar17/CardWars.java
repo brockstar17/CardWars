@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.github.brockstar17.attack.AttackFrame;
+import com.github.brockstar17.attack.AttackUtil;
 import com.github.brockstar17.deck.DeckFrame;
 import com.github.brockstar17.rules.RulesFrame;
 import com.github.brockstar17.util.BoardSpaces;
@@ -91,7 +92,6 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 		super("Card Wars");
 
-		// setUndecorated(true);
 		JPanel p = (JPanel) getContentPane();
 		p.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 
@@ -291,8 +291,15 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								else if(Paint.oCards[cell] != null)// attacking
 								{
 									this.setEnabled(false);
-
-									new AttackFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell], cell);
+									this.winner = AttackUtil.compare(Paint.pCards[Paint.clicked].getValue(), Paint.oCards[cell].getValue());
+									if(this.winner == "war")
+									{
+										new WarFrame(this);
+									}
+									else
+									{
+										new AttackFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell], cell);
+									}
 
 								}
 
@@ -368,8 +375,16 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								else if(Paint.pCards[cell] != null)// attacking
 								{
 									this.setEnabled(false);
+									this.winner = AttackUtil.compare(Paint.pCards[cell].getValue(), Paint.oCards[Paint.clicked].getValue());
+									if(this.winner == "war")
+									{
 
-									new AttackFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked], cell);
+										new WarFrame(this);
+									}
+									else
+									{
+										new AttackFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked], cell);
+									}
 
 								}
 							}
