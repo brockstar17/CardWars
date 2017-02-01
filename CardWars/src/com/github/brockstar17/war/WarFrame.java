@@ -15,6 +15,7 @@ public class WarFrame extends JDialog implements WindowListener
 
 	private CardWars cw;
 	private int x, y;
+	protected int method;
 
 	public WarFrame(CardWars cw)
 	{

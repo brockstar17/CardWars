@@ -8,6 +8,9 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import com.github.brockstar17.CardWars;
+import com.github.brockstar17.Paint;
+
 @SuppressWarnings("serial")
 public class WarStartPanel extends JPanel implements MouseListener
 {
@@ -67,20 +70,121 @@ public class WarStartPanel extends JPanel implements MouseListener
 		int mx = e.getX();
 		int my = e.getY();
 
-		if(my > y / 3)
+		if(canMethod1() && canMethod2())
 		{
-			if(mx < x / 2)
+			if(my > y / 3)
 			{
-				System.out.println("Method 1");
-				wf.remove(this);
+				if(mx < x / 2)
+				{
+					if(canMethod1())
+					{
+						System.out.println("Method 1");
+						wf.method = 1;
+						wf.dispose();
+					}
+
+				}
 
 			}
 			else
 			{
-				System.out.println("Method 2");
-				wf.remove(this);
+
+				if(canMethod2())
+				{
+					System.out.println("Method 2");
+					wf.method = 2;
+					wf.dispose();
+				}
 
 			}
 		}
+		else if(canMethod1())
+		{
+			System.out.println("Method 1");
+			wf.method = 1;
+			wf.dispose();
+		}
+		else if(canMethod2())
+		{
+			System.out.println("Method 2");
+			wf.method = 2;
+			wf.dispose();
+		}
+		else
+		{
+			System.out.println("Neither method 3 off top");
+			wf.method = 0;
+			wf.dispose();
+		}
+
+	}
+
+	private boolean canMethod1() {
+		if(CardWars.player1)
+		{
+			int n = 0;
+			for(int i = 0; i < Paint.pCards.length; i++)
+			{
+				if(Paint.pCards[i] != null)
+				{
+					n++;
+				}
+			}
+			if(n > 3)
+			{
+				return true;
+			}
+		}
+		else
+		{
+			int n = 0;
+			for(int i = 0; i < Paint.oCards.length; i++)
+			{
+				if(Paint.oCards[i] != null)
+				{
+					n++;
+				}
+			}
+			if(n > 3)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean canMethod2() {
+		if(CardWars.player1)
+		{
+			int n = 0;
+			for(int i = 0; i < Paint.pCards.length; i++)
+			{
+				if(Paint.pCards[i] != null)
+				{
+					n++;
+				}
+			}
+			if(n > 1)
+			{
+				return true;
+			}
+		}
+		else
+		{
+			int n = 0;
+
+			for(int i = 0; i < Paint.oCards.length; i++)
+			{
+				if(Paint.oCards[i] != null)
+				{
+					n++;
+				}
+			}
+			if(n > 1)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }
