@@ -76,6 +76,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private PlayingCard selectedCard;
 	public static boolean canPlaceCard;
 	public String winner;
+	public int method;
+	public int cardPickedNum = -1;
 
 	public static int backDeck = 5;
 	public static int userDeck;
@@ -234,174 +236,15 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		if(player1)
 		{
 
-			if((cell == 10 || cell == 5 || cell == 16 || cell == 17 || cell == 18) && deckClicked && cardSelected)
-			{
-				spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
-				cardSpawned = true;
-				countTurn();
-				// System.out.println(playCards);
-			}
-			else if(cell == 15 && !cardSpawned && playCards < 5)
-			{
-				// System.out.println("Deck Clicked");
+			player1Clicked(cell);
 
-				deckClicked = !deckClicked;
-
-				if(deckClicked)
-				{
-
-					this.setEnabled(false);
-					new CardFrame(this);
-				}
-
-			}
-			else if(cell != 4 && cell != -1)
-			{
-				if(Paint.pCards[cell] != null && !select && !cardMoved)
-				{
-					select = true;
-					highlight = false;
-
-					Paint.setClicked(cell);
-				}
-				else if(Paint.pCards[cell] == null)
-				{
-					if(!cardMoved)
-					{
-						if(Paint.pCards[Paint.clicked] != null)
-						{
-							if(GameUtils.canMove(cell, Paint.clicked) && canPlaceCard)
-							{
-
-								if(Paint.oCards[cell] == null)
-								{
-
-									select = false;
-									highlight = true;
-
-									Paint.pCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
-									Paint.pCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
-									Paint.pCards[cell] = Paint.pCards[Paint.clicked];
-									Paint.pCards[Paint.clicked] = null;
-
-									cardMoved = true;
-									countTurn();
-
-								}
-								else if(Paint.oCards[cell] != null)// attacking
-								{
-									this.setEnabled(false);
-									this.winner = AttackUtil.compare(Paint.pCards[Paint.clicked].getValue(), Paint.oCards[cell].getValue());
-									if(this.winner == "war")
-									{
-										new WarFrame(this);
-									}
-									else
-									{
-										new AttackFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell], cell);
-									}
-
-								}
-
-							}
-
-						}
-
-					}
-				}
-				else if(Paint.pCards[cell] != null && select)
-				{
-					select = false;
-					highlight = true;
-				}
-
-			}
 		}
 		else
 		{
-			if((cell == 9 || cell == 14 || cell == 1 || cell == 2 || cell == 3) && deckClicked && cardSelected)
-			{
-				spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
-				cardSpawned = true;
-				cardSelected = false;
-				countTurn();
-				// System.out.println(playCards);
-			}
-
-			else if(cell == 4 && !cardSpawned && oppCards < 5)
-			{
-				// System.out.println("Deck Clicked");
-
-				deckClicked = !deckClicked;
-
-				if(deckClicked)
-				{
-
-					this.setEnabled(false);
-					new CardFrame(this);
-				}
-
-			}
-			else if(cell != 15 && cell != -1)
-			{
-				if(Paint.oCards[cell] != null && !select && !cardMoved)
-				{
-					select = true;
-					highlight = false;
-
-					Paint.setClicked(cell);
-				}
-				else if(Paint.oCards[cell] == null)
-				{
-					if(!cardMoved)
-					{
-						if(Paint.oCards[Paint.clicked] != null)
-						{
-							if(GameUtils.canMove(cell, Paint.clicked) && canPlaceCard)
-							{
-								if(Paint.pCards[cell] == null)
-								{
-									select = false;
-									highlight = true;
-
-									Paint.oCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
-									Paint.oCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
-									Paint.oCards[cell] = Paint.oCards[Paint.clicked];
-									Paint.oCards[Paint.clicked] = null;
-
-									cardMoved = true;
-									countTurn();
-								}
-								else if(Paint.pCards[cell] != null)// attacking
-								{
-									this.setEnabled(false);
-									this.winner = AttackUtil.compare(Paint.pCards[cell].getValue(), Paint.oCards[Paint.clicked].getValue());
-									if(this.winner == "war")
-									{
-
-										new WarFrame(this);
-									}
-									else
-									{
-										new AttackFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked], cell);
-									}
-
-								}
-							}
-
-						}
-
-					}
-				}
-				else if(Paint.oCards[cell] != null && select)
-				{
-					select = false;
-					highlight = true;
-				}
-
-			}
+			otherClicked(cell);
 		}
 
+		// winner = " ";
 		repaint();
 
 	}
@@ -456,7 +299,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			cardMoved = false;
 			cardSpawned = false;
 			turnCount = 0;
-			player1 = !player1;
+			if(!deckClicked)
+				player1 = !player1;
 			break;
 
 		case KeyEvent.VK_ESCAPE:
@@ -517,6 +361,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		else
 		{
 			turnCount = 0;
+
 			player1 = !player1;
 			cardMoved = false;
 			cardSpawned = false;
@@ -538,6 +383,188 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 
 	public void decrOppCards() {
 		this.oppCards--;
+	}
+
+	private void player1Clicked(int cell) {
+		if((cell == 10 || cell == 5 || cell == 16 || cell == 17 || cell == 18) && deckClicked && cardSelected)
+		{
+			if(GameUtils.isSpawnEmpty(cell))
+			{
+				spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
+				cardSpawned = true;
+				if(cardPickedNum != -1)
+					playerDeck.remove(cardPickedNum);
+				cardSelected = false;
+				cardPickedNum = -1;
+				countTurn();
+			}
+			// System.out.println(playCards);
+		}
+		else if(cell == 15 && !cardSpawned && playCards < 5)
+		{
+			// System.out.println("Deck Clicked");
+
+			deckClicked = !deckClicked;
+
+			if(deckClicked)
+			{
+
+				this.setEnabled(false);
+				new CardFrame(this);
+			}
+
+		}
+		else if(cell != 4 && cell != -1)
+		{
+			if(Paint.pCards[cell] != null && !select && !cardMoved)
+			{
+				select = true;
+				highlight = false;
+
+				Paint.setClicked(cell);
+			}
+			else if(Paint.pCards[cell] == null)
+			{
+				if(!cardMoved)
+				{
+					if(Paint.pCards[Paint.clicked] != null)
+					{
+						if(GameUtils.canMove(cell, Paint.clicked) && canPlaceCard)
+						{
+
+							if(Paint.oCards[cell] == null)
+							{
+
+								select = false;
+								highlight = true;
+
+								Paint.pCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
+								Paint.pCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
+								Paint.pCards[cell] = Paint.pCards[Paint.clicked];
+								Paint.pCards[Paint.clicked] = null;
+
+								cardMoved = true;
+								countTurn();
+
+							}
+							else if(Paint.oCards[cell] != null)// attacking
+							{
+								this.setEnabled(false);
+								this.winner = AttackUtil.compare(Paint.pCards[Paint.clicked].getValue(), Paint.oCards[cell].getValue());
+								if(this.winner == "war")
+								{
+									new WarFrame(this);
+								}
+								else
+								{
+									new AttackFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell], cell);
+								}
+
+							}
+
+						}
+
+					}
+
+				}
+			}
+			else if(Paint.pCards[cell] != null && select)
+			{
+				select = false;
+				highlight = true;
+			}
+
+		}
+	}
+
+	private void otherClicked(int cell) {
+		if((cell == 9 || cell == 14 || cell == 1 || cell == 2 || cell == 3) && deckClicked && cardSelected)
+		{
+			if(GameUtils.isSpawnEmpty(cell))
+			{
+				spawnCard(BoardSpaces.getCellX(cell), BoardSpaces.getCellY(cell), cell);
+				cardSpawned = true;
+				if(cardPickedNum != -1)
+					otherDeck.remove(cardPickedNum);
+				cardPickedNum = -1;
+				cardSelected = false;
+				countTurn();
+			}
+			// System.out.println(playCards);
+		}
+
+		else if(cell == 4 && !cardSpawned && oppCards < 5)
+		{
+			// System.out.println("Deck Clicked");
+
+			deckClicked = !deckClicked;
+
+			if(deckClicked)
+			{
+
+				this.setEnabled(false);
+				new CardFrame(this);
+			}
+
+		}
+		else if(cell != 15 && cell != -1)
+		{
+			if(Paint.oCards[cell] != null && !select && !cardMoved)
+			{
+				select = true;
+				highlight = false;
+
+				Paint.setClicked(cell);
+			}
+			else if(Paint.oCards[cell] == null)
+			{
+				if(!cardMoved)
+				{
+					if(Paint.oCards[Paint.clicked] != null)
+					{
+						if(GameUtils.canMove(cell, Paint.clicked) && canPlaceCard)
+						{
+							if(Paint.pCards[cell] == null)
+							{
+								select = false;
+								highlight = true;
+
+								Paint.oCards[Paint.clicked].setX(BoardSpaces.getCellX(cell) + Paint.cardSpaceX);
+								Paint.oCards[Paint.clicked].setY(BoardSpaces.getCellY(cell) + Paint.cardSpaceY);
+								Paint.oCards[cell] = Paint.oCards[Paint.clicked];
+								Paint.oCards[Paint.clicked] = null;
+
+								cardMoved = true;
+								countTurn();
+							}
+							else if(Paint.pCards[cell] != null)// attacking
+							{
+								this.setEnabled(false);
+								this.winner = AttackUtil.compare(Paint.pCards[cell].getValue(), Paint.oCards[Paint.clicked].getValue());
+								if(this.winner == "war")
+								{
+
+									new WarFrame(this);
+								}
+								else
+								{
+									new AttackFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked], cell);
+								}
+
+							}
+						}
+
+					}
+
+				}
+			}
+			else if(Paint.oCards[cell] != null && select)
+			{
+				select = false;
+				highlight = true;
+			}
+
+		}
 	}
 
 }

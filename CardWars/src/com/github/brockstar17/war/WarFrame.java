@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import com.github.brockstar17.CardWars;
+import com.github.brockstar17.Paint;
 
 @SuppressWarnings("serial")
 public class WarFrame extends JDialog implements WindowListener
@@ -38,10 +39,26 @@ public class WarFrame extends JDialog implements WindowListener
 
 	@Override
 	public void windowActivated(WindowEvent e) {
+		if(!canMethod1() && !canMethod2())
+		{
+			cw.method = 0;
+			this.dispose();
+		}
+		if(!canMethod1() && canMethod2())
+		{
+			cw.method = 2;
+			this.dispose();
+		}
+		if(!canMethod2() && canMethod1())
+		{
+			cw.method = 1;
+			this.dispose();
+		}
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
+		this.cw.method = this.method;
 		this.cw.setVisible(true);
 		this.cw.setEnabled(true);
 	}
@@ -66,4 +83,72 @@ public class WarFrame extends JDialog implements WindowListener
 	public void windowOpened(WindowEvent e) {
 	}
 
+	protected boolean canMethod1() {
+		if(CardWars.player1)
+		{
+			int n = 0;
+			for(int i = 0; i < Paint.pCards.length; i++)
+			{
+				if(Paint.pCards[i] != null)
+				{
+					n++;
+				}
+			}
+			if(n > 3)
+			{
+				return true;
+			}
+		}
+		else
+		{
+			int n = 0;
+			for(int i = 0; i < Paint.oCards.length; i++)
+			{
+				if(Paint.oCards[i] != null)
+				{
+					n++;
+				}
+			}
+			if(n > 3)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean canMethod2() {
+		if(CardWars.player1)
+		{
+			int n = 0;
+			for(int i = 0; i < Paint.pCards.length; i++)
+			{
+				if(Paint.pCards[i] != null)
+				{
+					n++;
+				}
+			}
+			if(n > 1)
+			{
+				return true;
+			}
+		}
+		else
+		{
+			int n = 0;
+
+			for(int i = 0; i < Paint.oCards.length; i++)
+			{
+				if(Paint.oCards[i] != null)
+				{
+					n++;
+				}
+			}
+			if(n > 1)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

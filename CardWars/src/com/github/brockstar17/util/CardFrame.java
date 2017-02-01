@@ -99,9 +99,9 @@ public class CardFrame extends JDialog implements MouseListener, KeyListener, Wi
 				if(getCardClicked(mx, my) != -1)
 				{
 					int cell = getCardClicked(mx, my);
+					cardWars.cardPickedNum = cell;
 					cardWars.setSelectedCard(CardWars.playerDeck.get(cell));
 
-					CardWars.playerDeck.remove(cell);
 					cardWars.setCardSelected(true);
 					CardWars.deckClicked = !CardWars.deckClicked;
 					this.dispose();
@@ -112,10 +112,11 @@ public class CardFrame extends JDialog implements MouseListener, KeyListener, Wi
 			{
 				if(getCardClicked(mx, my) != -1)
 				{
+
 					int cell = getCardClicked(mx, my);
+					cardWars.cardPickedNum = cell;
 					cardWars.setSelectedCard(CardWars.otherDeck.get(cell));
 
-					CardWars.otherDeck.remove(cell);
 					cardWars.setCardSelected(true);
 					CardWars.deckClicked = !CardWars.deckClicked;
 					this.dispose();

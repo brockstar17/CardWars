@@ -7,51 +7,49 @@ import com.github.brockstar17.CardWars;
 import com.github.brockstar17.Paint;
 import com.github.brockstar17.PlayingCard;
 
-public class GameUtils {
+public class GameUtils
+{
 
 	private static Random rn = new Random();
-	
-	public static int[] adjMoves(int cell)
-	{
-		
-		
+
+	public static int[] adjMoves(int cell) {
+
 		if(cell == 5 || cell == 10)
 		{
-			
-			return fill(new int[]{cell+1, cell + 5, cell-5});
+
+			return fill(new int[] { cell + 1, cell + 5, cell - 5 });
 		}
 		else if(cell == 9 || cell == 14)
 		{
-			return fill(new int[]{cell-1, cell-5, cell+5});
+			return fill(new int[] { cell - 1, cell - 5, cell + 5 });
 		}
 		else if(cell == 0)
 		{
-			return fill(new int[]{cell + 1, cell+5});
+			return fill(new int[] { cell + 1, cell + 5 });
 		}
 		else if(cell == 19)
 		{
-			return fill(new int[]{cell-1, cell-5});
+			return fill(new int[] { cell - 1, cell - 5 });
 		}
-		
+
 		else if(cell > 15 && cell < 19)
 		{
-			return fill(new int[]{cell-1, cell+1, cell-5});
+			return fill(new int[] { cell - 1, cell + 1, cell - 5 });
 		}
 		else if(cell > 0 && cell < 4)
 		{
-			return fill(new int[]{cell-1, cell+1, cell+5});
+			return fill(new int[] { cell - 1, cell + 1, cell + 5 });
 		}
 		else
 		{
-			return fill(new int[]{cell+1, cell-1, cell+5, cell-5});
+			return fill(new int[] { cell + 1, cell - 1, cell + 5, cell - 5 });
 		}
-		
-		
+
 	}
-	
-	private static int[] fill(int[] mov){
+
+	private static int[] fill(int[] mov) {
 		ArrayList<Integer> ar = new ArrayList<Integer>();
-		
+
 		for(int i = 0; i < mov.length; i++)
 		{
 			if(CardWars.player1)
@@ -68,66 +66,61 @@ public class GameUtils {
 					ar.add(mov[i]);
 				}
 			}
-			
+
 		}
-		
+
 		int[] fin = new int[ar.size()];
 		for(int i = 0; i < fin.length; i++)
 		{
 			fin[i] = ar.get(i);
 		}
-		
+
 		return fin;
 	}
-	
-	public static void initShuffle(){
+
+	public static void initShuffle() {
 		int pdx = BoardSpaces.getCellX(15);
 		int pdy = BoardSpaces.getCellY(15);
 		int odx = BoardSpaces.getCellX(4);
 		int ody = BoardSpaces.getCellY(4);
-		
+
 		PlayingCard[] cards1 = new PlayingCard[52];
 		PlayingCard[] cards2 = new PlayingCard[52];
-		
+
 		int count = 0;
-		
+
 		for(int i = 0; i < 13; i++)
 		{
 			for(int s = 0; s < 4; s++)
 			{
-				cards1[count] = new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, getSuit(s), i+1);
-				cards2[count] = new PlayingCard(odx, ody, CardWars.cellW, CardWars.cellH, getSuit(s), i+1);
+				cards1[count] = new PlayingCard(pdx, pdy, CardWars.cellW, CardWars.cellH, getSuit(s), i + 1);
+				cards2[count] = new PlayingCard(odx, ody, CardWars.cellW, CardWars.cellH, getSuit(s), i + 1);
 				count++;
 			}
-		
+
 		}
-		
-		
-		
-		for(int i = 0; i  < 4; i++)
+
+		for(int i = 0; i < 4; i++)
 		{
 			iShuffle(cards1);
 			iShuffle(cards2);
-			
+
 		}
-		
+
 		for(int i = 0; i < cards1.length; i++)
 		{
-			
+
 			CardWars.playerDeck.add(cards1[i]);
-		
+
 			cards2[i].setX(odx);
 			cards2[i].setY(ody);
 			CardWars.otherDeck.add(cards2[i]);
-			
+
 		}
-		
-		
-		
-		
+
 	}
-	
-	private static String getSuit(int i){
+
+	private static String getSuit(int i) {
 		switch(i)
 		{
 		case 0:
@@ -142,8 +135,8 @@ public class GameUtils {
 			return null;
 		}
 	}
-	
-	private static void iShuffle(PlayingCard[] list){
+
+	private static void iShuffle(PlayingCard[] list) {
 		for(int i = 0; i < list.length; i++)
 		{
 			int to = rn.nextInt(list.length);
@@ -152,14 +145,11 @@ public class GameUtils {
 			list[from] = list[to];
 			list[to] = temp;
 		}
-		
-	}
-	
 
-	
-	public static void shuffle(ArrayList<PlayingCard> list){
-		
-		
+	}
+
+	public static void shuffle(ArrayList<PlayingCard> list) {
+
 		for(int i = 0; i < list.size(); i++)
 		{
 			int to = rn.nextInt(list.size());
@@ -169,9 +159,8 @@ public class GameUtils {
 			list.set(to, temp);
 		}
 	}
-	
-	
-	public static boolean canMove(int cell, int clicked){
+
+	public static boolean canMove(int cell, int clicked) {
 		for(int i = 0; i < adjMoves(clicked).length; i++)
 		{
 			if(cell == adjMoves(clicked)[i])
@@ -179,8 +168,26 @@ public class GameUtils {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
+	public static boolean isSpawnEmpty(int cell) {
+		if(CardWars.player1)
+		{
+			if(Paint.pCards[cell] == null)
+			{
+				return true;
+			}
+		}
+		else
+		{
+			if(Paint.oCards[cell] == null)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
