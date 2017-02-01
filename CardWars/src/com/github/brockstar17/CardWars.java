@@ -334,8 +334,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			new DeckFrame(this);
 			break;
 		case KeyEvent.VK_W:
-			this.setEnabled(false);
-			new WarFrame(this);
+			// this.setEnabled(false);
+			// new WarFrame(this);
 			break;
 		case KeyEvent.VK_F1:
 			// rules
