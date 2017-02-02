@@ -190,4 +190,27 @@ public class GameUtils
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return 1 if player lost, 2 if opp lost, 0 if neither lost
+	 */
+	public static int checkWin() {
+		if(Paint.isSpawnFull() != 0)
+		{
+			System.out.println("Player " + Paint.isSpawnFull() + " Lost");
+			return Paint.isSpawnFull();
+		}
+		if(CardWars.playerDeck.size() == 0)
+		{
+			System.out.println("Player 2 Wins");
+			return 1;
+		}
+		if(CardWars.otherDeck.size() == 0)
+		{
+			System.out.println("Player 1 Wins");
+			return 2;
+		}
+		return 0;
+	}
+
 }

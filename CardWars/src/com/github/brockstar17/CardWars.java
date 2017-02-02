@@ -78,6 +78,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public String winner;
 	public int method;
 	public int cardPickedNum = -1;
+	private int won = 0;
 
 	public static int backDeck = 5;
 	public static int userDeck;
@@ -233,18 +234,23 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public void mouseReleased(MouseEvent e) {
 		int cell = BoardSpaces.getCell(mx, my);
 
-		if(player1)
+		if(this.won == 0)
 		{
+			if(player1)
+			{
 
-			player1Clicked(cell);
+				player1Clicked(cell);
 
-		}
-		else
-		{
-			otherClicked(cell);
+			}
+			else
+			{
+				otherClicked(cell);
+
+			}
 		}
 
 		// winner = " ";
+
 		repaint();
 
 	}
@@ -300,7 +306,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			cardSpawned = false;
 			turnCount = 0;
 			if(!deckClicked)
-				player1 = !player1;
+				switchTurn();
 			break;
 
 		case KeyEvent.VK_ESCAPE:
@@ -360,11 +366,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		}
 		else
 		{
-			turnCount = 0;
-
-			player1 = !player1;
-			cardMoved = false;
-			cardSpawned = false;
+			switchTurn();
 		}
 
 	}
@@ -457,6 +459,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								}
 								else
 								{
+									Paint.pCards[Paint.clicked].setAttacked();
 									new AttackFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell], cell);
 								}
 
@@ -548,6 +551,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								}
 								else
 								{
+									Paint.oCards[Paint.clicked].setAttacked();
 									new AttackFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked], cell);
 								}
 
@@ -565,6 +569,59 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			}
 
 		}
+	}
+
+	private void handleMoveCount() {
+		if(!player1)
+		{
+			for(int i = 0; i < Paint.oCards.length; i++)
+			{
+				if(Paint.oCards[i] != null)
+				{
+					PlayingCard pc = Paint.oCards[i];
+					if(pc.getAttacked())
+					{
+						System.out.println("Move count opp " + pc.getMoveCount());
+						pc.decrMoveCount();
+						if(pc.getMoveCount() <= 0)
+						{
+							otherDiscard.add(pc);
+							Paint.oCards[i] = null;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			for(int i = 0; i < Paint.pCards.length; i++)
+			{
+				if(Paint.pCards[i] != null)
+				{
+					PlayingCard pc = Paint.pCards[i];
+					if(pc.getAttacked())
+					{
+						System.out.println("Move count player " + pc.getMoveCount());
+						pc.decrMoveCount();
+						if(pc.getMoveCount() <= 0)
+						{
+							playerDiscard.add(pc);
+							Paint.pCards[i] = null;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void switchTurn() {
+		turnCount = 0;
+		cardMoved = false;
+		cardSpawned = false;
+		this.won = GameUtils.checkWin();
+		handleMoveCount();
+		player1 = !player1;
+
 	}
 
 }

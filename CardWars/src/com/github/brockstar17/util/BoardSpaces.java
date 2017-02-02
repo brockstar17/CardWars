@@ -99,4 +99,23 @@ public class BoardSpaces
 	private static void setCellHighCard(boolean hasCard) {
 		Paint.cellHighCard = hasCard;
 	}
+
+	public static boolean hasOtherCard(int cell) {
+		if(CardWars.player1)
+		{
+			if(Paint.oCards[cell] == null)
+			{
+				return false;
+			}
+			return true;
+		}
+		else
+		{
+			if(Paint.pCards[cell] == null)
+			{
+				return false;
+			}
+			return true;
+		}
+	}
 }

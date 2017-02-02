@@ -252,4 +252,35 @@ public class Paint extends JPanel
 		}
 	}
 
+	/**
+	 * 
+	 * @return 1 if player is full, 2 if opp is full, 0 if neither
+	 */
+	public static int isSpawnFull() {
+		if(BoardSpaces.hasOtherCard(5))
+
+			if(BoardSpaces.hasOtherCard(10))
+
+				if(BoardSpaces.hasOtherCard(16))
+
+					if(BoardSpaces.hasOtherCard(17))
+
+						if(BoardSpaces.hasOtherCard(18))
+							return 1;
+
+		if(BoardSpaces.hasOtherCard(9))
+
+			if(BoardSpaces.hasOtherCard(14))
+
+				if(BoardSpaces.hasOtherCard(1))
+
+					if(BoardSpaces.hasOtherCard(2))
+
+						if(BoardSpaces.hasOtherCard(3))
+							return 2;
+
+		return 0;
+
+	}
+
 }

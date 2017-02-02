@@ -122,25 +122,21 @@ public class AttackFrame extends JDialog implements WindowListener
 		{
 			if(winner == "p2")
 			{
-				System.out.println("Lost: P1");
+				// System.out.println("Lost: P1");
 				player = Paint.pCards[Paint.clicked];
 				Paint.pCards[Paint.clicked] = null;
 				cw.decrPlayCard();
-				// System.out.println("Adding to other: " + player.getName());
-				CardWars.otherDiscard.add(player);
 
 			}
 			else if(winner == "p1")
 			{
-				System.out.println("Lost: P2");
+				// System.out.println("Lost: P2");
 				opp = Paint.oCards[cell];
 				Paint.oCards[cell] = null;
 				player = Paint.pCards[Paint.clicked];
 				Paint.pCards[Paint.clicked] = null;
 				Paint.pCards[cell] = player;
 				cw.decrOppCards();
-				// System.out.println("Adding to player: " + opp.getName());
-				CardWars.playerDiscard.add(opp);
 
 			}
 			else // war
@@ -155,24 +151,21 @@ public class AttackFrame extends JDialog implements WindowListener
 		{
 			if(winner == "p2")
 			{
-				System.out.println("Lost: P1");
+				// System.out.println("Lost: P1");
 				player = Paint.pCards[cell];
 				Paint.pCards[cell] = null;
 				opp = Paint.oCards[Paint.clicked];
 				Paint.oCards[Paint.clicked] = null;
 				Paint.oCards[cell] = opp;
 				cw.decrPlayCard();
-				// System.out.println("Adding to other: " + player.getName());
-				CardWars.otherDiscard.add(player);
+
 			}
 			else if(winner == "p1")
 			{
-				System.out.println("Lost: P2");
+				// System.out.println("Lost: P2");
 				opp = Paint.oCards[Paint.clicked];
 				Paint.oCards[Paint.clicked] = null;
 				cw.decrOppCards();
-				// System.out.println("Adding to player: " + opp.getName());
-				CardWars.playerDiscard.add(opp);
 
 			}
 			else // war
