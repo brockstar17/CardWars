@@ -76,7 +76,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private PlayingCard selectedCard;
 	public static boolean canPlaceCard;
 	public String winner;
-	public int method;
+	public int method = -1;
 	public int cardPickedNum = -1;
 	private int won = 0;
 
@@ -388,6 +388,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	}
 
 	private void player1Clicked(int cell) {
+
 		if((cell == 10 || cell == 5 || cell == 16 || cell == 17 || cell == 18) && deckClicked && cardSelected)
 		{
 			if(GameUtils.isSpawnEmpty(cell))
@@ -456,6 +457,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								if(this.winner == "war")
 								{
 									new WarFrame(this);
+
 								}
 								else
 								{
