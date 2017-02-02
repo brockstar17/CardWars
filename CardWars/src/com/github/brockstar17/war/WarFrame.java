@@ -39,27 +39,16 @@ public class WarFrame extends JDialog implements WindowListener
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		if(!canMethod1() && !canMethod2())
-		{
-			cw.method = 0;
-			this.dispose();
-		}
-		if(!canMethod1() && canMethod2())
-		{
-			cw.method = 2;
-			this.dispose();
-		}
-		if(!canMethod2() && canMethod1())
-		{
-			cw.method = 1;
-			this.dispose();
-		}
+
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
 		this.cw.method = this.method;
-		new WarResults(cw);
+		if(method == 1)
+		{
+			new WarResults(cw);
+		}
 	}
 
 	@Override
@@ -80,6 +69,21 @@ public class WarFrame extends JDialog implements WindowListener
 
 	@Override
 	public void windowOpened(WindowEvent e) {
+		if(!canMethod1() && !canMethod2())
+		{
+			cw.method = 0;
+			this.dispose();
+		}
+		if(!canMethod1() && canMethod2())
+		{
+			cw.method = 2;
+			this.dispose();
+		}
+		if(!canMethod2() && canMethod1())
+		{
+			cw.method = 1;
+			this.dispose();
+		}
 	}
 
 	protected boolean canMethod1() {

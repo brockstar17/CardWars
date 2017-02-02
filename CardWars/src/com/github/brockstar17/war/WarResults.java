@@ -21,6 +21,7 @@ public class WarResults extends JDialog implements WindowListener
 		setSize(cw.getWidth(), cw.getHeight());
 
 		Container c = getContentPane();
+		c.add(new PaintM1());
 
 		addWindowListener(this);
 
@@ -37,6 +38,8 @@ public class WarResults extends JDialog implements WindowListener
 
 	@Override
 	public void windowClosed(WindowEvent arg0) {
+		cw.setVisible(true);
+		cw.setEnabled(true);
 	}
 
 	@Override
