@@ -47,7 +47,17 @@ public class WarFrame extends JDialog implements WindowListener
 		this.cw.method = this.method;
 		if(method == 1)
 		{
-			new WarResults(cw);
+			new War1(cw);
+		}
+		else if(method == 2)
+		{
+			new War2(cw);
+		}
+		else
+		{
+			System.out.println("Null war");
+			cw.setVisible(true);
+			cw.setEnabled(true);
 		}
 	}
 
@@ -71,18 +81,22 @@ public class WarFrame extends JDialog implements WindowListener
 	public void windowOpened(WindowEvent e) {
 		if(!canMethod1() && !canMethod2())
 		{
-			cw.method = 0;
+			System.out.println("Both false");
+			method = 0;
 			this.dispose();
 		}
 		if(!canMethod1() && canMethod2())
 		{
-			cw.method = 2;
+			System.out.println("1 false");
+			method = 2;
 			this.dispose();
 		}
 		if(!canMethod2() && canMethod1())
 		{
-			cw.method = 1;
+			System.out.println("2 false");
+			method = 1;
 			this.dispose();
+
 		}
 	}
 

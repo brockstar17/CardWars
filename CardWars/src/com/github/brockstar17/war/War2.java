@@ -10,18 +10,18 @@ import javax.swing.JFrame;
 import com.github.brockstar17.CardWars;
 
 @SuppressWarnings("serial")
-public class WarResults extends JDialog implements WindowListener
+public class War2 extends JDialog implements WindowListener
 {
 	private CardWars cw;
 
-	public WarResults(CardWars cw)
+	public War2(CardWars cw)
 	{
 		this.cw = cw;
 
 		setSize(cw.getWidth(), cw.getHeight());
 
 		Container c = getContentPane();
-		c.add(new PaintM1());
+		c.add(new PaintWar());
 
 		addWindowListener(this);
 

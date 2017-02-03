@@ -1,6 +1,8 @@
 package com.github.brockstar17.war;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -11,13 +13,15 @@ import com.github.brockstar17.PlayingCard;
 import com.github.brockstar17.util.BoardSpaces;
 
 @SuppressWarnings("serial")
-public class PaintM1 extends JPanel
+public class PaintWar extends JPanel implements MouseMotionListener
 {
 	public static PlayingCard[] pCards = Paint.pCards;
 	public static PlayingCard[] oCards = Paint.oCards;
 	public static int cardSpaceX = (int) (CardWars.screenX * .034),
 			cardSpaceY = (int) (CardWars.screenY * .0165);
 	public static int clicked;
+	private int mx = 0, my = 0;
+	// private boolean highlight;
 
 	public static boolean cellHighCard;
 
@@ -26,17 +30,15 @@ public class PaintM1 extends JPanel
 
 		super.paintComponent(g);
 
+		addMouseMotionListener(this);
+
 		g.drawImage(CardWars.board, 0, 0, null);
 
 		// drawDeck(g);
 
 		drawCards(g);
 
-		if(CardWars.highlight)
-		{
-
-			highlight(g);
-		}
+		highlight(g);
 
 		// g.drawImage(CardWars.hearts[11], BoardSpaces.getCellX(0) + cardSpaceX, BoardSpaces.getCellY(0) + cardSpaceY, null);
 
@@ -64,7 +66,7 @@ public class PaintM1 extends JPanel
 
 	private void highlight(Graphics g) {
 
-		int cell = BoardSpaces.getCell(CardWars.mx, CardWars.my);
+		int cell = BoardSpaces.getCell(this.mx, this.my);
 
 		if(CardWars.player1)
 		{
@@ -170,5 +172,17 @@ public class PaintM1 extends JPanel
 			}
 			return CardWars.yin;
 		}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+	}
+
+	// this function will be for hovering
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		this.mx = e.getX();
+		this.my = e.getY();
+		repaint();
 	}
 }

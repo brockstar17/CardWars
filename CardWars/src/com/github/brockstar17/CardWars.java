@@ -364,10 +364,6 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 		{
 			turnCount++;
 		}
-		else
-		{
-			switchTurn();
-		}
 
 	}
 
