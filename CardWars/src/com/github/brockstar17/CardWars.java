@@ -28,6 +28,7 @@ import com.github.brockstar17.util.BoardSpaces;
 import com.github.brockstar17.util.CardFrame;
 import com.github.brockstar17.util.GameUtils;
 import com.github.brockstar17.util.ImageUtils;
+import com.github.brockstar17.war.Spoils;
 import com.github.brockstar17.war.WarFrame;
 
 @SuppressWarnings("serial")
@@ -59,6 +60,9 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage flame2 = null;
 	public static BufferedImage behFlame = null;
 	public static BufferedImage rules = null;
+
+	public static Spoils spoils1 = null;
+	public static Spoils spoils2 = null;
 
 	public static int cellW, cellH;
 	public static int mx, my;

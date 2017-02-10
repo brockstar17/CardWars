@@ -1,6 +1,8 @@
 package com.github.brockstar17.war;
 
 import java.awt.Container;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -10,7 +12,7 @@ import javax.swing.JFrame;
 import com.github.brockstar17.CardWars;
 
 @SuppressWarnings("serial")
-public class War1 extends JDialog implements WindowListener
+public class War1 extends JDialog implements WindowListener, MouseListener
 {
 	private CardWars cw;
 
@@ -18,6 +20,7 @@ public class War1 extends JDialog implements WindowListener
 	{
 		this.cw = cw;
 
+		setTitle("War Method 1");
 		setSize(cw.getWidth(), cw.getHeight());
 
 		Container c = getContentPane();
@@ -60,5 +63,25 @@ public class War1 extends JDialog implements WindowListener
 
 	@Override
 	public void windowOpened(WindowEvent arg0) {
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
 	}
 }

@@ -101,7 +101,7 @@ public class BoardSpaces
 	}
 
 	public static boolean hasOtherCard(int cell) {
-		if(CardWars.player1)
+		if(cell != 1 && cell != 2 && cell != 3 && cell != 9 && cell != 14)
 		{
 			if(Paint.oCards[cell] == null)
 			{

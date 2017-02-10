@@ -9,21 +9,17 @@ import javax.swing.JPanel;
 
 import com.github.brockstar17.CardWars;
 import com.github.brockstar17.Paint;
-import com.github.brockstar17.PlayingCard;
 import com.github.brockstar17.util.BoardSpaces;
 
 @SuppressWarnings("serial")
 public class PaintWar extends JPanel implements MouseMotionListener
 {
-	public static PlayingCard[] pCards = Paint.pCards;
-	public static PlayingCard[] oCards = Paint.oCards;
+
 	public static int cardSpaceX = (int) (CardWars.screenX * .034),
 			cardSpaceY = (int) (CardWars.screenY * .0165);
 	public static int clicked;
 	private int mx = 0, my = 0;
 	// private boolean highlight;
-
-	public static boolean cellHighCard;
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -46,17 +42,17 @@ public class PaintWar extends JPanel implements MouseMotionListener
 
 	private void drawCards(Graphics g) {
 
-		for(int i = 0; i < pCards.length; i++)
+		for(int i = 0; i < Paint.pCards.length; i++)
 		{
-			if(pCards[i] != null && i != 4 && i != 15)
+			if(Paint.pCards[i] != null && i != 4 && i != 15)
 			{
 				g.drawImage(getDeckBack(CardWars.userDeck, 0), BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i) + cardSpaceY, null);
 			}
 		}
 
-		for(int i = 0; i < oCards.length; i++)
+		for(int i = 0; i < Paint.oCards.length; i++)
 		{
-			if(oCards[i] != null && i != 4 && i != 15)
+			if(Paint.oCards[i] != null && i != 4 && i != 15)
 			{
 				g.drawImage(getDeckBack(CardWars.backDeck, CardWars.userDeck), BoardSpaces.getCellX(i) + cardSpaceX, BoardSpaces.getCellY(i) + cardSpaceY, null);
 			}
@@ -70,13 +66,13 @@ public class PaintWar extends JPanel implements MouseMotionListener
 
 		if(CardWars.player1)
 		{
-			if(cellHighCard && cell != -1)
+			if(Paint.cellHighCard && cell != -1)
 			{
-				BufferedImage[] suit = getSuitArray(pCards[cell].getSuit());
+				BufferedImage[] suit = getSuitArray(Paint.pCards[cell].getSuit());
 
 				if(suit != null)
 				{
-					g.drawImage(suit[pCards[cell].getValue() - 1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
+					g.drawImage(suit[Paint.pCards[cell].getValue() - 1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
 
 				}
 
@@ -89,13 +85,13 @@ public class PaintWar extends JPanel implements MouseMotionListener
 		}
 		else
 		{
-			if(cellHighCard && cell != -1)
+			if(Paint.cellHighCard && cell != -1)
 			{
-				BufferedImage[] suit = getSuitArray(oCards[cell].getSuit());
+				BufferedImage[] suit = getSuitArray(Paint.oCards[cell].getSuit());
 
 				if(suit != null)
 				{
-					g.drawImage(suit[oCards[cell].getValue() - 1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
+					g.drawImage(suit[Paint.oCards[cell].getValue() - 1], BoardSpaces.getCellX(cell) + cardSpaceX, BoardSpaces.getCellY(cell) + cardSpaceY, null);
 
 				}
 
