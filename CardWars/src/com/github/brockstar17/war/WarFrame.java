@@ -44,6 +44,7 @@ public class WarFrame extends JDialog implements WindowListener
 
 	@Override
 	public void windowClosed(WindowEvent e) {
+		System.out.println("This is method " + method);
 		this.cw.method = this.method;
 		if(method == 1)
 		{

@@ -18,7 +18,7 @@ public class PaintWar extends JPanel implements MouseMotionListener
 	public static int cardSpaceX = (int) (CardWars.screenX * .034),
 			cardSpaceY = (int) (CardWars.screenY * .0165);
 	public static int clicked;
-	private int mx = 0, my = 0;
+	protected int mx = 0, my = 0;
 	// private boolean highlight;
 
 	@Override

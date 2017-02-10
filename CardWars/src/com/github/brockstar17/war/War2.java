@@ -15,18 +15,21 @@ import com.github.brockstar17.CardWars;
 public class War2 extends JDialog implements WindowListener, MouseListener
 {
 	private CardWars cw;
+	private PaintWar pw;
 
 	public War2(CardWars cw)
 	{
 		this.cw = cw;
 
-		setTitle("War Method 1");
+		setTitle("War Method 2");
 		setSize(cw.getWidth(), cw.getHeight());
 
 		Container c = getContentPane();
-		c.add(new PaintWar());
+		this.pw = new PaintWar();
+		c.add(pw);
 
 		addWindowListener(this);
+		addMouseListener(this);
 
 		setLocationRelativeTo(null);
 
@@ -83,5 +86,6 @@ public class War2 extends JDialog implements WindowListener, MouseListener
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		System.out.println("Mx " + pw.mx);
 	}
 }
