@@ -1,20 +1,20 @@
-package com.github.brockstar17.war;
+package com.github.brockstar17.war.types;
 
 import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import com.github.brockstar17.CardWars;
+import com.github.brockstar17.war.PaintWar;
 
 @SuppressWarnings("serial")
-public class War2 extends JDialog implements WindowListener, MouseListener
+public class War2 extends War implements WindowListener, MouseListener, MouseMotionListener
 {
-	private CardWars cw;
 	private PaintWar pw;
 
 	public War2(CardWars cw)
@@ -25,11 +25,12 @@ public class War2 extends JDialog implements WindowListener, MouseListener
 		setSize(cw.getWidth(), cw.getHeight());
 
 		Container c = getContentPane();
-		this.pw = new PaintWar();
+		this.pw = new PaintWar(this);
 		c.add(pw);
 
 		addWindowListener(this);
 		addMouseListener(this);
+		addMouseMotionListener(this);
 
 		setLocationRelativeTo(null);
 
@@ -86,6 +87,18 @@ public class War2 extends JDialog implements WindowListener, MouseListener
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("Mx " + pw.mx);
+		System.out.println("Hello");
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+	}
+
+	// this function will be for hovering
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		this.mx = e.getX();
+		this.my = e.getY();
+		repaint();
 	}
 }

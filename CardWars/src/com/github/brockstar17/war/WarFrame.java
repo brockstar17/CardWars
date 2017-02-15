@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 
 import com.github.brockstar17.CardWars;
 import com.github.brockstar17.Paint;
+import com.github.brockstar17.war.types.War1;
+import com.github.brockstar17.war.types.War2;
 
 @SuppressWarnings("serial")
 public class WarFrame extends JDialog implements WindowListener

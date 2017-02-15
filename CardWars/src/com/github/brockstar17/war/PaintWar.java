@@ -1,8 +1,6 @@
 package com.github.brockstar17.war;
 
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -10,23 +8,27 @@ import javax.swing.JPanel;
 import com.github.brockstar17.CardWars;
 import com.github.brockstar17.Paint;
 import com.github.brockstar17.util.BoardSpaces;
+import com.github.brockstar17.war.types.War;
 
 @SuppressWarnings("serial")
-public class PaintWar extends JPanel implements MouseMotionListener
+public class PaintWar extends JPanel
 {
 
 	public static int cardSpaceX = (int) (CardWars.screenX * .034),
 			cardSpaceY = (int) (CardWars.screenY * .0165);
 	public static int clicked;
-	protected int mx = 0, my = 0;
-	// private boolean highlight;
+
+	private War war;
+
+	public PaintWar(War war)
+	{
+		this.war = war;
+	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
-
-		addMouseMotionListener(this);
 
 		g.drawImage(CardWars.board, 0, 0, null);
 
@@ -62,7 +64,7 @@ public class PaintWar extends JPanel implements MouseMotionListener
 
 	private void highlight(Graphics g) {
 
-		int cell = BoardSpaces.getCell(this.mx, this.my);
+		int cell = BoardSpaces.getCell(this.war.mx, this.war.my);
 
 		if(CardWars.player1)
 		{
@@ -170,15 +172,4 @@ public class PaintWar extends JPanel implements MouseMotionListener
 		}
 	}
 
-	@Override
-	public void mouseDragged(MouseEvent e) {
-	}
-
-	// this function will be for hovering
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		this.mx = e.getX();
-		this.my = e.getY();
-		repaint();
-	}
 }
