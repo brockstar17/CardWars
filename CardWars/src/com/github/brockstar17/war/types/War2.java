@@ -10,7 +10,12 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 import com.github.brockstar17.CardWars;
+import com.github.brockstar17.Paint;
+import com.github.brockstar17.PlayingCard;
+import com.github.brockstar17.util.BoardSpaces;
 import com.github.brockstar17.war.PaintWar;
+import com.github.brockstar17.war.Spoils;
+import com.github.brockstar17.war.WarResults;
 
 @SuppressWarnings("serial")
 public class War2 extends War implements WindowListener, MouseListener, MouseMotionListener
@@ -47,6 +52,7 @@ public class War2 extends War implements WindowListener, MouseListener, MouseMot
 	public void windowClosed(WindowEvent arg0) {
 		cw.setVisible(true);
 		cw.setEnabled(true);
+		new WarResults(playerSpoils, otherSpoils, cw);
 	}
 
 	@Override
@@ -87,7 +93,53 @@ public class War2 extends War implements WindowListener, MouseListener, MouseMot
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("Hello");
+		int cell = BoardSpaces.getCell(mx, my);
+
+		if(cell != -1 && cell != 4 && cell != 14)
+		{
+			if(CardWars.player1)
+			{
+				if(Paint.pCards[cell] != null)
+				{
+					this.playerSpoils = new Spoils(CardWars.playerDiscard, Paint.pCards[cell], new PlayingCard[] { CardWars.playerDeck.get(0), CardWars.playerDeck.get(1), CardWars.playerDeck.get(2) });
+
+					CardWars.playerDeck.remove(0);
+					CardWars.playerDeck.remove(1);
+					CardWars.playerDeck.remove(2);
+					Paint.pCards[cell] = null;
+
+					this.otherSpoils = new Spoils(CardWars.otherDiscard, CardWars.otherDeck.get(3), new PlayingCard[] { CardWars.otherDeck.get(0), CardWars.otherDeck.get(1), CardWars.otherDeck.get(2) });
+					CardWars.otherDeck.remove(0);
+					CardWars.otherDeck.remove(1);
+					CardWars.otherDeck.remove(2);
+					CardWars.otherDeck.remove(3);
+
+					this.dispose();
+
+				}
+			}
+			else
+			{
+				if(Paint.oCards[cell] != null)
+				{
+					this.otherSpoils = new Spoils(CardWars.otherDiscard, Paint.oCards[cell], new PlayingCard[] { CardWars.otherDeck.get(0), CardWars.otherDeck.get(1), CardWars.otherDeck.get(2) });
+
+					CardWars.otherDeck.remove(0);
+					CardWars.otherDeck.remove(1);
+					CardWars.otherDeck.remove(2);
+					Paint.oCards[cell] = null;
+
+					this.playerSpoils = new Spoils(CardWars.playerDiscard, CardWars.playerDeck.get(3), new PlayingCard[] { CardWars.playerDeck.get(0), CardWars.playerDeck.get(1), CardWars.playerDeck.get(2) });
+					CardWars.playerDeck.remove(0);
+					CardWars.playerDeck.remove(1);
+					CardWars.playerDeck.remove(2);
+					CardWars.playerDeck.remove(3);
+
+					this.dispose();
+
+				}
+			}
+		}
 	}
 
 	@Override

@@ -62,6 +62,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	public static BufferedImage behFlame = null;
 	public static BufferedImage rules = null;
 
+	public static int testColor = 0;
+
 	public static Spoils spoils1 = null;
 	public static Spoils spoils2 = null;
 
