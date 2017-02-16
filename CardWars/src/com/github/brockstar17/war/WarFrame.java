@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import com.github.brockstar17.CardWars;
 import com.github.brockstar17.Paint;
+import com.github.brockstar17.PlayingCard;
 import com.github.brockstar17.war.types.War1;
 import com.github.brockstar17.war.types.War2;
 
@@ -19,10 +20,13 @@ public class WarFrame extends JDialog implements WindowListener
 	private CardWars cw;
 	private int x, y;
 	protected int method;
+	private PlayingCard p, o;
 
-	public WarFrame(CardWars cw)
+	public WarFrame(CardWars cw, PlayingCard p, PlayingCard o)
 	{
 		this.cw = cw;
+		this.p = p;
+		this.o = o;
 		this.x = (int) (cw.getWidth() * .5);
 		this.y = (int) (cw.getHeight() * .5);
 		setSize(x, y);
@@ -54,7 +58,7 @@ public class WarFrame extends JDialog implements WindowListener
 		}
 		else if(method == 2)
 		{
-			new War2(cw);
+			new War2(cw, p, o);
 		}
 		else
 		{

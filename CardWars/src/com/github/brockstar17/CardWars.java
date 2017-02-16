@@ -30,7 +30,6 @@ import com.github.brockstar17.util.GameUtils;
 import com.github.brockstar17.util.ImageUtils;
 import com.github.brockstar17.war.Spoils;
 import com.github.brockstar17.war.WarFrame;
-import com.github.brockstar17.war.types.War2;
 
 @SuppressWarnings("serial")
 public class CardWars extends JFrame implements MouseMotionListener, MouseListener, KeyListener
@@ -347,8 +346,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			new DeckFrame(this);
 			break;
 		case KeyEvent.VK_W:
-			this.setEnabled(false);
-			new War2(this);
+			// this.setEnabled(false);
+			// new War2(this);
 			break;
 		case KeyEvent.VK_F1:
 			// rules
@@ -459,7 +458,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								this.winner = AttackUtil.compare(Paint.pCards[Paint.clicked].getValue(), Paint.oCards[cell].getValue());
 								if(this.winner == "war")
 								{
-									new WarFrame(this);
+
+									new WarFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell]);
 
 								}
 								else
@@ -552,7 +552,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								if(this.winner == "war")
 								{
 
-									new WarFrame(this);
+									new WarFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked]);
 								}
 								else
 								{

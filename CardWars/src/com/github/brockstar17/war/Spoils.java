@@ -24,6 +24,7 @@ public class Spoils
 		this.list = list;
 		this.deciding = d;
 		this.spoils = spoils;
+
 	}
 
 	public void returnSpoils() {
@@ -32,6 +33,7 @@ public class Spoils
 			list.add(spoils[i]);
 		}
 		list.add(deciding);
+
 	}
 
 	public PlayingCard getDeciding() {

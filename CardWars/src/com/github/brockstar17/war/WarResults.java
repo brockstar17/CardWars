@@ -19,6 +19,7 @@ public class WarResults extends JDialog
 		this.p = p;
 		this.o = o;
 		this.cw = cw;
+
 		printColor(o.getDeciding().getName() + " was Player 2");
 		printColor(p.getDeciding().getName() + " was Player 1");
 		printColor(whoWon());
