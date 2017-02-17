@@ -3,24 +3,21 @@ package com.github.brockstar17.war;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class WarStartPanel extends JPanel implements MouseListener
+public class WarStartPanel extends JPanel
 {
 	private int x, y;
 
-	private WarFrame wf;
+	// private WarFrame wf;
 
 	public WarStartPanel(WarFrame wf, int w, int h)
 	{
-		this.wf = wf;
+		// this.wf = wf;
 		this.x = w;
 		this.y = h;
-		addMouseListener(this);
 
 	}
 
@@ -44,55 +41,6 @@ public class WarStartPanel extends JPanel implements MouseListener
 
 		g.setColor(Color.BLACK);
 		g.drawString("Method 2", (int) (x * .2) + x / 2, (int) (y * .6));
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		int mx = e.getX();
-		int my = e.getY();
-
-		if(my > y / 3)
-		{
-			if(mx < x / 2)
-			{
-				if(wf.canMethod1())
-				{
-					System.out.println("Method 1");
-					wf.method = 1;
-					wf.dispose();
-				}
-
-			}
-
-		}
-		else
-		{
-
-			if(wf.canMethod2())
-			{
-				System.out.println("Method 2");
-				wf.method = 2;
-				wf.dispose();
-			}
-
-		}
-
 	}
 
 }

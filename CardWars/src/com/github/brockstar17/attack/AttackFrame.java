@@ -143,7 +143,7 @@ public class AttackFrame extends JDialog implements WindowListener
 			{
 				this.dispose();
 				cw.setEnabled(false);
-				new WarFrame(cw);
+				new WarFrame(cw, player, opp);
 			}
 
 		}
@@ -172,7 +172,7 @@ public class AttackFrame extends JDialog implements WindowListener
 			{
 				this.dispose();
 				cw.setEnabled(false);
-				new WarFrame(cw);
+				new WarFrame(cw, player, opp);
 			}
 
 		}

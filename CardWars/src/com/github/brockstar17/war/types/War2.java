@@ -109,6 +109,7 @@ public class War2 extends War implements WindowListener, MouseListener, MouseMot
 					CardWars.playerDeck.remove(1);
 					CardWars.playerDeck.remove(2);
 					Paint.pCards[cell] = null;
+					cw.playCards--;
 
 					this.otherSpoils = new Spoils(CardWars.otherDiscard, CardWars.otherDeck.get(3), new PlayingCard[] { CardWars.otherDeck.get(0), CardWars.otherDeck.get(1), CardWars.otherDeck.get(2), o });
 					CardWars.otherDeck.remove(0);
@@ -130,6 +131,7 @@ public class War2 extends War implements WindowListener, MouseListener, MouseMot
 					CardWars.otherDeck.remove(1);
 					CardWars.otherDeck.remove(2);
 					Paint.oCards[cell] = null;
+					cw.playCards--;
 
 					this.playerSpoils = new Spoils(CardWars.playerDiscard, CardWars.playerDeck.get(3), new PlayingCard[] { CardWars.playerDeck.get(0), CardWars.playerDeck.get(1), CardWars.playerDeck.get(2), p });
 					CardWars.playerDeck.remove(0);

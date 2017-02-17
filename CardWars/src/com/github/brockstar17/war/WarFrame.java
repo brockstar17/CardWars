@@ -1,6 +1,8 @@
 package com.github.brockstar17.war;
 
 import java.awt.Container;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -14,7 +16,7 @@ import com.github.brockstar17.war.types.War1;
 import com.github.brockstar17.war.types.War2;
 
 @SuppressWarnings("serial")
-public class WarFrame extends JDialog implements WindowListener
+public class WarFrame extends JDialog implements WindowListener, MouseListener
 {
 
 	private CardWars cw;
@@ -35,6 +37,7 @@ public class WarFrame extends JDialog implements WindowListener
 		c.add(new WarStartPanel(this, this.getWidth(), this.getHeight()));
 
 		addWindowListener(this);
+		addMouseListener(this);
 
 		setLocationRelativeTo(null);
 
@@ -54,7 +57,7 @@ public class WarFrame extends JDialog implements WindowListener
 		this.cw.method = this.method;
 		if(method == 1)
 		{
-			new War1(cw);
+			new War1(cw, p, o);
 		}
 		else if(method == 2)
 		{
@@ -174,5 +177,54 @@ public class WarFrame extends JDialog implements WindowListener
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		int mx = e.getX();
+		int my = e.getY();
+
+		if(my > y / 3)
+		{
+			if(mx < x / 2)
+			{
+				if(this.canMethod1())
+				{
+					System.out.println("Method 1");
+					this.method = 1;
+					this.dispose();
+				}
+
+			}
+
+		}
+		else
+		{
+
+			if(canMethod2())
+			{
+				System.out.println("Method 2");
+				this.method = 2;
+				this.dispose();
+			}
+
+		}
+
 	}
 }

@@ -10,21 +10,47 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 import com.github.brockstar17.CardWars;
+import com.github.brockstar17.Paint;
+import com.github.brockstar17.PlayingCard;
+import com.github.brockstar17.util.BoardSpaces;
 import com.github.brockstar17.war.PaintWar;
+import com.github.brockstar17.war.Spoils;
+import com.github.brockstar17.war.WarResults;
 
 @SuppressWarnings("serial")
 public class War1 extends War implements WindowListener, MouseListener, MouseMotionListener
 {
+	private PaintWar pw;
+	private PlayingCard p, o;
+	private PlayingCard[] selected = new PlayingCard[4];
+	private int numSelected;
 
-	public War1(CardWars cw)
+	public War1(CardWars cw, PlayingCard p, PlayingCard o)
 	{
 		this.cw = cw;
+		this.p = p;
+		this.o = o;
+		this.numSelected = 0;
+
+		System.out.println(CardWars.playerDeck.get(0).getName());
+
+		if(CardWars.player1)
+		{
+			this.selected[3] = p;
+
+		}
+		else
+		{
+			this.selected[3] = o;
+
+		}
 
 		setTitle("War Method 1");
 		setSize(cw.getWidth(), cw.getHeight());
 
 		Container c = getContentPane();
-		c.add(new PaintWar(this));
+		this.pw = new PaintWar(this);
+		c.add(pw);
 
 		addWindowListener(this);
 		addMouseListener(this);
@@ -45,6 +71,7 @@ public class War1 extends War implements WindowListener, MouseListener, MouseMot
 	public void windowClosed(WindowEvent arg0) {
 		cw.setVisible(true);
 		cw.setEnabled(true);
+		new WarResults(playerSpoils, otherSpoils, cw);
 	}
 
 	@Override
@@ -85,7 +112,68 @@ public class War1 extends War implements WindowListener, MouseListener, MouseMot
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("Mx " + mx);
+
+		int cell = BoardSpaces.getCell(mx, my);
+
+		if(cell != -1 && cell != 4 && cell != 14)
+		{
+			if(CardWars.player1)
+			{
+				if(Paint.pCards[cell] != null)
+				{
+					if(numSelected < 3)
+					{
+						selected[numSelected] = Paint.pCards[cell];
+						Paint.pCards[cell] = null;
+						cw.playCards--;
+						numSelected++;
+
+					}
+					if(numSelected >= 3)
+					{
+
+						this.playerSpoils = new Spoils(CardWars.playerDiscard, CardWars.playerDeck.get(0), this.selected);
+						CardWars.playerDeck.remove(0);
+
+						this.otherSpoils = new Spoils(CardWars.otherDiscard, CardWars.otherDeck.get(3), new PlayingCard[] { CardWars.otherDeck.get(0), CardWars.otherDeck.get(1), CardWars.otherDeck.get(2), o });
+						CardWars.otherDeck.remove(0);
+						CardWars.otherDeck.remove(1);
+						CardWars.otherDeck.remove(2);
+						CardWars.otherDeck.remove(3);
+						this.dispose();
+					}
+
+				}
+			}
+			else
+			{
+				if(Paint.oCards[cell] != null)
+				{
+					if(numSelected < 3)
+					{
+						selected[numSelected] = Paint.oCards[cell];
+						Paint.oCards[cell] = null;
+						cw.playCards--;
+						numSelected++;
+
+					}
+					if(numSelected >= 3)
+					{
+
+						this.otherSpoils = new Spoils(CardWars.otherDiscard, CardWars.otherDeck.get(0), this.selected);
+						CardWars.otherDeck.remove(0);
+
+						this.playerSpoils = new Spoils(CardWars.playerDiscard, CardWars.playerDeck.get(3), new PlayingCard[] { CardWars.playerDeck.get(0), CardWars.playerDeck.get(1), CardWars.playerDeck.get(2), p });
+						CardWars.playerDeck.remove(0);
+						CardWars.playerDeck.remove(1);
+						CardWars.playerDeck.remove(2);
+						CardWars.playerDeck.remove(3);
+						this.dispose();
+					}
+
+				}
+			}
+		}
 	}
 
 	@Override

@@ -30,6 +30,7 @@ import com.github.brockstar17.util.GameUtils;
 import com.github.brockstar17.util.ImageUtils;
 import com.github.brockstar17.war.Spoils;
 import com.github.brockstar17.war.WarFrame;
+import com.github.brockstar17.war.types.War1;
 
 @SuppressWarnings("serial")
 public class CardWars extends JFrame implements MouseMotionListener, MouseListener, KeyListener
@@ -76,7 +77,7 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 	private static int turnCount;
 	private boolean cardMoved;
 	private boolean cardSpawned;
-	private int playCards;
+	public int playCards;
 	private int oppCards;
 	private boolean cardSelected;
 	private PlayingCard selectedCard;
@@ -346,8 +347,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 			new DeckFrame(this);
 			break;
 		case KeyEvent.VK_W:
-			// this.setEnabled(false);
-			// new War2(this);
+			this.setEnabled(false);
+			new War1(this, null, null);
 			break;
 		case KeyEvent.VK_F1:
 			// rules

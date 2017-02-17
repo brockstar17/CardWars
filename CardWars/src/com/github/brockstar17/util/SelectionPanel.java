@@ -8,33 +8,36 @@ import javax.swing.JPanel;
 import com.github.brockstar17.CardWars;
 
 @SuppressWarnings("serial")
-public class SelectionPanel extends JPanel{
+public class SelectionPanel extends JPanel
+{
 
-	private int x,y;
+	private int x, y;
 	private int cardX, cardY;
-	
+
 	public SelectionPanel(CardFrame frame)
 	{
 		this.x = frame.getW();
 		this.y = frame.getH();
 		this.cardX = CardWars.hearts[0].getWidth();
 		this.cardY = CardWars.hearts[0].getHeight();
+		System.out.println(CardWars.playerDeck.get(0).getName());
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		g.drawImage(ImageUtils.scale(CardWars.cardSelBack, x, y), 0, 0, null);
-		
+
 		if(CardWars.player1)
 		{
 			for(int i = 0; i < 5; i++)
 			{
+
 				int val = CardWars.playerDeck.get(i).getValue();
 				String s = CardWars.playerDeck.get(i).getSuit();
-				g.drawImage(getSuit(s)[val - 1], (int)(x * .03 + (x * .19 * i)), (int)(y * .1), null);
-				
+				g.drawImage(getSuit(s)[val - 1], (int) (x * .03 + (x * .19 * i)), (int) (y * .1), null);
+
 			}
 		}
 		else
@@ -43,13 +46,13 @@ public class SelectionPanel extends JPanel{
 			{
 				int val = CardWars.otherDeck.get(i).getValue();
 				String s = CardWars.otherDeck.get(i).getSuit();
-				g.drawImage(getSuit(s)[val - 1], (int)(x * .03 + (x * .19 * i)), (int)(y * .1), null);
-				
+				g.drawImage(getSuit(s)[val - 1], (int) (x * .03 + (x * .19 * i)), (int) (y * .1), null);
+
 			}
 		}
 	}
-	
-	private BufferedImage[] getSuit(String suit){
+
+	private BufferedImage[] getSuit(String suit) {
 		switch(suit)
 		{
 		case "hearts":
@@ -62,12 +65,12 @@ public class SelectionPanel extends JPanel{
 			return CardWars.spades;
 		}
 	}
-	
-	public int getCardX(){
+
+	public int getCardX() {
 		return this.cardX;
 	}
-	
-	public int getCardY(){
+
+	public int getCardY() {
 		return this.cardY;
 	}
 }
