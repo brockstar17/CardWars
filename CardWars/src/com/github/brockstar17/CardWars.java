@@ -461,6 +461,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								{
 
 									new WarFrame(this, Paint.pCards[Paint.clicked], Paint.oCards[cell]);
+									Paint.pCards[Paint.clicked] = null;
+									Paint.oCards[cell] = null;
 
 								}
 								else
@@ -554,6 +556,8 @@ public class CardWars extends JFrame implements MouseMotionListener, MouseListen
 								{
 
 									new WarFrame(this, Paint.pCards[cell], Paint.oCards[Paint.clicked]);
+									Paint.pCards[cell] = null;
+									Paint.oCards[Paint.clicked] = null;
 								}
 								else
 								{

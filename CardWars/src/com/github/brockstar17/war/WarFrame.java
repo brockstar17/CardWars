@@ -212,16 +212,16 @@ public class WarFrame extends JDialog implements WindowListener, MouseListener
 				}
 
 			}
-
-		}
-		else
-		{
-
-			if(canMethod2())
+			else
 			{
-				System.out.println("Method 2");
-				this.method = 2;
-				this.dispose();
+
+				if(canMethod2())
+				{
+					System.out.println("Method 2");
+					this.method = 2;
+					this.dispose();
+				}
+
 			}
 
 		}
